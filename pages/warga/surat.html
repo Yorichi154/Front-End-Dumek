@@ -1,0 +1,79 @@
+<section class="warga-shell" data-warga-page="surat">
+  <aside class="warga-side">
+    <div class="side-head">
+      <h3><i class="fa-solid fa-user"></i> Panel Warga</h3>
+      <div class="muted" style="font-size:12px;margin-top:6px" id="wargaUserLabel">-</div>
+    </div>
+
+    <ul class="side-menu">
+      <li><a class="nav-link" data-page="warga/dashboard" href="#warga/dashboard"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+      <li><a class="nav-link" data-page="warga/surat" href="#warga/surat"><i class="fa-solid fa-file-lines"></i> Surat Saya</a></li>
+      <li><a class="nav-link" data-page="warga/pengaduan" href="#warga/pengaduan"><i class="fa-solid fa-comments"></i> Pengaduan Saya</a></li>
+      <li><a class="nav-link" data-page="warga/chat" href="#warga/chat"><i class="fa-solid fa-message"></i> Chat</a></li>
+      <li><a class="nav-link" data-page="warga/profil" href="#warga/profil"><i class="fa-solid fa-id-card"></i> Profil</a></li>
+      <li class="divider" style="margin:6px 0"></li>
+      <li><a class="nav-link" data-page="home" href="#home"><i class="fa-solid fa-arrow-left"></i> Ke Publik</a></li>
+      <li><a href="#" data-action="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+    </ul>
+  </aside>
+
+  <div class="warga-main">
+    <div class="warga-top">
+      <div>
+        <h1>Surat Saya</h1>
+        <div class="muted" style="font-weight:700">Ajukan dan pantau status surat</div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-primary nav-link" data-page="pengajuan-online" href="#pengajuan-online">
+          <i class="fa-solid fa-plus"></i> Ajukan Surat Baru
+        </a>
+      </div>
+    </div>
+
+    <div class="warga-card" style="margin-bottom:12px">
+      <div class="card-pad">
+        <div class="section-head" style="margin-bottom:10px">
+          <h2 style="margin:0">Pengajuan Surat Online</h2>
+          <a class="btn btn-solid nav-link" data-page="pengajuan-online" href="#pengajuan-online">
+            <i class="fa-solid fa-arrow-right"></i> Mulai Pengajuan
+          </a>
+        </div>
+        <div class="muted">Gunakan formulir online bertahap untuk mengisi data dan upload berkas persyaratan.</div>
+      </div>
+    </div>
+
+    <div class="warga-card">
+      <div class="card-pad">
+        <div class="section-head" style="margin-bottom:10px">
+          <h2 style="margin:0">Daftar Surat</h2>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <input id="wargaSuratSearch" class="input" placeholder="Cari jenis/keperluan..." />
+            <select id="wargaSuratFilter">
+              <option value="">Semua status</option>
+              <option value="menunggu">Menunggu</option>
+              <option value="diproses">Diproses</option>
+              <option value="ditinjau">Ditinjau</option>
+              <option value="selesai">Selesai</option>
+              <option value="ditolak">Ditolak</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="overflow:auto">
+          <table class="warga-table">
+            <thead>
+              <tr>
+                <th>Jenis</th>
+                <th>Keperluan</th>
+                <th>Tanggal</th>
+                <th>Status</th>
+                <th>Berkas</th>
+              </tr>
+            </thead>
+            <tbody id="wargaSuratTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,142 @@
+<section class="staf-shell staf-page staf-pengumuman-page" data-staf-page="pengumuman">
+    <aside class="staf-side">
+        <div class="side-head">
+            <h3><i class="fa-solid fa-user-gear"></i> Panel Staf</h3>
+            <div class="muted" style="font-size:12px;margin-top:6px" id="stafUserLabel">-</div>
+        </div>
+
+        <ul class="side-menu">
+            <li><a class="nav-link" data-page="staf/dashboard" href="#staf/dashboard"><i class="fa-solid fa-gauge"></i>
+                    Dashboard</a></li>
+            <li><a class="nav-link" data-page="staf/surat" href="#staf/surat"><i class="fa-solid fa-file-signature"></i>
+                    Surat Warga</a></li>
+            <li><a class="nav-link" data-page="staf/pengaduan" href="#staf/pengaduan"><i
+                        class="fa-solid fa-comments"></i> Pengaduan Warga</a></li>
+            <li><a class="nav-link active" data-page="staf/pengumuman" href="#staf/pengumuman"><i
+                        class="fa-solid fa-bullhorn"></i> Pengumuman</a></li>
+            <li><a class="nav-link" data-page="staf/chat" href="#staf/chat"><i class="fa-solid fa-message"></i> Chat
+                    Warga</a></li>
+
+            <li class="divider" style="margin:6px 0"></li>
+
+            <li><a class="nav-link" data-page="home" href="#home"><i class="fa-solid fa-arrow-left"></i> Ke Publik</a>
+            </li>
+            <li><a href="#" data-action="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <div class="staf-main">
+        <!-- TOP BAR -->
+        <div class="staf-top">
+            <div>
+                <h1>Pengumuman</h1>
+                <div class="muted" style="font-weight:700">Kelola pengumuman & status publikasi</div>
+            </div>
+
+            <div class="top-actions">
+                <div class="search-box" style="min-width:260px">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input id="staf-pengumuman-search" type="text" placeholder="Cari judul / isi" />
+                </div>
+            </div>
+        </div>
+
+        <!-- DAFTAR PENGUMUMAN -->
+        <div class="card">
+            <div class="card-pad">
+                <div class="filter-tabs" style="margin-bottom:12px">
+                    <select id="staf-pengumuman-status-filter">
+                        <option value="all">Semua Status</option>
+                        <option value="published">Published</option>
+                        <option value="draft">Draft</option>
+                    </select>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Judul</th>
+                                <th>Tanggal</th>
+                                <th>Status</th>
+                                <th>Kategori</th>
+                                <th style="width:180px">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="staf-pengumuman-table-body">
+                            <!-- render via JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="staf-pengumuman-empty" class="muted" style="display:none;margin-top:12px">
+                    Belum ada pengumuman.
+                </div>
+            </div>
+        </div>
+
+        <!-- FORM TAMBAH / EDIT -->
+        <div class="card">
+            <div class="card-pad">
+                <div class="section-head" style="margin-bottom:10px">
+                    <h2 style="margin:0" id="staf-pengumuman-form-title">Tambah Pengumuman</h2>
+                </div>
+
+                <form id="staf-pengumuman-form" class="form-vertical">
+                    <input type="hidden" id="staf-pengumuman-id" />
+
+                    <div class="form-group">
+                        <label for="staf-pengumuman-judul">Judul</label>
+                        <input type="text" id="staf-pengumuman-judul" placeholder="Judul pengumuman" required />
+                    </div>
+
+                    <div class="form-group form-row">
+                        <div class="form-col">
+                            <label for="staf-pengumuman-tanggal">Tanggal</label>
+                            <input type="date" id="staf-pengumuman-tanggal" required />
+                        </div>
+
+                        <div class="form-col">
+                            <label for="staf-pengumuman-status">Status</label>
+                            <select id="staf-pengumuman-status">
+                                <option value="published">Published</option>
+                                <option value="draft">Draft</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="staf-pengumuman-kategori">Kategori (diatur awal oleh Admin)</label>
+                        <select id="staf-pengumuman-kategori">
+                            <option value="info">Info</option>
+                            <option value="penting">Penting</option>
+                            <option value="darurat">Darurat</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="staf-pengumuman-ringkasan">Ringkasan Singkat</label>
+                        <textarea id="staf-pengumuman-ringkasan" rows="3"
+                            placeholder="Ringkasan singkat yang tampil di halaman utama..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="staf-pengumuman-isi">Isi Pengumuman</label>
+                        <textarea id="staf-pengumuman-isi" rows="5" placeholder="Isi pengumuman..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-ghost" id="staf-pengumuman-reset">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+
+                    <p class="form-note">
+                        Catatan: perubahan lanjutan (misalnya lampiran khusus, pengaturan urutan prioritas) dapat
+                        dilakukan oleh
+                        <strong>Admin</strong> melalui halaman Pengumuman Admin.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

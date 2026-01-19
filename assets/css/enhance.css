@@ -1,0 +1,13 @@
+/* enhance.css – efek modern & interaktif */
+
+*,
+*::before,
+*::after {
+    transition: background-color .2s ease-out,
+        box-shadow .2s ease-out,
+        transform .15s ease-out,
+        border-color .2s ease-out,
+        color .2s ease-out;
+}
+
+/* ...lanjutan semua snippet yang tadi aku kirim... */

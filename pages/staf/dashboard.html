@@ -1,0 +1,114 @@
+<section class="staf-shell" data-staf-page="dashboard">
+  <aside class="staf-side">
+    <div class="side-head">
+      <h3><i class="fa-solid fa-user-gear"></i> Panel Staf</h3>
+      <div class="muted" style="font-size:12px;margin-top:6px" id="stafUserLabel">-</div>
+    </div>
+
+    <ul class="side-menu">
+      <li>
+        <a class="nav-link" data-page="staf/dashboard" href="#staf/dashboard">
+          <i class="fa-solid fa-gauge"></i> Dashboard
+        </a>
+      </li>
+      <li>
+        <a class="nav-link" data-page="staf/surat" href="#staf/surat">
+          <i class="fa-solid fa-file-signature"></i> Surat Warga
+        </a>
+      </li>
+      <li>
+        <a class="nav-link" data-page="staf/pengaduan" href="#staf/pengaduan">
+          <i class="fa-solid fa-comments"></i> Pengaduan Warga
+        </a>
+      </li>
+
+      <!-- ✅ MENU BARU: PENGUMUMAN -->
+      <li>
+        <a class="nav-link" data-page="staf/pengumuman" href="#staf/pengumuman">
+          <i class="fa-solid fa-bullhorn"></i> Pengumuman
+        </a>
+      </li>
+
+      <li>
+        <a class="nav-link" data-page="staf/chat" href="#staf/chat">
+          <i class="fa-solid fa-message"></i> Chat Warga
+        </a>
+      </li>
+
+      <li class="divider" style="margin:6px 0"></li>
+
+      <li>
+        <a class="nav-link" data-page="home" href="#home">
+          <i class="fa-solid fa-arrow-left"></i> Ke Publik
+        </a>
+      </li>
+      <li>
+        <a href="#" data-action="logout">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <div class="staf-main">
+    <div class="staf-top">
+      <div>
+        <h1>Dashboard Staf</h1>
+        <div class="muted" style="font-weight:700">Ringkasan surat, pengaduan, dan pengumuman</div>
+      </div>
+
+      <div class="top-actions">
+        <a class="btn btn-ghost nav-link" data-page="staf/surat" href="#staf/surat">
+          <i class="fa-solid fa-file-signature"></i> Kelola Surat
+        </a>
+
+        <a class="btn btn-primary nav-link" data-page="staf/pengaduan" href="#staf/pengaduan">
+          <i class="fa-solid fa-comments"></i> Kelola Pengaduan
+        </a>
+
+        <!-- ✅ TOMBOL BARU: KELOLA PENGUMUMAN -->
+        <a class="btn btn-ghost nav-link" data-page="staf/pengumuman" href="#staf/pengumuman">
+          <i class="fa-solid fa-bullhorn"></i> Kelola Pengumuman
+        </a>
+      </div>
+    </div>
+
+    <div class="staf-metrics">
+      <div class="metric">
+        <div class="label">Surat Menunggu</div>
+        <div class="value" id="metricSuratMenunggu">0</div>
+      </div>
+      <div class="metric">
+        <div class="label">Pengaduan Aktif</div>
+        <div class="value" id="metricPengaduanAktif">0</div>
+      </div>
+      <div class="metric">
+        <div class="label">Total Pengajuan</div>
+        <div class="value" id="metricTotalPengajuan">0</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-pad">
+        <div class="section-head" style="margin-bottom:10px">
+          <h2 style="margin:0">Surat Menunggu Verifikasi</h2>
+          <a class="link-more nav-link" data-page="staf/surat" href="#staf/surat">Lihat semua</a>
+        </div>
+        <div id="listSuratMenunggu" class="stack"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-pad">
+        <div class="section-head" style="margin-bottom:10px">
+          <h2 style="margin:0">Pengaduan Terbaru</h2>
+          <a class="link-more nav-link" data-page="staf/pengaduan" href="#staf/pengaduan">Lihat semua</a>
+        </div>
+        <div id="listPengaduanTerbaru" class="stack"></div>
+      </div>
+    </div>
+
+    <!-- (Opsional) kalau kamu mau ringkasan pengumuman juga di dashboard, bilang ya,
+         nanti aku buatkan card "Pengumuman Terbaru" yang stylenya sama. -->
+  </div>
+</section>

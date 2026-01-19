@@ -1,0 +1,575 @@
+/* =========================
+   COMPONENTS.CSS — Buttons, Cards, Sections, Forms
+========================= */
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-weight: 800;
+  font-size: 14px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform .08s ease, background .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--primary-700);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: rgba(255, 255, 255, .65);
+  color: #fff;
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, .10);
+  border-color: rgba(255, 255, 255, .9);
+}
+
+.btn-light {
+  background: #fff;
+  color: var(--primary);
+}
+
+.btn-light:hover {
+  background: rgba(255, 255, 255, .92);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.btn-ghost:hover {
+  background: rgba(31, 95, 224, .08);
+  color: var(--primary);
+}
+
+/* Cards */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-pad {
+  padding: 18px;
+}
+
+/* Section head */
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.section-head h2 {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.link-more {
+  font-weight: 800;
+  color: var(--primary);
+  font-size: 13px;
+}
+
+.link-more:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   FORM CONTROLS (input, select, textarea)
+   Dipakai di warga, staf, admin, pengaduan, dll
+========================= */
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="tel"],
+input[type="url"],
+input[type="date"],
+input[type="time"],
+select,
+textarea,
+.input {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  color: var(--text);
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease,
+    background-color .18s ease,
+    transform .08s ease;
+}
+
+/* tinggi standar untuk input & select */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="tel"],
+input[type="url"],
+input[type="date"],
+input[type="time"],
+select,
+.input {
+  height: 44px;
+}
+
+/* textarea lebih tinggi dan bisa di-resize */
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+/* state focus – biar kelihatan modern */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+select:focus,
+textarea:focus,
+.input:focus {
+  border-color: rgba(31, 95, 224, .55);
+  box-shadow:
+    0 0 0 1px rgba(31, 95, 224, .12),
+    0 12px 30px rgba(15, 23, 42, .08);
+}
+
+/* SELECT – sedikit padding kanan supaya opsi tidak nabrak panah */
+select {
+  padding-right: 40px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 12px;
+}
+
+/* Placeholder sedikit lebih soft */
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted);
+  opacity: .9;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0 12px;
+  height: 44px;
+}
+
+.search-box i {
+  color: var(--muted);
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  height: 100%;
+  width: 100%;
+  background: transparent;
+}
+
+/* Tabs / filters */
+.filter-tabs,
+.galeri-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-btn,
+.tab {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-weight: 800;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.filter-btn:hover,
+.tab:hover {
+  border-color: rgba(31, 95, 224, .35);
+  color: var(--primary);
+}
+
+.filter-btn.active,
+.tab.active {
+  background: rgba(31, 95, 224, .12);
+  border-color: rgba(31, 95, 224, .25);
+  color: var(--primary);
+}
+
+/* efek hover halus untuk semua card */
+.card {
+  transition: box-shadow .2s ease, transform .15s ease;
+}
+
+.card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, .14);
+}
+
+/* tombol sedikit lebih hidup */
+.btn {
+  box-shadow: var(--shadow-sm);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, .18);
+}
+
+/* input / textarea fokus lebih modern */
+.input,
+textarea,
+select {
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.input:focus,
+textarea:focus,
+select:focus {
+  border-color: rgba(31, 95, 224, .45);
+  box-shadow:
+    0 0 0 1px rgba(31, 95, 224, .18),
+    0 12px 26px rgba(15, 23, 42, .12);
+}
+
+/* =========================
+   GLOBAL BUTTONS
+========================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  border: 1px solid transparent;
+
+  cursor: pointer;
+  text-decoration: none;
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.12s ease;
+}
+
+/* ikon di dalam button */
+.btn i {
+  font-size: 14px;
+}
+
+/* versi terang (background putih, teks biru) */
+.btn-light {
+  background: #ffffff;
+  color: var(--primary);
+  box-shadow: var(--shadow);
+}
+
+.btn-light:hover {
+  background: #f1f5ff;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+}
+
+.btn-light:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* versi outline (border putih, teks putih) – cocok di hero biru */
+.btn-outline {
+  background: transparent;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+
+.btn-outline:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- VARIASI BUTTON SOLID UMUM --- */
+.btn-solid {
+  background: var(--primary);
+  /* biru utama web-mu */
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.btn-solid:hover {
+  background: var(--primary-700, #2563eb);
+  border-color: var(--primary-700, #2563eb);
+  color: #fff;
+}
+
+/* --- KHUSUS LAYANAN SURAT --- */
+/* Tombol khusus layanan surat (online / offline) */
+.btn-service-online,
+.btn-service-offline {
+  border-radius: 999px;
+  padding-inline: 22px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, .12);
+  transition: background .2s ease, box-shadow .2s ease, transform .18s ease;
+}
+
+/* Online → biru muda sesuai tema, teks putih */
+.btn-service-online {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-service-online:hover {
+  background: var(--primary-700);
+  box-shadow: 0 14px 30px rgba(37, 99, 235, .28);
+  transform: translateY(-1px);
+}
+
+/* Offline → hijau, teks putih */
+.btn-service-offline {
+  background: #22c55e;
+  color: #fff;
+}
+
+.btn-service-offline:hover {
+  background: #16a34a;
+  box-shadow: 0 14px 30px rgba(22, 163, 74, .28);
+  transform: translateY(-1px);
+}
+
+/* =========================
+   MODAL (dipakai admin, staf, warga)
+========================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(15, 23, 42, .55);
+  z-index: 9999;
+}
+
+.modal.open {
+  display: flex;
+}
+
+.modal-dialog {
+  width: min(920px, 96vw);
+  max-height: 92vh;
+  overflow: auto;
+}
+
+.modal-content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 30px 80px rgba(2, 6, 23, .35);
+}
+
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modal-title h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 1000;
+}
+
+.modal-body {
+  padding: 16px;
+}
+
+/* padding alternatif, banyak markup lama pakai .card-body */
+.card-body {
+  padding: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--muted);
+}
+
+.section-title {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 1000;
+}
+
+.section-title-sm {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 1000;
+}
+
+.bullets {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.numbered-list {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.modal-foot {
+  padding: 14px 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn:hover {
+  background: rgba(31, 95, 224, .08);
+  color: var(--primary);
+  border-color: rgba(31, 95, 224, .25);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 720px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.list-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.list-row {
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  gap: 10px;
+  align-items: start;
+}
+
+.list-row .idx {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 1000;
+  background: rgba(148, 163, 184, .18);
+}
+
+.help-box {
+  border: 1px solid rgba(31, 95, 224, .25);
+  background: rgba(31, 95, 224, .06);
+  border-radius: 14px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-size: 13px;
+}
+/* Alias: beberapa halaman lama masih pakai .form-row */
+.form-row{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 720px){
+  .form-row{ grid-template-columns: 1fr; }
+}

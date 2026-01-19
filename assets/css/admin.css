@@ -1,0 +1,284 @@
+/* =========================================================
+   ADMIN.CSS
+   - Admin shell layout
+   - Sidebar
+   - Topbar
+========================================================= */
+
+body.is-admin #footer {
+  display: none;
+}
+
+.admin-shell {
+
+  max-width: 1200px;
+  width: 100%;
+  margin: 24px auto 48px;
+  padding: 0 24px 48px;
+
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  column-gap: 24px;
+  align-items: flex-start;
+}
+
+/* Sidebar */
+.admin-side {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(230, 234, 242, .8);
+  overflow: hidden;
+  position: sticky;
+  top: 86px;
+  /* di bawah header */
+  height: calc(100vh - 110px);
+}
+
+.admin-side .side-head {
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-side .side-head h3 {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: .2px;
+}
+
+.admin-side .side-menu {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-side a {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.admin-side a:hover,
+.admin-side a.active {
+  background: rgba(30, 99, 255, .12);
+  color: var(--primary);
+}
+
+/* Content */
+.admin-main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.admin-top {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(230, 234, 242, .8);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.admin-top h1 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.admin-top .top-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Dashboard cards */
+.admin-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.admin-card {
+  width: 100%;
+}
+
+.admin-card {
+  width: 100%;
+}
+
+.admin-form {
+  width: 100%;
+}
+
+.metric {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(230, 234, 242, .8);
+  padding: 16px;
+}
+
+.metric .label {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+}
+
+.metric .value {
+  font-size: 26px;
+  font-weight: 1000;
+  margin-top: 6px;
+}
+
+@media (min-width: 1440px) {
+  .admin-shell {
+    max-width: 1320px;
+  }
+}
+
+/* Responsive admin */
+@media (max-width: 1024px) {
+  .admin-shell {
+    grid-template-columns: 1fr;
+    padding: 0 16px 32px;
+  }
+
+  .admin-side {
+    position: static;
+    width: 100%;
+  }
+
+  .admin-metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .admin-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* auth.css */
+.auth-card {
+  transition: box-shadow .2s ease, transform .15s ease;
+}
+
+.auth-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+/* admin.css */
+.admin-side a {
+  transition: background .15s ease, color .15s ease, transform .1s ease;
+}
+
+.admin-side a:hover {
+  transform: translateX(2px);
+}
+
+.metric {
+  transition: box-shadow .2s ease, transform .15s ease;
+}
+
+.metric:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+/* =========================================================
+   Admin Sidebar (Collapsible Groups)
+========================================================= */
+
+.admin-side{
+  display:flex;
+  flex-direction:column;
+}
+
+.admin-side .side-menu{
+  flex:1;
+  overflow:auto;
+  padding-bottom:16px;
+}
+
+.menu-group { margin: 2px 0; }
+
+.group-toggle{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:10px 12px;
+  border:0;
+  background:transparent;
+  border-radius:12px;
+  cursor:pointer;
+  font: inherit;
+  color: var(--text);
+}
+
+.group-toggle:hover{
+  background: rgba(30, 99, 255, .08);
+}
+
+.group-toggle .left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+}
+
+.group-toggle .chev{
+  transition: transform .18s ease;
+  opacity:.7;
+}
+
+.group-items{
+  margin: 4px 0 0 0;
+  padding-left: 10px;
+  list-style:none;
+  overflow:hidden;
+  max-height:0;
+  transition: max-height .22s ease;
+}
+
+.menu-group.open .group-items{ max-height: 560px; }
+.menu-group.open .group-toggle .chev{ transform: rotate(180deg); }
+
+.group-items .nav-link{
+  padding:10px 12px;
+  border-radius:12px;
+}
+
+/* Modal panel fallback (admin pages masih pakai modal-panel) */
+.modal-panel{
+  width: min(920px, 96vw);
+  max-height: 92vh;
+  overflow: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 30px 80px rgba(2, 6, 23, .35);
+}
+
+/* Admin table helpers (kalau dibutuhkan) */
+.row-actions{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+
+@media (max-width: 1024px){
+  .admin-side{ height:auto; }
+}

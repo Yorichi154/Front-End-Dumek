@@ -1,0 +1,208 @@
+<section class="admin-shell" data-admin-page="pengaduan">
+  <aside class="admin-side">
+    <div class="side-head">
+      <h3><i class="fa-solid fa-shield-halved"></i> Panel Admin</h3>
+      <div class="muted" style="font-size:12px;margin-top:6px" id="adminUserLabel" data-bind="userName">-</div>
+    </div>
+
+    <ul class="side-menu" id="adminSideMenu">
+      <!-- MAIN -->
+      <li>
+        <a class="nav-link" data-page="admin/dashboard" href="#admin/dashboard">
+          <i class="fa-solid fa-gauge"></i> Dashboard
+        </a>
+      </li>
+
+      <li>
+        <a class="nav-link" data-page="admin/profil-kelurahan" href="#admin/profil-kelurahan">
+          <i class="fa-solid fa-location-dot"></i> Profil Kelurahan
+        </a>
+      </li>
+
+      <li class="divider" style="margin:10px 0"></li>
+
+      <!-- KONTEN (collapse) -->
+      <li class="menu-group" data-group="konten">
+        <button class="group-toggle" type="button" aria-expanded="false" aria-controls="groupKonten">
+          <span class="left">
+            <i class="fa-regular fa-folder-open"></i>
+            <span>Konten</span>
+          </span>
+          <i class="fa-solid fa-chevron-down chev"></i>
+        </button>
+
+        <ul class="group-items" id="groupKonten">
+          <li><a class="nav-link" data-page="admin/berita" href="#admin/berita"><i class="fa-regular fa-newspaper"></i> Kelola Berita</a></li>
+          <li><a class="nav-link" data-page="admin/agenda" href="#admin/agenda"><i class="fa-regular fa-calendar"></i> Kelola Agenda</a></li>
+          <li><a class="nav-link" data-page="admin/galeri" href="#admin/galeri"><i class="fa-regular fa-image"></i> Kelola Galeri</a></li>
+          <li><a class="nav-link" data-page="admin/pengumuman" href="#admin/pengumuman"><i class="fa-solid fa-bullhorn"></i> Kelola Pengumuman</a></li>
+        </ul>
+      </li>
+
+      <li class="divider" style="margin:10px 0"></li>
+
+      <!-- ORGANISASI & PELAYANAN -->
+      <li><a class="nav-link" data-page="admin/pelayanan" href="#admin/pelayanan"><i class="fa-regular fa-file-lines"></i> Pelayanan Surat</a></li>
+      <li><a class="nav-link" data-page="admin/unit-kerja" href="#admin/unit-kerja"><i class="fa-solid fa-people-roof"></i> Unit Kerja</a></li>
+      <li><a class="nav-link" data-page="admin/lembaga" href="#admin/lembaga"><i class="fa-solid fa-building-columns"></i> Lembaga</a></li>
+
+      <li class="divider" style="margin:10px 0"></li>
+
+      <!-- OPERASIONAL (collapse) -->
+      <li class="menu-group" data-group="operasional">
+        <button class="group-toggle" type="button" aria-expanded="false" aria-controls="groupOperasional">
+          <span class="left">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <span>Operasional</span>
+          </span>
+          <i class="fa-solid fa-chevron-down chev"></i>
+        </button>
+
+        <ul class="group-items" id="groupOperasional">
+          <li><a class="nav-link" data-page="admin/pengaduan" href="#admin/pengaduan"><i class="fa-solid fa-comments"></i> Pengaduan</a></li>
+          <li><a class="nav-link" data-page="admin/surat" href="#admin/surat"><i class="fa-solid fa-file-signature"></i> Surat</a></li>
+          <li><a class="nav-link" data-page="admin/umkm" href="#admin/umkm"><i class="fa-solid fa-store"></i> UMKM</a></li>
+          <li><a class="nav-link" data-page="admin/rt-rw" href="#admin/rt-rw"><i class="fa-solid fa-users"></i> RT/RW</a></li>
+          <li><a class="nav-link" data-page="admin/faq" href="#admin/faq"><i class="fa-regular fa-circle-question"></i> FAQ</a></li>
+        </ul>
+      </li>
+
+      <li class="divider" style="margin:10px 0"></li>
+
+      <!-- SISTEM (collapse) -->
+      <li class="menu-group" data-group="sistem">
+        <button class="group-toggle" type="button" aria-expanded="false" aria-controls="groupSistem">
+          <span class="left">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Sistem</span>
+          </span>
+          <i class="fa-solid fa-chevron-down chev"></i>
+        </button>
+
+        <ul class="group-items" id="groupSistem">
+          <li><a class="nav-link" data-page="admin/pengaturan" href="#admin/pengaturan"><i class="fa-solid fa-gear"></i> Pengaturan</a></li>
+          <li><a class="nav-link" data-page="admin/laporan" href="#admin/laporan"><i class="fa-solid fa-chart-column"></i> Laporan</a></li>
+        </ul>
+      </li>
+
+      <li class="divider" style="margin:10px 0"></li>
+
+      <!-- BOTTOM -->
+      <li><a class="nav-link" data-page="home" href="#home"><i class="fa-solid fa-arrow-left"></i> Ke Publik</a></li>
+      <li><a href="#" data-action="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+    </ul>
+  </aside>
+
+  <div class="admin-main">
+    <div class="admin-top">
+      <div>
+        <h1>Pengaduan</h1>
+        <div class="muted" style="font-weight:700">Pantau dan kelola pengaduan warga (terintegrasi dengan staf).</div>
+      </div>
+      <div class="top-actions">
+        <div class="search-box" style="min-width:260px">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input id="adminPengaduanSearchTop" type="text" placeholder="Cari cepat..." />
+        </div>
+      </div>
+    </div>
+
+    
+<div class="card">
+  <div class="card-body">
+    <div class="form-row" style="align-items:end">
+      <div class="field">
+        <label>Cari</label>
+        <input class="input" id="adminPengaduanSearch" placeholder="Cari nama / judul..." />
+      </div>
+      <div class="field">
+        <label>Filter Status</label>
+        <select id="adminPengaduanFilter">
+          <option value="">Semua</option>
+          <option value="baru">Baru</option>
+          <option value="diproses">Diproses</option>
+          <option value="selesai">Selesai</option>
+          <option value="ditolak">Ditolak</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="table-wrap" style="margin-top:12px">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Warga</th>
+            <th>Judul</th>
+            <th>Tanggal</th>
+            <th>Status</th>
+            <th style="width:190px">Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="adminPengaduanTbody"></tbody>
+      </table>
+    </div>
+
+    <div id="adminPengaduanEmpty" class="muted" style="display:none;margin-top:12px">Belum ada pengaduan.</div>
+  </div>
+</div>
+
+<div class="modal" id="adminPengaduanModal" aria-hidden="true">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <div>
+        <h3 style="margin:0" id="adminPengaduanModalTitle">Detail Pengaduan</h3>
+        <div class="muted" style="font-size:12px" id="adminPengaduanModalSub">-</div>
+      </div>
+      <button class="btn btn-ghost" data-action="closePengaduanModal"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="modal-body">
+      <input type="hidden" id="apdId" />
+
+      <div class="form-row">
+        <div class="field">
+          <label>Nama</label>
+          <input class="input" id="apdNama" disabled />
+        </div>
+        <div class="field">
+          <label>Tanggal</label>
+          <input class="input" id="apdTanggal" disabled />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Judul</label>
+        <input class="input" id="apdJudul" disabled />
+      </div>
+
+      <div class="field">
+        <label>Isi</label>
+        <textarea id="apdIsi" disabled style="min-height:140px"></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label>Status</label>
+          <select id="apdStatus">
+            <option value="baru">Baru</option>
+            <option value="diproses">Diproses</option>
+            <option value="selesai">Selesai</option>
+            <option value="ditolak">Ditolak</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Catatan Admin (opsional)</label>
+          <input class="input" id="apdCatatan" placeholder="Mis: sudah diteruskan ke petugas..." />
+        </div>
+      </div>
+
+      <div class="modal-foot">
+        <button class="btn btn-ghost" data-action="closePengaduanModal">Tutup</button>
+        <button class="btn btn-solid" data-action="savePengaduanStatus"><i class="fa-solid fa-floppy-disk"></i> Simpan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</section>

@@ -1,0 +1,229 @@
+<section class="admin-shell" data-admin-page="lembaga">
+    <!-- =============== SIDEBAR =============== -->
+      <aside class="admin-side">
+    <div class="side-head">
+      <h3><i class="fa-solid fa-shield-halved"></i> Panel Admin</h3>
+      <div class="muted" style="font-size:12px;margin-top:6px" id="adminUserLabel" data-bind="userName">-</div>
+    </div>
+
+    <ul class="side-menu" id="adminSideMenu">
+      <!-- MAIN -->
+      <li>
+        <a class="nav-link" data-page="admin/dashboard" href="#admin/dashboard">
+          <i class="fa-solid fa-gauge"></i> Dashboard
+        </a>
+      </li>
+
+      <li>
+        <a class="nav-link" data-page="admin/profil-kelurahan" href="#admin/profil-kelurahan">
+          <i class="fa-solid fa-location-dot"></i> Profil Kelurahan
+        </a>
+      </li>
+
+      <li class="divider" style="margin:10px 0"></li>
+
+      <!-- KONTEN (collapse) -->
+      <li class="menu-group" data-group="konten">
+        <button class="group-toggle" type="button" aria-expanded="false" aria-controls="groupKonten">
+          <span class="left">
+            <i class="fa-regular fa-folder-open"></i>
+            <span>Konten</span>
+          </span>
+          <i class="fa-solid fa-chevron-down chev"></i>
+        </button>
+
+        <ul class="group-items" id="groupKonten">
+          <li><a class="nav-link" data-page="admin/berita" href="#admin/berita"><i class="fa-regular fa-newspaper"></i> Kelola Berita</a></li>
+          <li><a class="nav-link" data-page="admin/agenda" href="#admin/agenda"><i class="fa-regular fa-calendar"></i> Kelola Agenda</a></li>
+          <li><a class="nav-link" data-page="admin/galeri" href="#admin/galeri"><i class="fa-regular fa-image"></i> Kelola Galeri</a></li>
+          <li><a class="nav-link" data-page="admin/pengumuman" href="#admin/pengumuman"><i class="fa-solid fa-bullhorn"></i> Kelola Pengumuman</a></li>
+        </ul>
+      </li>
+
+      <li class="divider" style="margin:10px 0"></li>
+
+      <!-- ORGANISASI & PELAYANAN -->
+      <li><a class="nav-link" data-page="admin/pelayanan" href="#admin/pelayanan"><i class="fa-regular fa-file-lines"></i> Pelayanan Surat</a></li>
+      <li><a class="nav-link" data-page="admin/unit-kerja" href="#admin/unit-kerja"><i class="fa-solid fa-people-roof"></i> Unit Kerja</a></li>
+      <li><a class="nav-link" data-page="admin/lembaga" href="#admin/lembaga"><i class="fa-solid fa-building-columns"></i> Lembaga</a></li>
+
+      <li class="divider" style="margin:10px 0"></li>
+
+      <!-- OPERASIONAL (collapse) -->
+      <li class="menu-group" data-group="operasional">
+        <button class="group-toggle" type="button" aria-expanded="false" aria-controls="groupOperasional">
+          <span class="left">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <span>Operasional</span>
+          </span>
+          <i class="fa-solid fa-chevron-down chev"></i>
+        </button>
+
+        <ul class="group-items" id="groupOperasional">
+          <li><a class="nav-link" data-page="admin/pengaduan" href="#admin/pengaduan"><i class="fa-solid fa-comments"></i> Pengaduan</a></li>
+          <li><a class="nav-link" data-page="admin/surat" href="#admin/surat"><i class="fa-solid fa-file-signature"></i> Surat</a></li>
+          <li><a class="nav-link" data-page="admin/umkm" href="#admin/umkm"><i class="fa-solid fa-store"></i> UMKM</a></li>
+          <li><a class="nav-link" data-page="admin/rt-rw" href="#admin/rt-rw"><i class="fa-solid fa-users"></i> RT/RW</a></li>
+          <li><a class="nav-link" data-page="admin/faq" href="#admin/faq"><i class="fa-regular fa-circle-question"></i> FAQ</a></li>
+        </ul>
+      </li>
+
+      <li class="divider" style="margin:10px 0"></li>
+
+      <!-- SISTEM (collapse) -->
+      <li class="menu-group" data-group="sistem">
+        <button class="group-toggle" type="button" aria-expanded="false" aria-controls="groupSistem">
+          <span class="left">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Sistem</span>
+          </span>
+          <i class="fa-solid fa-chevron-down chev"></i>
+        </button>
+
+        <ul class="group-items" id="groupSistem">
+          <li><a class="nav-link" data-page="admin/pengaturan" href="#admin/pengaturan"><i class="fa-solid fa-gear"></i> Pengaturan</a></li>
+          <li><a class="nav-link" data-page="admin/laporan" href="#admin/laporan"><i class="fa-solid fa-chart-column"></i> Laporan</a></li>
+        </ul>
+      </li>
+
+      <li class="divider" style="margin:10px 0"></li>
+
+      <!-- BOTTOM -->
+      <li><a class="nav-link" data-page="home" href="#home"><i class="fa-solid fa-arrow-left"></i> Ke Publik</a></li>
+      <li><a href="#" data-action="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+    </ul>
+  </aside>
+<!-- =============== MAIN CONTENT =============== -->
+    <div class="admin-main">
+        <div class="admin-top">
+            <h1 class="page-title">Kelola Lembaga Kemasyarakatan</h1>
+            <p class="page-subtitle muted">
+                Atur data pengurus RT, RW, PKK, Karang Taruna, dan LPMK beserta nomor
+                kontak dan wilayah kerjanya. Data ini akan tampil di halaman publik
+                Lembaga Kemasyarakatan.
+            </p>
+        </div>
+
+        <!-- LIST / TABEL PENGURUS -->
+        <div class="card admin-card">
+            <div class="card-header admin-card-header">
+                <div>
+                    <h2>Daftar Pengurus Lembaga</h2>
+                    <p class="muted">
+                        Pilih jenis lembaga lalu gunakan fitur pencarian untuk menemukan pengurus
+                        tertentu. Klik tombol edit / hapus pada kolom aksi untuk memperbarui data.
+                    </p>
+                </div>
+                <div class="admin-card-actions">
+                    <!-- kalau nanti mau pakai muat ulang bisa tambahkan JS untuk id ini -->
+                    <!-- <button class="btn btn-light" type="button" id="lembagaRefreshBtn">
+            <i class="fa-solid fa-rotate"></i> Muat Ulang
+          </button> -->
+                    <button class="btn btn-primary" type="button" id="btnAddLembaga">
+                        <i class="fa-solid fa-plus"></i> Tambah Data
+                    </button>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="filter-row">
+                    <div class="filter-item">
+                        <label for="jenisLembaga">Jenis Lembaga</label>
+                        <select class="input" id="jenisLembaga">
+                            <option value="rt">RT</option>
+                            <option value="rw">RW</option>
+                            <option value="pkk">PKK</option>
+                            <option value="karang-taruna">Karang Taruna</option>
+                            <option value="lpmk">LPMK</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-item" style="flex:1;">
+                        <label for="lembagaSearch">Cari</label>
+                        <input class="input" id="lembagaSearch"
+                            placeholder="Cari nama / jabatan / wilayah / kontak..." />
+                    </div>
+                </div>
+
+                <div class="table-wrapper" style="margin-top:16px;">
+                    <table class="table admin-table">
+                        <thead>
+                            <tr>
+                                <th>Nama Pengurus</th>
+                                <th>Jabatan</th>
+                                <th>Wilayah</th>
+                                <th>Kontak</th>
+                                <th class="text-right">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admLembagaTbody"><!-- diisi via lembaga.js --></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL FORM -->
+        <div class="modal" id="lembagaModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-head">
+                        <h3>Data Pengurus Lembaga</h3>
+                    </div>
+
+                    <form id="lembagaForm">
+                        <input type="hidden" id="fLembagaId" />
+
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="fLembagaJenis">Jenis Lembaga</label>
+                                <select class="input" id="fLembagaJenis">
+                                    <option value="rt">RT</option>
+                                    <option value="rw">RW</option>
+                                    <option value="pkk">PKK</option>
+                                    <option value="karang-taruna">Karang Taruna</option>
+                                    <option value="lpmk">LPMK</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label for="fLembagaNama">Nama Pengurus</label>
+                                <input class="input" id="fLembagaNama" placeholder="Nama lengkap pengurus" required />
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="fLembagaJabatan">Jabatan</label>
+                            <input class="input" id="fLembagaJabatan" placeholder="Contoh: Ketua RT 001 / RW 001"
+                                required />
+                        </div>
+
+                        <div class="field">
+                            <label for="fLembagaWilayah">Wilayah / Lingkup</label>
+                            <input class="input" id="fLembagaWilayah"
+                                placeholder="Contoh: RT 001 / RW 001, RW 002, Kelurahan Duren Mekar" required />
+                        </div>
+
+                        <div class="field">
+                            <label for="fLembagaKontak">Nomor Kontak (HP / WA)</label>
+                            <input class="input" id="fLembagaKontak" placeholder="08xxxxxxxxxx" required />
+                        </div>
+
+                        <div class="field">
+                            <label for="fLembagaKet">Keterangan</label>
+                            <textarea class="input" id="fLembagaKet" rows="2"
+                                placeholder="Keterangan tambahan (alamat sekretariat, jam layanan, dll)"></textarea>
+                        </div>
+
+                        <div class="modal-foot">
+                            <button class="btn btn-ghost" type="button" data-action="closeLembagaModal">
+                                Batal
+                            </button>
+                            <button class="btn btn-solid" type="submit">
+                                Simpan
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,27 @@
+<section class="berita-page">
+    <div class="container">
+        <div class="page-head">
+            <h1>Berita & Informasi</h1>
+            <p>Informasi terbaru dari kelurahan untuk masyarakat.</p>
+        </div>
+
+        <div class="berita-toolbar">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                <input id="beritaSearch" type="search" placeholder="Cari berita..." />
+            </div>
+
+            <div class="filter-tabs" id="beritaTabs">
+                <button class="tab active" data-filter="all">Semua</button>
+                <button class="tab" data-filter="Pengumuman">Pengumuman</button>
+                <button class="tab" data-filter="Kegiatan">Kegiatan</button>
+                <button class="tab" data-filter="Kesehatan">Kesehatan</button>
+                <button class="tab" data-filter="UMKM">UMKM</button>
+            </div>
+        </div>
+
+        <div id="beritaContainer" class="berita-grid"></div>
+    </div>
+</section>
+
+<script src="assets/js/public/berita.js"></script>

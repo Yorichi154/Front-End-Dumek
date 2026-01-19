@@ -1,0 +1,70 @@
+<section class="warga-shell" data-warga-page="profil">
+  <aside class="warga-side">
+    <div class="side-head">
+      <h3><i class="fa-solid fa-user"></i> Panel Warga</h3>
+      <div class="muted" style="font-size:12px;margin-top:6px" id="wargaUserLabel">-</div>
+    </div>
+
+    <ul class="side-menu">
+      <li><a class="nav-link" data-page="warga/dashboard" href="#warga/dashboard"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+      <li><a class="nav-link" data-page="warga/surat" href="#warga/surat"><i class="fa-solid fa-file-lines"></i> Surat Saya</a></li>
+      <li><a class="nav-link" data-page="warga/pengaduan" href="#warga/pengaduan"><i class="fa-solid fa-comments"></i> Pengaduan Saya</a></li>
+      <li><a class="nav-link" data-page="warga/chat" href="#warga/chat"><i class="fa-solid fa-message"></i> Chat</a></li>
+      <li><a class="nav-link" data-page="warga/profil" href="#warga/profil"><i class="fa-solid fa-id-card"></i> Profil</a></li>
+
+      <li class="divider" style="margin:6px 0"></li>
+      <li><a class="nav-link" data-page="home" href="#home"><i class="fa-solid fa-arrow-left"></i> Ke Publik</a></li>
+      <li><a href="#" data-action="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+    </ul>
+  </aside>
+
+  <div class="warga-main">
+    <div class="warga-top">
+      <div>
+        <h1>Profil Warga</h1>
+        <div class="muted" style="font-weight:700">Lengkapi data dasar agar pengajuan lebih mudah</div>
+      </div>
+    </div>
+
+    <div class="warga-card">
+      <div class="card-pad">
+        <h2 style="margin:0 0 8px">Data Akun</h2>
+        <div class="muted" style="margin-bottom:12px">Data ini hanya tersimpan di browser (demo localStorage).</div>
+
+        <form id="wargaProfilForm" class="form">
+          <div class="form-row">
+            <div>
+              <label>Nama</label>
+              <input id="wpNama" type="text" required />
+            </div>
+            <div>
+              <label>Email</label>
+              <input id="wpEmail" type="email" disabled />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label>RT</label>
+              <input id="wpRT" type="text" placeholder="01" />
+            </div>
+            <div>
+              <label>RW</label>
+              <input id="wpRW" type="text" placeholder="02" />
+            </div>
+          </div>
+
+          <div>
+            <label>Alamat</label>
+            <input id="wpAlamat" type="text" placeholder="Alamat singkat..." />
+          </div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> Simpan</button>
+            <button class="btn btn-ghost" type="button" data-action="resetProfil"><i class="fa-solid fa-rotate"></i> Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

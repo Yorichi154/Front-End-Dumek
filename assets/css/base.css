@@ -1,0 +1,114 @@
+/* =========================
+   BASE.CSS — Root, Reset, Utilities
+   Theme: biru muda modern
+========================= */
+:root {
+    --primary: #1f5fe0;
+    /* biru utama */
+    --primary-700: #174bb7;
+    --primary-500: #2e73ff;
+    --primary-soft: #e9f1ff;
+
+    --bg: #f4f7ff;
+    --surface: #ffffff;
+    --text: #0b1220;
+    --muted: #5b677a;
+
+    --border: #e6ecf5;
+    --shadow: 0 12px 28px rgba(15, 23, 42, .10);
+    --shadow-sm: 0 8px 18px rgba(15, 23, 42, .08);
+
+    --radius: 16px;
+    --radius-sm: 12px;
+
+    --container: 1200px;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    color: inherit;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+    margin: 0;
+}
+
+:focus-visible {
+    outline: 3px solid rgba(46, 115, 255, .35);
+    outline-offset: 2px;
+}
+
+/* Utilities */
+.container {
+    width: min(var(--container), calc(100% - 48px));
+    margin-inline: auto;
+}
+
+.stack {
+    display: grid;
+    gap: 12px;
+}
+
+.stack-lg {
+    display: grid;
+    gap: 18px;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.divider {
+    height: 1px;
+    background: var(--border);
+    width: 100%;
+}

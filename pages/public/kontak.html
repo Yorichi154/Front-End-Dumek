@@ -1,0 +1,112 @@
+<section class="kontak-page">
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="kontak-header">
+      <h1>Kontak & Informasi</h1>
+      <p>Hubungi kami untuk informasi lebih lanjut</p>
+    </div>
+
+    <!-- INFO UTAMA -->
+    <div class="kontak-grid">
+
+      <div class="kontak-card">
+        <div class="icon blue"><i class="fa fa-phone"></i></div>
+        <h4>Telepon</h4>
+        <p>(021) 1234-5678</p>
+        <small>Senin – Jumat<br>08.00 – 16.00 WIB</small>
+      </div>
+
+      <div class="kontak-card">
+        <div class="icon green"><i class="fa fa-envelope"></i></div>
+        <h4>Email</h4>
+        <p>info@kelurahandigital.id</p>
+        <small>Respon dalam 1×24 jam</small>
+      </div>
+
+      <div class="kontak-card">
+        <div class="icon purple"><i class="fa fa-location-dot"></i></div>
+        <h4>Alamat</h4>
+        <p>Jl. Raya Kelurahan No.123</p>
+        <small>Kecamatan ABC, Kota XYZ</small>
+      </div>
+
+    </div>
+
+    <!-- JAM & SOSIAL -->
+    <div class="kontak-row">
+
+      <div class="kontak-box">
+        <h3>Jam Pelayanan</h3>
+        <ul class="jam-list">
+          <li><span>Senin – Kamis</span><span>08.00 – 16.00 WIB</span></li>
+          <li><span>Jumat</span><span>08.00 – 15.00 WIB</span></li>
+          <li><span>Sabtu – Minggu</span><span class="closed">Tutup</span></li>
+        </ul>
+      </div>
+
+      <div class="kontak-box">
+        <h3>Media Sosial</h3>
+        <ul class="sosial-list">
+          <li><i class="fab fa-facebook"></i> Facebook</li>
+          <li><i class="fab fa-instagram"></i> Instagram</li>
+          <li><i class="fab fa-youtube"></i> YouTube</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- KONTAK RT/RW -->
+    <div class="kontak-box">
+      <h3>Kontak RT / RW</h3>
+
+      <div class="rt-grid">
+        <div class="rt-card">
+          <strong>RT 01 / RW 01</strong>
+          <p>Budi Santoso</p>
+          <small>0812-3456-7890</small>
+        </div>
+        <div class="rt-card">
+          <strong>RT 02 / RW 01</strong>
+          <p>Ahmad Dahlan</p>
+          <small>0813-4567-8901</small>
+        </div>
+        <div class="rt-card">
+          <strong>RT 01 / RW 02</strong>
+          <p>Bambang Surya</p>
+          <small>0814-5678-9012</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="kontak-box">
+      <h3>Pertanyaan yang Sering Diajukan (FAQ)</h3>
+
+      <div class="faq-item">
+        <button class="faq-question">Bagaimana cara mengajukan surat online?</button>
+        <div class="faq-answer">
+          Pengajuan surat dapat dilakukan melalui menu Pelayanan Online.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Apakah layanan dikenakan biaya?</button>
+        <div class="faq-answer">
+          Seluruh layanan administrasi kelurahan tidak dipungut biaya.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll(".faq-question").forEach(btn => {
+    btn.addEventListener("click", () => {
+      btn.classList.toggle("active");
+      btn.nextElementSibling.classList.toggle("show");
+    });
+  });
+</script>

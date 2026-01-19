@@ -1,0 +1,69 @@
+<section class="staf-shell" data-staf-page="pengaduan">
+  <aside class="staf-side">
+    <div class="side-head">
+      <h3><i class="fa-solid fa-user-gear"></i> Panel Staf</h3>
+      <div class="muted" style="font-size:12px;margin-top:6px" id="stafUserLabel">-</div>
+    </div>
+
+    <ul class="side-menu">
+      <li><a class="nav-link" data-page="staf/dashboard" href="#staf/dashboard"><i class="fa-solid fa-gauge"></i>
+          Dashboard</a></li>
+      <li><a class="nav-link" data-page="staf/surat" href="#staf/surat"><i class="fa-solid fa-file-signature"></i>
+          Surat Warga</a></li>
+      <li><a class="nav-link" data-page="staf/pengaduan" href="#staf/pengaduan"><i class="fa-solid fa-comments"></i>
+          Pengaduan Warga</a></li>
+      <li><a class="nav-link active" data-page="staf/pengumuman" href="#staf/pengumuman"><i
+            class="fa-solid fa-bullhorn"></i> Pengumuman</a></li>
+      <li><a class="nav-link" data-page="staf/chat" href="#staf/chat"><i class="fa-solid fa-message"></i> Chat
+          Warga</a></li>
+
+      <li class="divider" style="margin:6px 0"></li>
+
+      <li><a class="nav-link" data-page="home" href="#home"><i class="fa-solid fa-arrow-left"></i> Ke Publik</a>
+      </li>
+      <li><a href="#" data-action="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+    </ul>
+  </aside>
+
+  <div class="staf-main">
+    <div class="staf-top">
+      <div>
+        <h1>Pengaduan Warga</h1>
+        <div class="muted" style="font-weight:700">Kelola pengaduan & status tindak lanjut</div>
+      </div>
+
+      <div class="top-actions">
+        <div class="search-box" style="min-width:260px">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input id="pengaduanSearch" type="text" placeholder="Cari judul / nama / lokasi" />
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-pad">
+        <div class="filter-tabs" id="pengaduanFilter" style="margin-bottom:12px"></div>
+
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Tanggal</th>
+                <th>Judul</th>
+                <th>Warga</th>
+                <th>Lokasi</th>
+                <th>Status</th>
+                <th style="width:300px">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="pengaduanTbody"></tbody>
+          </table>
+        </div>
+
+        <div id="pengaduanEmpty" class="muted" style="display:none;margin-top:12px">
+          Belum ada pengaduan.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,220 @@
+/* =========================
+   HEADER + NAVBAR
+========================= */
+
+/* Pastikan kena ke element kamu: <header id="header"> */
+#header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, .92);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: saturate(170%) blur(10px);
+  transition: box-shadow .25s ease;
+}
+
+#header.scrolled {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.header-container {
+  max-width: var(--container-wide);
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 240px;
+}
+
+.logo img {
+  height: 44px;
+}
+
+.logo-text h1 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.logo-text p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Wrapper nav kanan */
+.nav-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* HAMBURGER: default HIDDEN di desktop */
+.menu-toggle {
+  display: none;
+  /* <- ini kunci biar ga muncul di desktop */
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-toggle i {
+  font-size: 18px;
+}
+
+/* NAV UL/LI */
+.navbar {
+  display: flex;
+  /* desktop: tampil normal */
+  align-items: center;
+  gap: 10px;
+
+  list-style: none;
+  /* hilangin bullet */
+  margin: 0;
+  padding: 0;
+}
+
+.navbar>li {
+  position: relative;
+}
+
+.navbar a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.navbar a i {
+  font-size: 14px;
+  opacity: .9;
+}
+
+/* Hover / active */
+.navbar a:hover,
+.navbar a.active {
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+}
+
+.navbar a:hover i,
+.navbar a.active i {
+  opacity: 1;
+}
+
+/* Login button */
+.navbar a.btn-login {
+  background: var(--primary);
+  color: #fff;
+}
+
+.navbar a.btn-login:hover {
+  background: var(--primary-dark);
+  color: #fff;
+}
+
+/* DROPDOWN */
+.dropdown-icon {
+  margin-left: 2px;
+  transition: transform .2s ease;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  min-width: 220px;
+
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border-radius: 14px;
+
+  padding: 8px;
+  list-style: none;
+  margin: 0;
+
+  display: none;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all .2s ease;
+}
+
+.dropdown-menu a {
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* Dropdown open (sesuai class yang kamu pakai: .click-dropdown.open) */
+.click-dropdown.open>.dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.click-dropdown.open .dropdown-icon {
+  transform: rotate(180deg);
+}
+
+/* =========================
+   DROPDOWN MENU ITEMS
+========================= */
+
+/* Kotak dropdown (sudah ada, ini hanya haluskan padding & radius) */
+.dropdown-menu {
+  padding: 10px 10px;
+  border-radius: 18px;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Setiap baris item */
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  transition:
+    background 0.16s ease,
+    color 0.16s ease,
+    transform 0.1s ease;
+}
+
+/* Icon di kiri teks */
+.dropdown-item i {
+  width: 18px;
+  text-align: center;
+}
+
+/* Hover efek */
+.dropdown-item:hover {
+  background: var(--primary-soft);
+  color: var(--primary);
+  transform: translateY(-1px);
+}

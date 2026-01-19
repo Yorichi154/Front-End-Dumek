@@ -1,0 +1,89 @@
+<section class="service-page">
+    <div class="container page-wrap">
+
+        <!-- HEADER LAYANAN -->
+        <header class="page-header">
+            <h1 class="page-title" id="srvTitle">Judul Layanan</h1>
+            <div class="service-header-meta">
+                <span id="srvStatusBadge" class="badge"></span>
+            </div>
+            <div class="service-actions" id="srvActionButtons">
+                <!-- tombol Ajukan Online / Info Lokasi diisi dari JS -->
+            </div>
+        </header>
+
+        <!-- NOTICE OFFLINE (hanya muncul kalau tipe = offline) -->
+        <section class="service-offline-notice" id="srvOfflineNotice" style="display:none;">
+            <div class="card card-warning">
+                <div class="card-body">
+                    <p><strong>Layanan ini tidak dapat diajukan secara online.</strong></p>
+                    <p>Silakan datang langsung ke Kantor Kelurahan dengan membawa dokumen persyaratan yang lengkap.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PERSYARATAN -->
+        <section class="service-section">
+            <h2 class="section-title">Persyaratan</h2>
+            <div class="card">
+                <div class="card-body">
+                    <ol class="numbered-list" id="srvSyaratList">
+                        <!-- diisi JS -->
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROSES -->
+        <section class="service-section">
+            <h2 class="section-title" id="srvStepsTitle">Proses Online</h2>
+            <div class="card">
+                <div class="card-body">
+                    <div class="timeline" id="srvSteps">
+                        <!-- diisi JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INFORMASI PENTING -->
+        <section class="service-section">
+            <h2 class="section-title">Informasi Penting</h2>
+            <div class="card">
+                <div class="card-body info-grid">
+
+                    <div class="info-block">
+                        <h3 class="section-title-sm">
+                            <i class="fa-regular fa-clock"></i> Waktu Pelayanan
+                        </h3>
+                        <p id="srvJamPelayanan"></p>
+                    </div>
+
+                    <div class="info-block">
+                        <h3 class="section-title-sm">
+                            <i class="fa-solid fa-location-dot"></i> Lokasi
+                        </h3>
+                        <p id="srvLokasi"></p>
+                    </div>
+
+                    <div class="info-block">
+                        <h3 class="section-title-sm">
+                            <i class="fa-regular fa-circle-check"></i> Catatan
+                        </h3>
+                        <ul class="bullets" id="srvCatatanList"></ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA BAWAH (khusus online) -->
+        <section class="service-section" id="srvBottomCta" style="text-align:center;display:none;">
+            <button class="btn btn-solid" id="srvBottomButton">
+                <i class="fa-regular fa-file-lines"></i>
+                <span id="srvBottomButtonText">Ajukan Layanan Online</span>
+            </button>
+        </section>
+
+    </div>
+</section>

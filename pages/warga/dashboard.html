@@ -1,0 +1,98 @@
+<section class="warga-shell" data-warga-page="dashboard">
+  <aside class="warga-side">
+    <div class="side-head">
+      <h3><i class="fa-solid fa-user"></i> Panel Warga</h3>
+      <div class="muted" style="font-size:12px;margin-top:6px" id="wargaUserLabel">-</div>
+    </div>
+
+    <ul class="side-menu">
+      <li><a class="nav-link" data-page="warga/dashboard" href="#warga/dashboard"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+      <li><a class="nav-link" data-page="warga/surat" href="#warga/surat"><i class="fa-solid fa-file-lines"></i> Surat Saya</a></li>
+      <li><a class="nav-link" data-page="warga/pengaduan" href="#warga/pengaduan"><i class="fa-solid fa-comments"></i> Pengaduan Saya</a></li>
+      <li><a class="nav-link" data-page="warga/chat" href="#warga/chat"><i class="fa-solid fa-message"></i> Chat</a></li>
+      <li><a class="nav-link" data-page="warga/profil" href="#warga/profil"><i class="fa-solid fa-id-card"></i> Profil</a></li>
+
+      <li class="divider" style="margin:6px 0"></li>
+      <li><a class="nav-link" data-page="home" href="#home"><i class="fa-solid fa-arrow-left"></i> Ke Publik</a></li>
+      <li><a href="#" data-action="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+    </ul>
+  </aside>
+
+  <div class="warga-main">
+    <div class="warga-top">
+      <div>
+        <h1>Dashboard Warga</h1>
+        <div class="muted" style="font-weight:700">Pantau status surat & pengaduan Anda</div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn btn-ghost nav-link" data-page="warga/surat" href="#warga/surat"><i class="fa-solid fa-file-circle-plus"></i> Ajukan Surat</a>
+        <a class="btn btn-primary nav-link" data-page="warga/pengaduan" href="#warga/pengaduan"><i class="fa-solid fa-comment-medical"></i> Buat Pengaduan</a>
+      </div>
+    </div>
+
+    <div class="warga-metrics">
+      <div class="metric">
+        <div class="label">Surat Menunggu</div>
+        <div class="value" id="metricWSuratMenunggu">0</div>
+      </div>
+      <div class="metric">
+        <div class="label">Surat Diproses</div>
+        <div class="value" id="metricWSuratDiproses">0</div>
+      </div>
+      <div class="metric">
+        <div class="label">Surat Selesai</div>
+        <div class="value" id="metricWSuratSelesai">0</div>
+      </div>
+      <div class="metric">
+        <div class="label">Pengaduan Aktif</div>
+        <div class="value" id="metricWPengaduanAktif">0</div>
+      </div>
+    </div>
+
+    <div class="warga-grid">
+      <div class="warga-card">
+        <div class="card-pad">
+          <div class="section-head" style="margin-bottom:10px">
+            <h2 style="margin:0">Surat Terbaru</h2>
+            <a class="link-more nav-link" data-page="warga/surat" href="#warga/surat">Lihat semua</a>
+          </div>
+          <div class="muted" style="margin-bottom:10px">Daftar pengajuan surat terbaru Anda</div>
+          <div style="overflow:auto">
+            <table class="warga-table">
+              <thead>
+                <tr>
+                  <th>Jenis</th>
+                  <th>Tanggal</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="wargaSuratLatest"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="warga-card">
+        <div class="card-pad">
+          <div class="section-head" style="margin-bottom:10px">
+            <h2 style="margin:0">Pengaduan Terbaru</h2>
+            <a class="link-more nav-link" data-page="warga/pengaduan" href="#warga/pengaduan">Lihat semua</a>
+          </div>
+          <div class="muted" style="margin-bottom:10px">Pantau progress pengaduan Anda</div>
+          <div style="overflow:auto">
+            <table class="warga-table">
+              <thead>
+                <tr>
+                  <th>Judul</th>
+                  <th>Tanggal</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="wargaPengaduanLatest"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

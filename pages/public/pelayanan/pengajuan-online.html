@@ -1,0 +1,171 @@
+<section class="service-wizard wizard-modal-page">
+  <div class="wizard-overlay">
+    <div class="card wizard-card wizard-dialog">
+
+      <!-- HEAD -->
+      <div class="wizard-head">
+        <div>
+          <h1 style="margin:0">Pengajuan Surat Online</h1>
+          <div class="muted" style="font-weight:700;margin-top:4px">Ajukan surat secara online dengan mudah dan cepat.</div>
+        </div>
+        <button class="icon-btn" type="button" id="wizClose" aria-label="Tutup">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- BODY -->
+      <div class="wizard-body">
+
+        <!-- STEP INDICATOR -->
+        <div class="wizard-steps" id="wizSteps">
+          <div class="wizard-step is-active" data-step="1">
+            <div class="step-circle">1</div>
+            <div class="step-label">Pilih Jenis</div>
+          </div>
+          <div class="wizard-step" data-step="2">
+            <div class="step-circle">2</div>
+            <div class="step-label">Isi Data</div>
+          </div>
+          <div class="wizard-step" data-step="3">
+            <div class="step-circle">3</div>
+            <div class="step-label">Upload Berkas</div>
+          </div>
+        </div>
+
+        <!-- KONTEN STEP -->
+        <div class="wizard-content">
+
+          <!-- STEP 1: PILIH JENIS -->
+          <div class="wizard-pane is-active" data-step="1">
+            <h2 class="section-title">Pilih Jenis Surat</h2>
+            <p class="muted">Pilih jenis surat yang ingin Anda ajukan (hanya yang bisa online).</p>
+
+            <!-- list pilihan layanan (render via JS) -->
+            <div id="wizServiceCards" class="wizard-choice-list"></div>
+
+            <!-- fallback lama (hidden) -->
+            <div class="field" style="display:none">
+              <label>Jenis Surat</label>
+              <select class="input" id="wizJenisSurat"></select>
+            </div>
+
+            <div class="card" style="margin-top:16px;">
+              <div class="card-body">
+                <h3 class="section-title-sm">Ringkasan Persyaratan</h3>
+                <ol class="numbered-list" id="wizSyaratRingkas"></ol>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 2: ISI DATA -->
+          <div class="wizard-pane" data-step="2">
+            <h2 class="section-title">Isi Data Pemohon</h2>
+            <p class="muted">Lengkapi data diri dan keperluan surat.</p>
+
+            <div class="card">
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label>Nama Lengkap</label>
+                    <input class="input" id="wizNama" placeholder="Nama sesuai KTP" required>
+                  </div>
+                  <div class="field">
+                    <label>NIK</label>
+                    <input class="input" id="wizNik" placeholder="16 digit NIK" maxlength="16">
+                  </div>
+
+                  <div class="field">
+                    <label>No. Telepon</label>
+                    <input class="input" id="wizTelp" placeholder="08xxxxxxxxxx">
+                  </div>
+                  <div class="field">
+                    <label>RT / RW</label>
+                    <input class="input" id="wizRtRw" placeholder="RT 01 / RW 02">
+                  </div>
+                </div>
+
+                <div class="field" style="margin-top:12px">
+                  <label>Alamat</label>
+                  <input class="input" id="wizAlamat" placeholder="Alamat domisili">
+                </div>
+
+                <!-- extra fields (opsional dari admin) -->
+                <div id="wizExtraFields" style="margin-top:12px"></div>
+
+                <div class="field" style="margin-top:12px">
+                  <label>Keperluan Surat</label>
+                  <textarea class="input" id="wizKeperluan" rows="2" placeholder="Contoh: Untuk persyaratan pendaftaran NPWP"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:16px;">
+              <div class="card-body">
+                <h3 class="section-title-sm">Persyaratan yang Harus Disiapkan</h3>
+                <ul class="bullets" id="wizSyaratBox"></ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3: UPLOAD BERKAS -->
+          <div class="wizard-pane" data-step="3">
+            <h2 class="section-title">Upload Berkas Persyaratan</h2>
+            <p class="muted">Pastikan semua dokumen yang diunggah jelas dan terbaca.</p>
+
+            <div class="card">
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="field">
+                    <label>Tipe Berkas</label>
+                    <select class="input" id="wizUploadType"></select>
+                  </div>
+                  <div class="field">
+                    <label>Pilih File</label>
+                    <label class="upload-dropzone" id="wizDropzone">
+                      <input type="file" id="wizFile" accept=".jpg,.jpeg,.png,.pdf" hidden>
+                      <div class="upload-placeholder">
+                        <div class="upload-icon"><i class="fa-solid fa-upload"></i></div>
+                        <div class="upload-text">
+                          Klik untuk upload atau drag &amp; drop<br>
+                          <small>Format: JPG, PNG, PDF (maks. 5MB per file)</small>
+                        </div>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="field" style="margin-top:10px">
+                  <button type="button" class="btn btn-ghost" id="wizAddFile">
+                    <i class="fa-solid fa-plus"></i> Tambah ke Daftar Berkas
+                  </button>
+                </div>
+
+                <div class="field" id="wizFileListWrapper" style="display:none;">
+                  <label>Daftar Berkas yang Akan Dikirim</label>
+                  <ul class="file-list" id="wizFileList"></ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="help-box" style="margin-top:14px">
+              <strong>Catatan:</strong> Pastikan semua berkas yang diupload jelas dan terbaca.
+              Berkas yang tidak memenuhi syarat dapat ditolak oleh operator.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- FOOTER NAVIGASI -->
+        <div class="wizard-footer">
+          <button class="btn btn-ghost" type="button" id="wizPrev">Kembali</button>
+          <button class="btn btn-solid" type="button" id="wizNext">Lanjut</button>
+          <button class="btn btn-solid" type="button" id="wizSubmit" style="display:none;">
+            <i class="fa-regular fa-paper-plane"></i> Kirim Pengajuan
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
