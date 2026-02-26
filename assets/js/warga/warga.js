@@ -35,6 +35,15 @@
     }
   };
 
+  // file -> dataURL (frontend-only)
+  const fileToDataURL = (file) =>
+    new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(String(r.result || ""));
+      r.onerror = () => reject(new Error("Gagal membaca file"));
+      r.readAsDataURL(file);
+    });
+
   function makeId(seed) {
     const str = String(seed || "");
     let h = 0;
@@ -225,6 +234,182 @@
     const filter = document.getElementById("wargaSuratFilter");
     const form = document.getElementById("wargaSuratForm");
 
+    const esc = (v) =>
+      String(v ?? "").replace(/[&<>\"]/g, (ch) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+      }[ch]));
+
+    const fmtSize = (n) => {
+      const b = Number(n || 0);
+      if (!b) return "-";
+      if (b < 1024) return `${b} B`;
+      if (b < 1024 * 1024) return `${(b / 1024).toFixed(1)} KB`;
+      return `${(b / (1024 * 1024)).toFixed(1)} MB`;
+    };
+
+    const isRealUrl = (u) => /^(https?:\/\/|\/|assets\/|data:)/i.test(String(u || "").trim());
+
+    function ensureBerkasModal() {
+      let modal = document.getElementById("wargaBerkasModal");
+      if (modal) {
+        return {
+          modal,
+          meta: modal.querySelector("#wargaBerkasMeta"),
+          body: modal.querySelector("#wargaBerkasBody"),
+        };
+      }
+
+      modal = document.createElement("div");
+      modal.className = "modal";
+      modal.id = "wargaBerkasModal";
+      modal.innerHTML = `
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-head">
+              <div class="modal-title">
+                <h3>Berkas Persyaratan</h3>
+                <div class="muted" id="wargaBerkasMeta" style="font-size:12px"></div>
+              </div>
+              <button class="icon-btn" type="button" data-action="closeWargaBerkas" aria-label="Tutup">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div id="wargaBerkasBody"></div>
+            </div>
+            <div class="modal-foot">
+              <button class="btn btn-light" type="button" data-action="closeWargaBerkas">Tutup</button>
+            </div>
+          </div>
+        </div>`;
+
+      document.body.appendChild(modal);
+
+      return {
+        modal,
+        meta: modal.querySelector("#wargaBerkasMeta"),
+        body: modal.querySelector("#wargaBerkasBody"),
+      };
+    }
+
+    const berkasUi = ensureBerkasModal();
+
+    function openBerkasModal(item) {
+      const files = Array.isArray(item?.berkas) ? item.berkas : [];
+      const hasil = item?.hasilSurat && typeof item.hasilSurat === "object" ? item.hasilSurat : null;
+      if (berkasUi.meta) {
+        berkasUi.meta.innerHTML = `${esc(item?.jenis || "-")} • ${esc(fmtDate(item?.tanggal))} • ${pill(item?.status)}`;
+      }
+
+      if (!berkasUi.body) return;
+
+      let html = "";
+
+      // Hasil surat dari staf (jika sudah dikirim)
+      if (hasil) {
+        const hName = esc(hasil.fileName || "surat.pdf");
+        const hMeta = `${esc(hasil.mime || "application/pdf")}${hasil.size ? ` • ${fmtSize(hasil.size)}` : ""}`;
+        const hNote = hasil.note ? `<div class="muted" style="font-size:12px;margin-top:6px">Catatan: ${esc(hasil.note)}</div>` : "";
+        const hSent = hasil.sentAt ? `<div class="muted" style="font-size:12px;margin-top:6px">Dikirim: ${esc(fmtDateTime(hasil.sentAt))}</div>` : "";
+        const hBtn = hasil.dataUrl
+          ? `<a class="btn btn-primary btn-sm" href="${hasil.dataUrl}" target="_blank" rel="noopener">
+               <i class="fa-regular fa-eye" aria-hidden="true"></i> Buka Surat
+             </a>`
+          : `<span class="pill yellow">Tidak ada file</span>`;
+
+        html += `
+          <div class="card" style="margin-bottom:10px">
+            <div class="card-body" style="padding:14px">
+              <div style="display:flex;gap:12px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap">
+                <div>
+                  <div style="font-weight:1000">Hasil Surat</div>
+                  <div class="muted" style="font-size:12px">${hName}${hMeta ? ` • ${hMeta}` : ""}</div>
+                  ${hNote}
+                  ${hSent}
+                </div>
+                <div>${hBtn}</div>
+              </div>
+            </div>
+          </div>`;
+      } else {
+        html += `<div class="muted" style="margin-bottom:10px">Hasil surat belum tersedia. Silakan menunggu proses dari petugas.</div>`;
+      }
+
+      // Berkas persyaratan dari warga
+      html += `<div style="font-weight:1000; margin:6px 0 10px">Berkas Persyaratan</div>`;
+
+      if (!files.length) {
+        html += `<div class="muted">Tidak ada berkas persyaratan yang diunggah.</div>`;
+      } else {
+        html += files
+          .map((f) => {
+            const req = esc(f?.requirement || "Berkas");
+            const name = esc(f?.fileName || "-");
+            const meta = `${esc(f?.mime || "")}${f?.size ? ` • ${fmtSize(f.size)}` : ""}`;
+            const openBtn = f?.dataUrl
+              ? `<a class="btn btn-primary btn-sm" href="${f.dataUrl}" target="_blank" rel="noopener">
+                   <i class="fa-regular fa-eye" aria-hidden="true"></i> Buka
+                 </a>`
+              : `<span class="pill yellow">Tidak ada preview</span>`;
+
+            const note = !f?.dataUrl
+              ? `<div class="muted" style="font-size:12px;margin-top:6px">Catatan: file demo hanya menyimpan preview untuk berkas kecil (≤ 200KB).</div>`
+              : "";
+
+            return `
+              <div class="card" style="margin-bottom:10px">
+                <div class="card-body" style="padding:14px">
+                  <div style="display:flex;gap:12px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap">
+                    <div>
+                      <div style="font-weight:1000">${req}</div>
+                      <div class="muted" style="font-size:12px">${name}${meta ? ` • ${meta}` : ""}</div>
+                      ${note}
+                    </div>
+                    <div>${openBtn}</div>
+                  </div>
+                </div>
+              </div>`;
+          })
+          .join("");
+      }
+
+      berkasUi.body.innerHTML = html;
+
+      berkasUi.modal.classList.add("open");
+    }
+
+    function closeBerkasModal() {
+      berkasUi.modal.classList.remove("open");
+    }
+
+    const berkasCell = (s) => {
+      const files = Array.isArray(s?.berkas) ? s.berkas : [];
+      const count = files.length;
+      const hasHasil = !!(s?.hasilSurat && typeof s.hasilSurat === "object");
+      const raw = String(s?.berkasUrl || "").trim();
+      if (count > 0 || hasHasil) {
+        const label = count > 0 ? `Lihat (${count})` : "Lihat";
+        return `<button type="button" class="btn btn-primary btn-sm" data-action="viewBerkas" data-id="${s.id}">
+          <i class="fa-regular fa-eye" aria-hidden="true"></i> ${label}
+        </button>`;
+      }
+      if (raw && raw !== "-" && isRealUrl(raw)) {
+        return `<a class="btn btn-primary btn-sm" href="${esc(raw)}" target="_blank" rel="noopener">
+          <i class="fa-regular fa-eye" aria-hidden="true"></i> Lihat
+        </a>`;
+      }
+      // raw "1 berkas" (bukan URL) -> tetap tampil tombol biar tidak 404
+      if (raw && raw !== "-" && /berkas/i.test(raw)) {
+        return `<button type="button" class="btn btn-primary btn-sm" data-action="viewBerkas" data-id="${s.id}">
+          <i class="fa-regular fa-eye" aria-hidden="true"></i> Lihat
+        </button>`;
+      }
+      return "-";
+    };
+
     const draw = () => {
       if (!tbody) return;
       const q = (search?.value || "").toLowerCase();
@@ -248,7 +433,7 @@
               <td>${s.keperluan || "-"}<div class="muted" style="font-size:12px">${s.catatan || ""}</div></td>
               <td>${fmtDate(s.tanggal)}</td>
               <td>${pill(s.status)}</td>
-              <td>${s.berkasUrl ? `<a href="${s.berkasUrl}" target="_blank" rel="noopener">Lihat</a>` : "-"}</td>
+              <td>${berkasCell(s)}</td>
             </tr>`
           )
           .join("") || `<tr><td colspan="5" class="muted">Belum ada pengajuan surat.</td></tr>`;
@@ -256,6 +441,27 @@
 
     search?.addEventListener("input", draw);
     filter?.addEventListener("change", draw);
+
+    // buka modal berkas
+    tbody?.addEventListener("click", (e) => {
+      const btn = e.target.closest?.("[data-action='viewBerkas']");
+      if (!btn) return;
+      const id = btn.dataset.id;
+      const item = getArr("surat").find((x) => String(x.id) === String(id));
+      if (!item) return;
+      openBerkasModal(item);
+    });
+
+    // close modal
+    document.addEventListener("click", (e) => {
+      if (e.target.closest?.("[data-action='closeWargaBerkas']")) {
+        closeBerkasModal();
+        return;
+      }
+      if (e.target === berkasUi.modal) {
+        closeBerkasModal();
+      }
+    });
 
     document.addEventListener("click", (e) => {
       const reset = e.target.closest("[data-action='resetSurat']");
@@ -386,7 +592,8 @@
         const kategori = (document.getElementById("wpKategori")?.value || "").trim();
         const judul = (document.getElementById("wpJudul")?.value || "").trim();
         const lokasi = (document.getElementById("wpLokasi")?.value || "").trim();
-        const buktiUrl = (document.getElementById("wpBukti")?.value || "").trim();
+        const buktiInput = document.getElementById("wpBukti");
+        const buktiFile = buktiInput?.files?.[0] || null;
         const deskripsi = (document.getElementById("wpDeskripsi")?.value || "").trim();
 
         if (!kategori || !judul || !lokasi || !deskripsi) {
@@ -397,45 +604,63 @@
         const now = new Date().toISOString();
         const id = makeId(`pengaduan|${now}|${s.email}|${judul}`);
 
-        const item = {
-          id,
-          tanggal: now,
-          nama: s.name || "Warga",
-          rt: s.rt || "",
-          rw: s.rw || "",
-          wargaEmail: s.email || "",
-          kategori,
-          judul,
-          lokasi,
-          buktiUrl,
-          deskripsi,
-          status: "baru",
+        const run = async () => {
+          let buktiData = "";
+          let buktiName = "";
+          if (buktiFile) {
+            buktiData = await fileToDataURL(buktiFile);
+            buktiName = buktiFile.name || "";
+          }
+
+          const item = {
+            id,
+            tanggal: now,
+            nama: s.name || "Warga",
+            rt: s.rt || "",
+            rw: s.rw || "",
+            wargaEmail: s.email || "",
+            kategori,
+            judul,
+            lokasi,
+            buktiData,
+            buktiName,
+            deskripsi,
+            status: "baru",
+          };
+
+          const all = getArr("pengaduan");
+          all.unshift(item);
+          setArr("pengaduan", all);
+
+          // buat thread chat langsung
+          const threads = getObj("chatThreads", {});
+          if (!threads[id]) {
+            threads[id] = {
+              id,
+              pengaduanId: id,
+              wargaName: item.nama,
+              wargaEmail: (item.wargaEmail || "").toLowerCase(),
+              title: item.judul,
+              lastAt: now,
+              messages: [
+                { from: "system", text: `Thread dibuat untuk pengaduan: "${item.judul}"`, ts: now },
+              ],
+            };
+            setObj("chatThreads", threads);
+          }
+
+          // arahkan ke halaman konfirmasi (lebih sopan daripada alert)
+          sessionStorage.setItem("postSubmitType", "pengaduan");
+          sessionStorage.setItem("postSubmitId", id);
+          sessionStorage.setItem("postSubmitTitle", item.judul || "Pengaduan");
+          if (typeof window.navigateTo === "function") window.navigateTo("warga/konfirmasi");
+          else window.location.hash = "#warga/konfirmasi";
         };
 
-        const all = getArr("pengaduan");
-        all.unshift(item);
-        setArr("pengaduan", all);
-
-        // buat thread chat langsung
-        const threads = getObj("chatThreads", {});
-        if (!threads[id]) {
-          threads[id] = {
-            id,
-            pengaduanId: id,
-            wargaName: item.nama,
-            wargaEmail: (item.wargaEmail || "").toLowerCase(),
-            title: item.judul,
-            lastAt: now,
-            messages: [
-              { from: "system", text: `Thread dibuat untuk pengaduan: "${item.judul}"`, ts: now },
-            ],
-          };
-          setObj("chatThreads", threads);
-        }
-
-        alert("Pengaduan terkirim. Anda bisa chat staf untuk tindak lanjut.");
-        form.reset();
-        draw();
+        run().catch((err) => {
+          console.error(err);
+          alert("Gagal mengirim pengaduan. Coba lagi.");
+        });
       });
     }
 
@@ -607,6 +832,64 @@
   }
 
   // =========================
+  // KONFIRMASI (Thank You)
+  // =========================
+  function initKonfirmasi() {
+    const type = (sessionStorage.getItem("postSubmitType") || "").toLowerCase();
+    const id = sessionStorage.getItem("postSubmitId") || "";
+
+    const titleEl = document.getElementById("thanksMainTitle");
+    const descEl = document.getElementById("thanksMainDesc");
+    const refBox = document.getElementById("thanksRefBox");
+    const refCode = document.getElementById("thanksRefCode");
+    const trackLink = document.getElementById("thanksTrackLink");
+    const trackHint = document.getElementById("thanksTrackHint");
+    const btnSurat = document.getElementById("thanksBtnSurat");
+    const btnPengaduan = document.getElementById("thanksBtnPengaduan");
+
+    // tampilkan nomor referensi jika ada
+    if (id && refBox && refCode) {
+      refBox.hidden = false;
+      refCode.textContent = id;
+    }
+
+    // teks baku + sopan, menyesuaikan jenis layanan
+    if (type === "pengaduan") {
+      if (titleEl) titleEl.textContent = "Terima kasih. Pelaporan Anda telah kami terima.";
+      if (descEl) {
+        descEl.textContent =
+          "Laporan Anda telah berhasil dikirim. Mohon menunggu, petugas kami akan melakukan verifikasi dan tindak lanjut sesuai ketentuan.";
+      }
+      if (trackHint) trackHint.textContent = "Pengaduan Saya";
+      if (trackLink) {
+        trackLink.textContent = "Pengaduan Saya";
+        trackLink.dataset.page = "warga/pengaduan";
+        trackLink.setAttribute("href", "#warga/pengaduan");
+      }
+
+      // buat tombol pelaporan terlihat utama
+      if (btnPengaduan) {
+        btnPengaduan.classList.add("btn-primary");
+        btnPengaduan.classList.remove("btn-ghost");
+      }
+      if (btnSurat) btnSurat.classList.add("btn-solid");
+    } else {
+      // default: surat
+      if (titleEl) titleEl.textContent = "Terima kasih. Pengajuan surat Anda telah kami terima.";
+      if (descEl) {
+        descEl.textContent =
+          "Permohonan Anda telah berhasil dikirim. Mohon menunggu, petugas kami akan melakukan verifikasi data dan berkas sebelum diproses lebih lanjut.";
+      }
+      if (trackHint) trackHint.textContent = "Surat Saya";
+      if (trackLink) {
+        trackLink.textContent = "Surat Saya";
+        trackLink.dataset.page = "warga/surat";
+        trackLink.setAttribute("href", "#warga/surat");
+      }
+    }
+  }
+
+  // =========================
   // Hook on route load
   // =========================
   window.addEventListener("page:loaded", (e) => {
@@ -625,5 +908,6 @@
     if (name === "warga/pengaduan") initPengaduan();
     if (name === "warga/chat") initChat();
     if (name === "warga/profil") initProfil();
+    if (name === "warga/konfirmasi") initKonfirmasi();
   });
 })();

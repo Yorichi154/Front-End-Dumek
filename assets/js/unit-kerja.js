@@ -172,6 +172,11 @@
             },
         ];
 
+        // Tambahkan timestamp agar kolom "Terakhir Diubah" tidak kosong
+        data.forEach((d) => {
+            if (!d.updatedAt) d.updatedAt = new Date().toISOString();
+        });
+
         Storage.set(KEY, data);
     }
 
@@ -319,14 +324,223 @@
     function initAdminPage() {
         if (!Guard.requireAdmin || !Guard.requireAdmin()) return;
 
+        // =========================
+        // ADMIN UI v2 (halaman baru pakai id uk*)
+        // =========================
+        const ukTable = document.getElementById("ukTable");
+        const ukFormCard = document.getElementById("ukFormCard");
+
+        if (ukTable && ukFormCard) {
+            const tbody = ukTable.querySelector("tbody");
+            const refreshBtn = document.getElementById("ukRefreshBtn");
+            const addBtn = document.getElementById("ukAddBtn");
+            const filterJenis = document.getElementById("ukFilterJenis");
+            const searchEl = document.getElementById("ukSearch");
+
+            const formTitle = document.getElementById("ukFormTitle");
+            const closeBtn = document.getElementById("ukFormClose");
+            const cancelBtn = document.getElementById("ukFormCancel");
+            const form = document.getElementById("ukForm");
+
+            const fId = document.getElementById("ukId");
+            const fJenis = document.getElementById("ukJenis");
+            const fNamaUnit = document.getElementById("ukNamaUnit");
+            const fNamaPimpinan = document.getElementById("ukNamaPimpinan");
+            const fJabatan = document.getElementById("ukJabatanPimpinan");
+            const fKontak = document.getElementById("ukKontak");
+            const fEmail = document.getElementById("ukEmail");
+            const fAlamat = document.getElementById("ukAlamat");
+            const fTugas = document.getElementById("ukTugas");
+            const fKewenangan = document.getElementById("ukKewenangan");
+
+            const showForm = (on) => {
+                ukFormCard.hidden = !on;
+                if (on) ukFormCard.scrollIntoView({ behavior: "smooth", block: "start" });
+            };
+
+            const parseLines = (txt) =>
+                String(txt || "")
+                    .split(/\r?\n/)
+                    .map((s) => s.trim())
+                    .filter(Boolean);
+
+            const toDateTime = (iso) => {
+                const d = iso ? new Date(iso) : null;
+                if (!d || isNaN(d.getTime())) return "-";
+                return d.toLocaleString("id-ID", {
+                    year: "numeric",
+                    month: "short",
+                    day: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                });
+            };
+
+            function resetForm() {
+                if (form) form.reset();
+                if (fId) fId.value = "";
+                if (formTitle) formTitle.textContent = "Tambah Unit Kerja";
+
+                // ikutkan filter (kalau user sedang filter 1 jenis)
+                const cur = String(filterJenis?.value || "all");
+                if (fJenis && cur !== "all") fJenis.value = cur;
+            }
+
+            function fillForm(unit) {
+                if (!unit) return;
+                if (formTitle) formTitle.textContent = "Update Unit Kerja";
+                if (fId) fId.value = unit.id || unit.slug || "";
+                if (fJenis) fJenis.value = unit.slug || "";
+                if (fNamaUnit) fNamaUnit.value = unit.unitName || "";
+                if (fNamaPimpinan) fNamaPimpinan.value = unit.name || "";
+                if (fJabatan) fJabatan.value = unit.position || "";
+                if (fKontak) fKontak.value = unit.phone || "";
+                if (fEmail) fEmail.value = unit.email || "";
+                if (fAlamat) fAlamat.value = unit.alamat || "";
+                if (fTugas) fTugas.value = Array.isArray(unit.tugas) ? unit.tugas.join("\n") : "";
+                if (fKewenangan) fKewenangan.value = Array.isArray(unit.kewenangan) ? unit.kewenangan.join("\n") : "";
+            }
+
+            function draw() {
+                if (!tbody) return;
+                const q = String(searchEl?.value || "").trim().toLowerCase();
+                const jenis = String(filterJenis?.value || "all");
+
+                let items = getAll();
+                if (jenis !== "all") items = items.filter((u) => String(u.slug) === jenis);
+
+                if (q) {
+                    items = items.filter((u) => {
+                        const hay = `${u.slug || ""} ${u.unitName || ""} ${u.name || ""} ${u.position || ""} ${u.phone || ""} ${u.email || ""}`.toLowerCase();
+                        return hay.includes(q);
+                    });
+                }
+
+                items = items
+                    .slice()
+                    .sort((a, b) => String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
+
+                tbody.innerHTML =
+                    items
+                        .map(
+                            (u) => `
+              <tr>
+                <td>
+                  <div style="font-weight:1000">${u.unitName || "-"}</div>
+                  <div class="muted" style="font-size:12px">${u.slug || ""}</div>
+                </td>
+                <td>
+                  <div style="font-weight:900">${u.name || "-"}</div>
+                  <div class="muted" style="font-size:12px">${u.position || ""}</div>
+                </td>
+                <td>
+                  <div>${u.phone || "-"}</div>
+                  <div class="muted" style="font-size:12px">${u.email || ""}</div>
+                </td>
+                <td>${toDateTime(u.updatedAt)}</td>
+                <td class="text-right">
+                  <button class="btn btn-ghost btn-sm" type="button" data-action="editUk" data-id="${u.id}">
+                    <i class="fa-solid fa-pen" aria-hidden="true"></i> Edit
+                  </button>
+                </td>
+              </tr>`
+                        )
+                        .join("") ||
+                    `<tr><td colspan="5" class="muted">Belum ada data unit kerja.</td></tr>`;
+            }
+
+            function openAdd() {
+                resetForm();
+                showForm(true);
+            }
+
+            function openEdit(id) {
+                const unit = getAll().find((u) => String(u.id) === String(id)) || null;
+                if (!unit) return;
+                if (form) form.reset();
+                fillForm(unit);
+                showForm(true);
+            }
+
+            function closeForm() {
+                showForm(false);
+            }
+
+            // listeners
+            addBtn?.addEventListener("click", openAdd);
+            refreshBtn?.addEventListener("click", draw);
+            filterJenis?.addEventListener("change", () => {
+                draw();
+                // bantu isi jenis di form kalau user sedang filter
+                const cur = String(filterJenis.value || "all");
+                if (!ukFormCard.hidden && fJenis && cur !== "all") fJenis.value = cur;
+            });
+            searchEl?.addEventListener("input", draw);
+            closeBtn?.addEventListener("click", closeForm);
+            cancelBtn?.addEventListener("click", closeForm);
+
+            ukTable.addEventListener("click", (e) => {
+                const btn = e.target.closest?.("[data-action='editUk']");
+                if (!btn) return;
+                openEdit(btn.dataset.id);
+            });
+
+            form?.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const jenis = String(fJenis?.value || "").trim();
+                const namaUnit = String(fNamaUnit?.value || "").trim();
+                if (!jenis || !namaUnit) {
+                    alert("Jenis Unit dan Nama Unit wajib diisi.");
+                    return;
+                }
+
+                const id = String(fId?.value || jenis).trim() || jenis;
+                const items = getAll();
+                const idx = items.findIndex((u) => String(u.id) === id || String(u.slug) === jenis);
+                const base = idx >= 0 ? items[idx] : {};
+
+                const updated = {
+                    ...base,
+                    id,
+                    slug: jenis,
+                    unitName: namaUnit,
+                    name: String(fNamaPimpinan?.value || "").trim(),
+                    position: String(fJabatan?.value || "").trim(),
+                    phone: String(fKontak?.value || "").trim(),
+                    email: String(fEmail?.value || "").trim(),
+                    alamat: String(fAlamat?.value || "").trim(),
+                    tugas: parseLines(fTugas?.value),
+                    kewenangan: parseLines(fKewenangan?.value),
+                    riwayat: Array.isArray(base.riwayat) ? base.riwayat : [],
+                    nip: base.nip || "",
+                    photo: base.photo || "",
+                    pendidikan: base.pendidikan || "",
+                    updatedAt: new Date().toISOString(),
+                };
+
+                if (idx >= 0) items[idx] = updated;
+                else items.unshift(updated);
+                saveAll(items);
+                draw();
+                closeForm();
+            });
+
+            // init
+            draw();
+            showForm(false);
+            return;
+        }
+
+        // =========================
+        // Fallback (markup lama: unitModal)
+        // =========================
         const searchEl = document.getElementById("unitSearch");
         const tbody = document.getElementById("unitTbody");
         const form = document.getElementById("unitForm");
         const modal = document.getElementById("unitModal");
 
         if (!tbody || !form || !modal) return;
-
-        let editingId = null;
 
         function draw() {
             const q = (searchEl && searchEl.value ? searchEl.value : "").toLowerCase();
@@ -366,8 +580,6 @@
         function openModal(id) {
             const items = getAll();
             const unit = items.find((u) => u.id === id) || null;
-            editingId = unit ? unit.id : null;
-
             modal.classList.add("open");
 
             const setVal = (fieldId, value) => {
@@ -389,7 +601,6 @@
 
         function closeModal() {
             modal.classList.remove("open");
-            editingId = null;
         }
 
         if (searchEl) {
@@ -430,6 +641,7 @@
                 phone: getVal("fPhone"),
                 photo: getVal("fPhoto"),
                 pendidikan: getVal("fPendidikan"),
+                updatedAt: new Date().toISOString(),
             };
 
             if (idx >= 0) {

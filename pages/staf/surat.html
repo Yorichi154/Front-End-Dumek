@@ -92,4 +92,51 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal: Kirim Hasil Surat ke Warga -->
+  <div class="modal" id="kirimSuratModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-head">
+          <div class="modal-title">
+            <h3 id="kirimSuratTitle">Upload Hasil Surat</h3>
+            <div class="muted" style="font-size:12px" id="kirimSuratSub">Unggah surat yang sudah ditandatangani (format PDF)</div>
+          </div>
+          <button class="icon-btn" type="button" data-action="closeModal">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="card" style="box-shadow:none; border:0; background:transparent">
+            <div class="card-body" style="padding:0">
+              <form id="kirimSuratForm" class="form" style="padding:0; background:transparent; border:0">
+                <input type="hidden" id="kirimSuratId" />
+
+                <div class="field">
+                  <label>File Surat (PDF)</label>
+                  <input class="input" type="file" id="kirimSuratFile" accept="application/pdf" required />
+                  <div class="muted" style="font-size:12px;margin-top:6px">
+                    Upload surat yang sudah ditandatangani (format PDF).
+                  </div>
+                </div>
+
+                <div class="field" style="margin-top:12px">
+                  <label>Catatan (Opsional)</label>
+                  <textarea class="input" id="kirimSuratNote" rows="3" placeholder="Catatan tambahan untuk warga..."></textarea>
+                </div>
+
+                <div class="modal-foot" style="padding:0; margin-top:14px; justify-content:stretch; gap:10px">
+                  <button type="submit" class="btn btn-success" style="width:100%; padding:12px 14px; border-radius:14px; display:flex; justify-content:center; gap:10px; align-items:center">
+                    <i class="fa-solid fa-upload" aria-hidden="true"></i> Kirim ke Warga
+                  </button>
+                  <button type="button" class="btn btn-light" data-action="closeModal" style="width:100%; padding:12px 14px; border-radius:14px">Batal</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

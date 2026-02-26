@@ -2,8 +2,8 @@
 const APP_BASE = (() => {
   const parts = location.pathname.split("/").filter(Boolean);
   if (!parts.length) return "/";
-  if (parts[0].includes(".html")) return "/";     // Live Server root: /index.html
-  return `/${parts[0]}/`;                        // XAMPP subfolder: /Project_Kelurahan/
+  if (parts[0].includes(".html")) return "/"; // Live Server root: /index.html
+  return `/${parts[0]}/`; // XAMPP subfolder: /Project_Kelurahan/
 })();
 
 // ==============================
@@ -13,7 +13,9 @@ function getRole() {
   return sessionStorage.getItem("role");
 }
 function getUserName() {
-  return sessionStorage.getItem("userName") || sessionStorage.getItem("name") || "";
+  return (
+    sessionStorage.getItem("userName") || sessionStorage.getItem("name") || ""
+  );
 }
 
 // ==============================
@@ -34,7 +36,6 @@ async function fetchFirstOk(urls) {
   throw new Error("❌ Semua path gagal: " + urls.join(" | "));
 }
 
-
 function normalizePage(raw) {
   // dukung #home, #/home, #?home, #/?home
   return (raw || "")
@@ -46,6 +47,88 @@ function normalizePage(raw) {
 function getPageFromHash() {
   return normalizePage(window.location.hash) || "home";
 }
+
+// ==============================
+// UX HELPERS
+// - Ubah placeholder 'Login untuk lihat' menjadi tombol Login
+// ==============================
+function upgradeLoginHints(root = document) {
+  const cells = root.querySelectorAll("td");
+  cells.forEach((td) => {
+    const t = (td.textContent || "").trim().toLowerCase();
+    if (!t) return;
+    const match =
+      t === "login untuk lihat" ||
+      t === "login untuk melihat" ||
+      t === "login untuk melihat data kontak." ||
+      t === "login untuk melihat data kontak";
+    if (!match) return;
+
+    // Hindari double render
+    if (td.querySelector("a[data-page='login']")) return;
+
+    td.innerHTML = `
+      <div class="muted" style="display:flex;align-items:center;gap:10px;justify-content:center;padding:10px 0">
+        <span>Login untuk lihat</span>
+        <a class="btn btn-primary btn-sm nav-link" href="#login" data-page="login">
+          <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i> Login
+        </a>
+      </div>`;
+  });
+}
+
+// ==============================
+// TABLE RESPONSIVE HELPERS
+// - Isi data-label dari <th> supaya tabel bisa tampil rapih di HP
+// ==============================
+function syncResponsiveTables(root = document) {
+  // Admin/Staf pakai .table, Warga pakai .warga-table
+  const tables = root.querySelectorAll("table.table, table.warga-table");
+  tables.forEach((table) => {
+    const heads = Array.from(table.querySelectorAll("thead th")).map((th) =>
+      (th.textContent || "").trim(),
+    );
+    if (!heads.length) return;
+
+    table.querySelectorAll("tbody tr").forEach((tr) => {
+      const cells = Array.from(tr.children).filter((el) => el.tagName === "TD");
+      cells.forEach((td, i) => {
+        const label = heads[i] || "";
+        if (label) td.dataset.label = label;
+      });
+    });
+  });
+}
+
+function installTableObserver(containerEl) {
+  try {
+    // Bersihkan observer lama
+    if (window.__TABLE_OBSERVER__) {
+      window.__TABLE_OBSERVER__.disconnect();
+      window.__TABLE_OBSERVER__ = null;
+    }
+
+    // Sync awal
+    syncResponsiveTables(containerEl);
+
+    let raf = 0;
+    const obs = new MutationObserver(() => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        syncResponsiveTables(containerEl);
+      });
+    });
+
+    obs.observe(containerEl, { childList: true, subtree: true });
+    window.__TABLE_OBSERVER__ = obs;
+  } catch (e) {
+    console.warn("Table observer failed:", e);
+  }
+}
+
+// expose (opsional, kalau modul lain mau panggil manual)
+window.syncResponsiveTables = syncResponsiveTables;
 
 // ==============================
 // LOAD HEADER & FOOTER
@@ -161,8 +244,6 @@ async function loadPageHtml(page) {
   return await fetchFirstOk(candidates);
 }
 
-
-
 // ==============================
 // ROUTER + GUARD
 // ==============================
@@ -188,11 +269,21 @@ async function navigateTo(page, opts = {}) {
 
     content.innerHTML = html;
 
+    // Pastikan tabel admin/staf punya data-label untuk mode HP
+    installTableObserver(content);
+
     // Notifikasi bahwa halaman sudah dirender (dipakai public.js / admin.js / staf.js)
-    window.dispatchEvent(new CustomEvent("page:loaded", { detail: { name: page } }));
+    window.dispatchEvent(
+      new CustomEvent("page:loaded", { detail: { name: page } }),
+    );
+
+    // Upgrade placeholder login (kalau ada)
+    upgradeLoginHints(content);
 
     // ✅ setiap kali pindah halaman, pastikan menu mobile tertutup
-    const header = document.getElementById("site-header") || document.querySelector(".header");
+    const header =
+      document.getElementById("site-header") ||
+      document.querySelector(".header");
     if (header) {
       const nav = header.querySelector(".navbar");
       const toggle = header.querySelector(".menu-toggle");
@@ -247,8 +338,11 @@ window.navigateTo = navigateTo;
 // NAVIGATION (SPA)
 // ==============================
 function setupNavigation() {
+  if (window.__NAVIGATION_BOUND__) return;
+  window.__NAVIGATION_BOUND__ = true;
+
   document.addEventListener("click", (e) => {
-    const link = e.target.closest(".nav-link[data-page]");
+    const link = e.target.closest("a[data-page]");
     if (!link) return;
 
     e.preventDefault();
@@ -256,6 +350,11 @@ function setupNavigation() {
     // kalau klik item dropdown, tutup dropdown
     const dd = link.closest(".dropdown");
     if (dd) dd.classList.remove("open");
+
+    // preset untuk halaman layanan (biar dropdown langsung kebuka sesuai pilihan)
+    if (link.dataset.layanan) {
+      sessionStorage.setItem("layananPreset", link.dataset.layanan);
+    }
 
     navigateTo(link.dataset.page);
   });
@@ -273,6 +372,9 @@ function setupNavigation() {
 // DROPDOWN (klik untuk buka/tutup)
 // ==============================
 function setupDropdowns() {
+  if (window.__DROPDOWNS_BOUND__) return;
+  window.__DROPDOWNS_BOUND__ = true;
+
   document.addEventListener("click", (e) => {
     const trigger = e.target.closest(".dropdown > .nav-link");
     const insideDropdown = e.target.closest(".dropdown");
@@ -282,21 +384,43 @@ function setupDropdowns() {
       const dd = trigger.closest(".dropdown");
 
       document.querySelectorAll(".dropdown.open").forEach((x) => {
-        if (x !== dd) x.classList.remove("open");
+        if (x !== dd) {
+          x.classList.remove("open");
+          const t = x.querySelector(":scope > .nav-link");
+          if (t) t.setAttribute("aria-expanded", "false");
+        }
       });
 
       dd.classList.toggle("open");
+
+      // sync aria-expanded
+      trigger.setAttribute(
+        "aria-expanded",
+        dd.classList.contains("open") ? "true" : "false",
+      );
       return;
     }
 
     if (!insideDropdown) {
-      document.querySelectorAll(".dropdown.open").forEach((x) => x.classList.remove("open"));
+      document
+        .querySelectorAll(".dropdown.open")
+        .forEach((x) => {
+          x.classList.remove("open");
+          const t = x.querySelector(":scope > .nav-link");
+          if (t) t.setAttribute("aria-expanded", "false");
+        });
     }
   });
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      document.querySelectorAll(".dropdown.open").forEach((x) => x.classList.remove("open"));
+      document
+        .querySelectorAll(".dropdown.open")
+        .forEach((x) => {
+          x.classList.remove("open");
+          const t = x.querySelector(":scope > .nav-link");
+          if (t) t.setAttribute("aria-expanded", "false");
+        });
     }
   });
 }
@@ -305,6 +429,9 @@ function setupDropdowns() {
 // STICKY HEADER
 // ==============================
 function setupStickyHeader() {
+  if (window.__STICKY_BOUND__) return;
+  window.__STICKY_BOUND__ = true;
+
   window.addEventListener("scroll", () => {
     const header = document.querySelector("header");
     if (!header) return;
@@ -315,7 +442,10 @@ function setupStickyHeader() {
 // MOBILE MENU (HAMBURGER)
 // ==============================
 function setupMobileMenu() {
-  const header = document.getElementById("site-header") || document.querySelector(".header");
+  if (window.__MOBILEMENU_BOUND__) return;
+  window.__MOBILEMENU_BOUND__ = true;
+  const header =
+    document.getElementById("site-header") || document.querySelector(".header");
   const toggle = header ? header.querySelector(".menu-toggle") : null;
   const nav = header ? header.querySelector(".navbar") : null;
 
@@ -323,8 +453,17 @@ function setupMobileMenu() {
 
   const icon = toggle.querySelector("i");
 
+  // sync tinggi header untuk posisi drawer mobile (dipakai CSS: var(--header-h))
+  const syncHeaderHeight = () => {
+    document.documentElement.style.setProperty(
+      "--header-h",
+      `${header.offsetHeight}px`,
+    );
+  };
+  syncHeaderHeight();
+
   function setOpen(open) {
-    nav.classList.toggle("show", open);         // <- ini yang sudah di-handle CSS
+    nav.classList.toggle("show", open); // <- ini yang sudah di-handle CSS
     header.classList.toggle("menu-open", open); // kalau mau dipakai untuk styling tambahan
     document.body.classList.toggle("nav-open", open);
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
@@ -347,11 +486,19 @@ function setupMobileMenu() {
   nav.addEventListener("click", (e) => {
     const link = e.target.closest("a");
     if (!link) return;
-    if (window.innerWidth <= 768) {
-      setOpen(false);
-    }
-  });
 
+    // ✅ Jangan tutup menu kalau yang diklik adalah trigger dropdown (Profil/Layanan/Informasi Publik)
+    // Trigger dropdown itu: .dropdown > .nav-link dan biasanya href="#" dan tidak punya data-page
+    const isDropdownTrigger =
+      link.classList.contains("nav-link") &&
+      !!link.closest(".dropdown") &&
+      (!link.dataset.page || link.getAttribute("href") === "#");
+
+    if (isDropdownTrigger) return;
+
+    // ✅ Tutup menu hanya saat klik link yang benar-benar navigasi (dropdown-item / link biasa)
+    if (window.innerWidth <= 900) setOpen(false);
+  });
 
   // klik di luar nav saat menu terbuka → tutup
   document.addEventListener("click", (e) => {
@@ -364,7 +511,8 @@ function setupMobileMenu() {
 
   // kalau di-resize ke desktop, pastikan menu ditutup
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 768 && nav.classList.contains("show")) {
+    syncHeaderHeight();
+    if (window.innerWidth > 900 && nav.classList.contains("show")) {
       setOpen(false);
     }
   });
@@ -375,10 +523,33 @@ function setupMobileMenu() {
 // ==============================
 // BACK/FORWARD + HASH CHANGE
 // ==============================
-window.addEventListener("popstate", () => navigateTo(getPageFromHash(), { replace: true }));
-window.addEventListener("hashchange", () => navigateTo(getPageFromHash(), { replace: true }));
+if (!window.__ROUTER_EVENTS_BOUND__) {
+  window.__ROUTER_EVENTS_BOUND__ = true;
+  window.addEventListener("popstate", () =>
+    navigateTo(getPageFromHash(), { replace: true }),
+  );
+  window.addEventListener("hashchange", () =>
+    navigateTo(getPageFromHash(), { replace: true }),
+  );
+}
 
 // ==============================
 // INIT
 // ==============================
-document.addEventListener("DOMContentLoaded", loadComponents);
+document.addEventListener("DOMContentLoaded", () => {
+  // Observer untuk konten dinamis (misal tabel kontak dirender setelah page:loaded)
+  if (!window.__LOGIN_HINT_OBS__) {
+    window.__LOGIN_HINT_OBS__ = true;
+    const root = document.getElementById("content");
+    if (root && window.MutationObserver) {
+      const mo = new MutationObserver(() => upgradeLoginHints(root));
+      mo.observe(root, { childList: true, subtree: true });
+    }
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.__COMPONENTS_LOADED__) return;
+  window.__COMPONENTS_LOADED__ = true;
+  loadComponents();
+});

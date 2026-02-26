@@ -1,0 +1,84 @@
+<section class="warga-shell konfirmasi-page" data-warga-page="konfirmasi">
+  <aside class="warga-side">
+    <div class="side-head">
+      <h3><i class="fa-solid fa-user"></i> Panel Warga</h3>
+      <div class="muted" style="font-size:12px;margin-top:6px" id="wargaUserLabel">-</div>
+    </div>
+
+    <ul class="side-menu">
+      <li><a class="nav-link" data-page="warga/dashboard" href="#warga/dashboard"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+      <li><a class="nav-link" data-page="warga/surat" href="#warga/surat"><i class="fa-solid fa-file-lines"></i> Surat Saya</a></li>
+      <li><a class="nav-link" data-page="warga/pengaduan" href="#warga/pengaduan"><i class="fa-solid fa-comments"></i> Pengaduan Saya</a></li>
+      <li><a class="nav-link" data-page="warga/chat" href="#warga/chat"><i class="fa-solid fa-message"></i> Chat</a></li>
+      <li><a class="nav-link" data-page="warga/profil" href="#warga/profil"><i class="fa-solid fa-id-card"></i> Profil</a></li>
+      <li class="divider" style="margin:6px 0"></li>
+      <li><a class="nav-link" data-page="home" href="#home"><i class="fa-solid fa-arrow-left"></i> Ke Publik</a></li>
+      <li><a href="#" data-action="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+    </ul>
+  </aside>
+
+  <div class="warga-main">
+    <div class="warga-top">
+      <div>
+        <h1>Konfirmasi Layanan</h1>
+        <div class="muted" style="font-weight:700">Terima kasih, permohonan Anda telah kami terima.</div>
+      </div>
+    </div>
+
+    <div class="warga-card" style="margin-bottom:12px">
+      <div class="card-pad">
+        <div class="thanks-inner">
+          <div class="thanks-icon" aria-hidden="true">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+
+          <div class="thanks-text">
+            <h2 id="thanksMainTitle">Terima kasih.</h2>
+            <p id="thanksMainDesc" class="muted">
+              Pengajuan Anda telah berhasil dikirim. Mohon menunggu, petugas kami akan melakukan verifikasi dan pemrosesan sesuai ketentuan.
+            </p>
+
+            <div id="thanksRefBox" class="thanks-ref" hidden>
+              <div class="muted" style="font-size:12px;font-weight:800;margin-top:12px">Nomor Referensi</div>
+              <div id="thanksRefCode" class="ref-code">-</div>
+            </div>
+
+            <div class="help-box" style="margin-top:12px">
+              Mohon menunggu. Anda dapat memantau perkembangan melalui menu
+              <a id="thanksTrackLink" class="nav-link" data-page="warga/surat" href="#warga/surat" style="text-decoration:underline; font-weight:900">Surat Saya</a>.
+            </div>
+
+            <div class="thanks-actions" style="margin-top:14px">
+              <a class="btn btn-primary nav-link" data-page="home" href="#home">
+                <i class="fa-solid fa-house"></i> Kembali ke Beranda
+              </a>
+
+              <a class="btn btn-solid nav-link" data-page="pengajuan-online" href="#pengajuan-online" id="thanksBtnSurat">
+                <i class="fa-solid fa-file-circle-plus"></i> Ajukan Surat Lainnya
+              </a>
+
+              <a class="btn btn-ghost nav-link" data-page="warga/pengaduan" href="#warga/pengaduan" id="thanksBtnPengaduan">
+                <i class="fa-solid fa-bullhorn"></i> Buat Pelaporan Lainnya
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="warga-card">
+      <div class="card-pad">
+        <h3 style="margin:0 0 10px">Langkah Selanjutnya</h3>
+        <ol class="numbered-list" style="padding-left:18px">
+          <li>Permohonan akan diverifikasi oleh petugas Kelurahan Duren Mekar.</li>
+          <li>Apabila diperlukan, Anda dapat dihubungi melalui nomor telepon atau fitur chat.</li>
+          <li>Silakan pantau status secara berkala pada menu <span id="thanksTrackHint" style="font-weight:900">Surat Saya</span>.</li>
+        </ol>
+        <div class="divider" style="margin:12px 0"></div>
+        <div class="muted" style="font-size:13px">
+          Terima kasih atas kerja sama Anda. Kami akan berupaya memberikan pelayanan yang cepat dan tepat.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

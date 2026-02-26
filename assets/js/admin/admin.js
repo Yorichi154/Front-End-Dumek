@@ -16,6 +16,27 @@
     }
   };
 
+  // Read file input -> dataURL (frontend-only)
+  const fileToDataURL = (file) =>
+    new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(String(r.result || ""));
+      r.onerror = () => reject(new Error("Gagal membaca file"));
+      r.readAsDataURL(file);
+    });
+
+  function setImagePreview(src) {
+    const img = document.getElementById("fImagePreview");
+    if (!img) return;
+    if (src) {
+      img.src = src;
+      img.style.display = "block";
+    } else {
+      img.removeAttribute("src");
+      img.style.display = "none";
+    }
+  }
+
   function setAdminMode(on) {
     document.body.classList.toggle("is-admin", !!on);
   }
@@ -61,6 +82,49 @@
       const btn = group.querySelector(".group-toggle");
       if (btn) btn.setAttribute("aria-expanded", "true");
     }
+  }
+
+  // --------------------
+  // Mobile drawer (Admin)
+  // --------------------
+  let _adminMobileMenuBound = false;
+
+  function ensureAdminMobileMenu() {
+    if (_adminMobileMenuBound) return;
+    _adminMobileMenuBound = true;
+
+    // Backdrop
+    if (!document.getElementById("adminMenuBackdrop")) {
+      const bd = document.createElement("div");
+      bd.id = "adminMenuBackdrop";
+      document.body.appendChild(bd);
+    }
+
+    const close = () => document.body.classList.remove("admin-menu-open");
+    const toggle = () => document.body.classList.toggle("admin-menu-open");
+
+    document.addEventListener("click", (e) => {
+      if (e.target.id === "adminMenuBackdrop") return close();
+      if (e.target.closest?.("[data-action='toggleAdminMenu']")) return toggle();
+      if (e.target.closest?.(".admin-side a[data-page]")) return close();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") close();
+    });
+  }
+
+  function mountAdminMenuButton() {
+    const actions = document.querySelector(".admin-top .top-actions");
+    if (!actions) return;
+    if (actions.querySelector("[data-action='toggleAdminMenu']")) return;
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "btn btn-ghost";
+    btn.setAttribute("data-action", "toggleAdminMenu");
+    btn.innerHTML = `<i class="fa-solid fa-bars"></i> Menu`;
+    actions.prepend(btn);
   }
 
   function fillAdminUserLabel() {
@@ -150,8 +214,8 @@
           <td>${status}</td>
           <td>
             <div class="row-actions">
-              <button class="btn btn-ghost" data-action="edit" data-id="${item.id}"><i class="fa-solid fa-pen"></i> Edit</button>
-              <button class="btn btn-danger" data-action="delete" data-id="${item.id}"><i class="fa-solid fa-trash"></i></button>
+              <button class="btn btn-warning btn-sm" data-action="edit" data-id="${item.id}"><i class="fa-solid fa-pen"></i> Edit</button>
+              <button class="btn btn-danger btn-sm" data-action="delete" data-id="${item.id}"><i class="fa-solid fa-trash"></i></button>
             </div>
           </td>
         </tr>`;
@@ -165,8 +229,8 @@
           <td>${item.location || "-"}</td>
           <td>
             <div class="row-actions">
-              <button class="btn btn-ghost" data-action="edit" data-id="${item.id}"><i class="fa-solid fa-pen"></i> Edit</button>
-              <button class="btn btn-danger" data-action="delete" data-id="${item.id}"><i class="fa-solid fa-trash"></i></button>
+              <button class="btn btn-warning btn-sm" data-action="edit" data-id="${item.id}"><i class="fa-solid fa-pen"></i> Edit</button>
+              <button class="btn btn-danger btn-sm" data-action="delete" data-id="${item.id}"><i class="fa-solid fa-trash"></i></button>
             </div>
           </td>
         </tr>`;
@@ -180,8 +244,8 @@
           <td>${fmtDate(item.date)}</td>
           <td>
             <div class="row-actions">
-              <button class="btn btn-ghost" data-action="edit" data-id="${item.id}"><i class="fa-solid fa-pen"></i> Edit</button>
-              <button class="btn btn-danger" data-action="delete" data-id="${item.id}"><i class="fa-solid fa-trash"></i></button>
+              <button class="btn btn-warning btn-sm" data-action="edit" data-id="${item.id}"><i class="fa-solid fa-pen"></i> Edit</button>
+              <button class="btn btn-danger btn-sm" data-action="delete" data-id="${item.id}"><i class="fa-solid fa-trash"></i></button>
             </div>
           </td>
         </tr>`;
@@ -189,11 +253,10 @@
 
     if (type === "pengumuman") {
       const pr = item.status || "info";
-      const badge = `<span class="badge" style="${
+      const badge =
         pr === "urgent"
-          ? "background:rgba(239,68,68,.12);color:#dc2626"
-          : "background:rgba(30,99,255,.12);color:var(--primary)"
-      }">${pr}</span>`;
+          ? '<span class="badge badge-cat-darurat">URGENT</span>'
+          : '<span class="badge badge-cat-info">INFO</span>';
 
       return `
         <tr>
@@ -202,8 +265,8 @@
           <td>${badge}</td>
           <td>
             <div class="row-actions">
-              <button class="btn btn-ghost" data-action="edit" data-id="${item.id}"><i class="fa-solid fa-pen"></i> Edit</button>
-              <button class="btn btn-danger" data-action="delete" data-id="${item.id}"><i class="fa-solid fa-trash"></i></button>
+              <button class="btn btn-warning btn-sm" data-action="edit" data-id="${item.id}"><i class="fa-solid fa-pen"></i> Edit</button>
+              <button class="btn btn-danger btn-sm" data-action="delete" data-id="${item.id}"><i class="fa-solid fa-trash"></i></button>
             </div>
           </td>
         </tr>`;
@@ -229,7 +292,6 @@
       fDate: item?.date || "",
       fTime: item?.time || "",
       fLocation: item?.location || "",
-      fImage: item?.image || "",
       fExcerpt: item?.excerpt || "",
       fContent: item?.content || "",
       fStatus: item?.status || (type === "pengumuman" ? "info" : "published"),
@@ -240,6 +302,13 @@
       if (!el) return;
       el.value = val;
     });
+
+    // file input (tidak bisa di-set value). Pakai hidden existing + preview.
+    const existing = document.getElementById("fImageExisting");
+    if (existing) existing.value = item?.image || "";
+    const fileEl = document.getElementById("fImage");
+    if (fileEl && fileEl.type === "file") fileEl.value = "";
+    setImagePreview(item?.image || "");
 
     modal.classList.add("open");
   }
@@ -261,7 +330,7 @@
         title: get("fTitle"),
         category: get("fCategory"),
         date: get("fDate"),
-        image: get("fImage"),
+        image: "", // diisi dari file upload / existing
         excerpt: get("fExcerpt"),
         content: get("fContent"),
         status: get("fStatus") || "draft",
@@ -285,7 +354,7 @@
         title: get("fTitle"),
         category: get("fCategory"),
         date: get("fDate"),
-        image: get("fImage"),
+        image: "", // diisi dari file upload / existing
         content: get("fContent"),
       };
     }
@@ -372,20 +441,55 @@
 
     // submit form
     if (form) {
+      // preview untuk file upload (berita/galeri)
+      const fileEl = document.getElementById("fImage");
+      if (fileEl && fileEl.type === "file" && !fileEl.__boundPreview) {
+        fileEl.__boundPreview = true;
+        fileEl.addEventListener("change", () => {
+          const f = fileEl.files?.[0];
+          if (!f) {
+            // kembali ke existing bila ada
+            const existing = document.getElementById("fImageExisting")?.value || "";
+            setImagePreview(existing);
+            return;
+          }
+          const url = URL.createObjectURL(f);
+          setImagePreview(url);
+        });
+      }
+
       form.addEventListener("submit", (ev) => {
         ev.preventDefault();
-        const item = readForm(type);
 
-        // basic validation
-        if (!item.title) {
-          alert("Judul wajib diisi.");
-          return;
-        }
+        const run = async () => {
+          const item = readForm(type);
 
-        Data.upsert(type, item);
-        closeModal();
-        draw();
-        alert("Tersimpan.");
+          // Jika ada file upload (berita/galeri), simpan sebagai dataURL ke localStorage
+          const imgInput = document.getElementById("fImage");
+          const picked = imgInput?.files?.[0];
+          if ((type === "berita" || type === "galeri") && picked) {
+            item.image = await fileToDataURL(picked);
+          } else if (type === "berita" || type === "galeri") {
+            // pakai value lama jika tidak memilih file baru
+            item.image = document.getElementById("fImageExisting")?.value || "";
+          }
+
+          // basic validation
+          if (!item.title) {
+            alert("Judul wajib diisi.");
+            return;
+          }
+
+          Data.upsert(type, item);
+          closeModal();
+          draw();
+          alert("Tersimpan.");
+        };
+
+        run().catch((err) => {
+          console.error(err);
+          alert("Gagal menyimpan. Coba lagi.");
+        });
       });
     }
   }
@@ -1192,7 +1296,10 @@
     const isAdminRoute = name.startsWith("admin/");
     setAdminMode(isAdminRoute);
 
-    if (!isAdminRoute) return;
+    if (!isAdminRoute) {
+      document.body.classList.remove("admin-menu-open");
+      return;
+    }
 
     if (!Guard.requireAdmin()) return;
 
@@ -1202,6 +1309,10 @@
     // ensure sidebar collapsible groups works on every admin page
     ensureSidebarCollapse();
     syncSidebarGroups("#" + name);
+
+    // mobile drawer
+    ensureAdminMobileMenu();
+    mountAdminMenuButton();
 
     if (name === "admin/dashboard") initDashboard();
     if (name === "admin/berita") initListPage("berita");

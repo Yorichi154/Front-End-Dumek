@@ -161,9 +161,12 @@
           </div>
 
           <div class="field">
-            <label>URL Gambar</label>
-            <input class="input" id="fImage" placeholder="https://..." />
-            <div class="muted" style="font-size:12px">Tip: pakai URL gambar agar ringan (bisa dari assets/images/...)
+            <label>Upload Gambar/Dokumen</label>
+            <input class="input" id="fImage" type="file" accept=".jpg,.jpeg,.png,.pdf" />
+            <input type="hidden" id="fImageExisting" />
+            <div class="muted" style="font-size:12px">Format: JPG/PNG/PDF</div>
+            <div style="margin-top:10px">
+              <img id="fImagePreview" alt="" style="display:none;max-width:180px;border-radius:14px;border:1px solid var(--border)" />
             </div>
           </div>
 

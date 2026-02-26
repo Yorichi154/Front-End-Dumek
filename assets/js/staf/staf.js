@@ -163,6 +163,65 @@
     return email ? `${name} (${email})` : name;
   }
 
+  // file -> dataURL (frontend-only demo)
+  const fileToDataURL = (file) =>
+    new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(String(r.result || ""));
+      r.onerror = () => reject(new Error("Gagal membaca file"));
+      r.readAsDataURL(file);
+    });
+
+  const fmtSize = (n) => {
+    const b = Number(n || 0);
+    if (!b) return "-";
+    if (b < 1024) return `${b} B`;
+    if (b < 1024 * 1024) return `${(b / 1024).toFixed(1)} KB`;
+    return `${(b / (1024 * 1024)).toFixed(1)} MB`;
+  };
+
+  // =========================
+  // Mobile drawer (Staf)
+  // =========================
+  let _stafMobileMenuBound = false;
+
+  function ensureStafMobileMenu() {
+    if (_stafMobileMenuBound) return;
+    _stafMobileMenuBound = true;
+
+    if (!document.getElementById("stafMenuBackdrop")) {
+      const bd = document.createElement("div");
+      bd.id = "stafMenuBackdrop";
+      document.body.appendChild(bd);
+    }
+
+    const close = () => document.body.classList.remove("staf-menu-open");
+    const toggle = () => document.body.classList.toggle("staf-menu-open");
+
+    document.addEventListener("click", (e) => {
+      if (e.target.id === "stafMenuBackdrop") return close();
+      if (e.target.closest?.("[data-action='toggleStafMenu']")) return toggle();
+      if (e.target.closest?.(".staf-side a[data-page]")) return close();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") close();
+    });
+  }
+
+  function mountStafMenuButton() {
+    const actions = document.querySelector(".staf-top .top-actions");
+    if (!actions) return;
+    if (actions.querySelector("[data-action='toggleStafMenu']")) return;
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "btn btn-ghost";
+    btn.setAttribute("data-action", "toggleStafMenu");
+    btn.innerHTML = `<i class="fa-solid fa-bars"></i> Menu`;
+    actions.prepend(btn);
+  }
+
   // =========================
   // Dashboard
   // =========================
@@ -281,8 +340,9 @@
               .map((opt) => `<option value="${opt}" ${String(s.status).toLowerCase() === opt ? "selected" : ""}>${opt}</option>`)
               .join("")}
                 </select>
-                <button class="btn btn-primary" style="padding:10px 12px" data-action="saveSurat" data-id="${s.id}"><i class="fa-solid fa-floppy-disk"></i> Update</button>
-                <button class="btn btn-ghost" style="padding:10px 12px" data-action="openSuratDetail" data-id="${s.id}"><i class="fa-solid fa-circle-info"></i> Detail</button>
+                <button class="btn btn-primary btn-sm" data-action="saveSurat" data-id="${s.id}"><i class="fa-solid fa-floppy-disk"></i> Update</button>
+                <button class="btn btn-success btn-sm" data-action="openSendSurat" data-id="${s.id}"><i class="fa-solid fa-paper-plane"></i> Kirim</button>
+                <button class="btn btn-info btn-sm" data-action="openSuratDetail" data-id="${s.id}"><i class="fa-solid fa-circle-info"></i> Detail</button>
               </div>
             </td>
           </tr>`
@@ -352,7 +412,7 @@
           .map((f, idx) => {
             const reqLabel = f.requirement || f.label || f.tipe || `Berkas ${idx + 1}`;
             const name = f.originalName || f.fileName || f.name || "(tanpa nama)";
-            const url = f.url || f.downloadUrl || "";
+            const url = f.dataUrl || f.url || f.downloadUrl || "";
             const link = url
               ? `<a class="btn btn-ghost" style="padding:8px 10px" href="${escapeHtml(url)}" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Unduh</a>`
               : "";
@@ -369,6 +429,27 @@
           })
           .join("")
       : `<div class="muted">Tidak ada berkas terlampir.</div>`;
+
+    const hasil = s.hasilSurat && typeof s.hasilSurat === "object" ? s.hasilSurat : null;
+    const hasilHtml = hasil
+      ? `
+        <div class="card" style="margin-top:10px">
+          <div class="card-body" style="padding:14px">
+            <div style="display:flex; gap:12px; justify-content:space-between; align-items:flex-start; flex-wrap:wrap">
+              <div>
+                <div style="font-weight:1000">Hasil Surat</div>
+                <div class="muted" style="font-size:12px">${escapeHtml(hasil.fileName || "surat.pdf")} • ${escapeHtml(hasil.mime || "application/pdf")}${hasil.size ? ` • ${escapeHtml(fmtSize(hasil.size))}` : ""}</div>
+                ${hasil.note ? `<div class="muted" style="margin-top:6px; font-size:12px">Catatan: ${escapeHtml(hasil.note)}</div>` : ""}
+                ${hasil.sentAt ? `<div class="muted" style="margin-top:6px; font-size:12px">Dikirim: ${escapeHtml(fmtDateTime(hasil.sentAt))}</div>` : ""}
+              </div>
+              <div>
+                ${hasil.dataUrl ? `<a class="btn btn-primary btn-sm" href="${escapeHtml(hasil.dataUrl)}" target="_blank" rel="noopener"><i class="fa-regular fa-eye"></i> Buka</a>` : ""}
+              </div>
+            </div>
+          </div>
+        </div>
+      `
+      : `<div class="muted" style="margin-top:8px">Hasil surat belum dikirim.</div>`;
 
     bodyEl.innerHTML = `
       <div class="form-grid" style="margin-bottom:14px">
@@ -406,6 +487,14 @@
 
       <h4 class="section-title-sm">Berkas Persyaratan</h4>
       <div class="list-editor">${filesHtml}</div>
+
+      <h4 class="section-title-sm" style="margin-top:14px">Pengiriman ke Warga</h4>
+      ${hasilHtml}
+      <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap">
+        <button class="btn btn-success btn-sm" type="button" data-action="openSendSurat" data-id="${escapeHtml(s.id)}">
+          <i class="fa-solid fa-upload" aria-hidden="true"></i> Upload & Kirim ke Warga
+        </button>
+      </div>
     `;
 
     openModal(modalEl);
@@ -618,6 +707,31 @@
       return;
     }
 
+    // Open modal kirim hasil surat
+    const btnSend = e.target.closest("[data-action='openSendSurat']");
+    if (btnSend) {
+      const id = btnSend.dataset.id;
+      const items = getArr("surat");
+      const s = items.find((x) => x.id === id);
+      if (!s) return;
+
+      const modal = document.getElementById("kirimSuratModal");
+      const title = document.getElementById("kirimSuratTitle");
+      const sub = document.getElementById("kirimSuratSub");
+      const hid = document.getElementById("kirimSuratId");
+      const file = document.getElementById("kirimSuratFile");
+      const note = document.getElementById("kirimSuratNote");
+
+      if (hid) hid.value = id;
+      if (file) file.value = "";
+      if (note) note.value = "";
+      if (title) title.textContent = "Upload Hasil Surat";
+      if (sub) sub.textContent = `${(s.jenis || "Surat")} — ${s.nama || "Warga"} (format PDF)`;
+
+      openModal(modal);
+      return;
+    }
+
     // Update status surat
     const btnSurat = e.target.closest("[data-action='saveSurat']");
     if (btnSurat) {
@@ -682,11 +796,75 @@
     }
   });
 
+  // Submit kirim hasil surat (PDF)
+  document.addEventListener("submit", async (e) => {
+    const form = e.target;
+    if (!form || form.id !== "kirimSuratForm") return;
+    e.preventDefault();
+
+    const id = (document.getElementById("kirimSuratId")?.value || "").trim();
+    const fileEl = document.getElementById("kirimSuratFile");
+    const note = (document.getElementById("kirimSuratNote")?.value || "").trim();
+    const modal = document.getElementById("kirimSuratModal");
+
+    const f = fileEl?.files?.[0] || null;
+    if (!id || !f) {
+      alert("Mohon pilih file surat (PDF).");
+      return;
+    }
+    if (String(f.type || "").toLowerCase() !== "application/pdf") {
+      alert("Format file harus PDF.");
+      return;
+    }
+    const max = 5 * 1024 * 1024; // 5MB
+    if (f.size > max) {
+      alert("Ukuran file terlalu besar. Maksimal 5MB.");
+      return;
+    }
+
+    let dataUrl = "";
+    try {
+      dataUrl = await fileToDataURL(f);
+    } catch (err) {
+      alert("Gagal membaca file.");
+      return;
+    }
+
+    const items = getArr("surat");
+    const idx = items.findIndex((x) => x.id === id);
+    if (idx < 0) {
+      alert("Data surat tidak ditemukan.");
+      return;
+    }
+
+    const sentAt = new Date().toISOString();
+    items[idx].hasilSurat = {
+      fileName: f.name,
+      mime: f.type,
+      size: f.size,
+      dataUrl,
+      note,
+      sentAt,
+      sentBy: staffLabel(),
+    };
+    items[idx].status = "selesai";
+    items[idx].updatedAt = sentAt;
+    setArr("surat", items);
+
+    alert("Surat berhasil dikirim ke warga.");
+    closeModal(modal);
+    // refresh staf/surat
+    if (typeof window.navigateTo === "function") window.navigateTo("staf/surat", { replace: true });
+  });
+
   window.addEventListener("page:loaded", (e) => {
     const name = e.detail?.name || "";
     const isStaf = name.startsWith("staf/");
     document.body.classList.toggle("is-staf", isStaf);
-    if (!isStaf) return;
+    if (!isStaf) {
+      document.body.classList.remove("staf-menu-open");
+      return;
+    }
 
     ensureIds();
 
@@ -694,6 +872,10 @@
     document.querySelectorAll("#stafUserLabel").forEach((el) => {
       el.textContent = staffLabel();
     });
+
+    // mobile drawer
+    ensureStafMobileMenu();
+    mountStafMenuButton();
 
     if (name === "staf/dashboard") initDashboard();
     if (name === "staf/surat") initSurat();
@@ -723,6 +905,30 @@ window.addEventListener("page:loaded", (ev) => {
   const resetBtn = document.getElementById("staf-pengumuman-reset");
 
   let data = loadPengumuman();
+
+  const esc = (v) =>
+    String(v ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+
+  const statusChip = (s) =>
+    s === "published"
+      ? '<span class="badge badge-published">Published</span>'
+      : '<span class="badge badge-draft">Draft</span>';
+
+  const kategoriChip = (k) => {
+    const kk = String(k || "info").toLowerCase();
+    const map = {
+      info: "badge-cat-info",
+      penting: "badge-cat-penting",
+      darurat: "badge-cat-darurat",
+    };
+    const cls = map[kk] || "badge-neutral";
+    return `<span class="badge ${cls}">${esc(kk.toUpperCase())}</span>`;
+  };
 
   function resetForm() {
     idInput.value = "";
@@ -756,12 +962,14 @@ window.addEventListener("page:loaded", (ev) => {
     items.forEach((item) => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>${item.judul || "-"}</td>
-        <td>${item.tanggal || "-"}</td>
-        <td>${item.status === "published" ? "Published" : "Draft"}</td>
-        <td>${(item.kategori || "info").toUpperCase()}</td>
+        <td><b>${esc(item.judul || "-")}</b></td>
+        <td><span style="font-variant-numeric:tabular-nums">${esc(item.tanggal || "-")}</span></td>
+        <td>${statusChip(item.status)}</td>
+        <td>${kategoriChip(item.kategori)}</td>
         <td>
-          <button type="button" class="btn-link" data-action="edit" data-id="${item.id}">Edit</button>
+          <button type="button" class="btn btn-warning btn-sm" data-action="edit" data-id="${esc(item.id)}">
+            <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Edit
+          </button>
         </td>
       `;
       tbody.appendChild(tr);

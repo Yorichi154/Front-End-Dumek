@@ -1463,7 +1463,11 @@ function initWizardPage() {
         all.unshift(record);
         localStorage.setItem(key, JSON.stringify(all));
 
-        alert(`Pengajuan untuk "${layanan.nama}" berhasil dikirim.`);
-        window.KelurahanApp?.navigateTo?.("warga/surat");
+        // arahkan ke halaman konfirmasi (lebih sopan daripada alert)
+        sessionStorage.setItem("postSubmitType", "surat");
+        sessionStorage.setItem("postSubmitId", record.id);
+        sessionStorage.setItem("postSubmitTitle", layanan.nama || "Surat");
+        if (typeof window.navigateTo === "function") window.navigateTo("warga/konfirmasi");
+        else window.location.hash = "#warga/konfirmasi";
     });
 }

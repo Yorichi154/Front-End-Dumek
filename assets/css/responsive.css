@@ -1,5 +1,8 @@
 /* =========================
-   RESPONSIVE
+   RESPONSIVE (CLEAN)
+   Catatan:
+   - NAV mobile drawer/accordion hanya di-handle di layout.css (@media max-width: 900px)
+   - File ini fokus untuk layout konten (grid/hero/footer)
 ========================= */
 
 /* 1024px: grid 2 kolom */
@@ -13,109 +16,8 @@
   }
 }
 
-/* 768px: layout mobile + drawer nav + grid 1 kolom */
+/* 768px: layout konten */
 @media (max-width: 768px) {
-
-  .header-container {
-    padding: 10px 16px;
-  }
-
-  /* Tombol hamburger */
-
-  .menu-toggle {
-    transition:
-      transform .16s ease-out,
-      box-shadow .16s ease-out;
-  }
-
-  .menu-toggle:active {
-    transform: scale(.94);
-  }
-
-  /* Sedikit animasi pada item menu */
-  .nav-link,
-  .dropdown-item {
-    transition:
-      transform .14s ease-out;
-  }
-
-  .nav-link:hover,
-  .dropdown-item:hover {
-    transform: translateX(2px);
-  }
-
-  /* NAV: drawer tertutup default */
-  .navbar {
-    position: fixed;
-    top: 16px;
-    left: 16px;
-    right: 16px;
-    height: auto;
-    max-height: calc(100vh - 32px);
-
-    background: #fff;
-    border: 1px solid var(--border);
-    box-shadow: 0 18px 40px rgba(15, 23, 42, .20);
-    border-radius: 24px;
-
-    display: none;
-    /* tersembunyi dulu */
-    opacity: 0;
-    transform: translateY(12px) scale(.98);
-    pointer-events: none;
-
-    transition:
-      opacity .22s ease-out,
-      transform .22s ease-out,
-      box-shadow .22s ease-out;
-    /* animasi halus */
-    will-change: opacity, transform;
-
-    z-index: 1000;
-    overflow-y: auto;
-
-    flex-direction: column;
-    align-items: stretch;
-    gap: 6px;
-    padding: 16px;
-  }
-
-  /* Saat .show: drawer muncul dengan animasi halus */
-  .navbar.show {
-    display: flex;
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    pointer-events: auto;
-  }
-
-  .nav-list {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 6px;
-  }
-
-  .navbar a {
-    width: 100%;
-    justify-content: flex-start;
-    padding: 12px 14px;
-  }
-
-  /* Dropdown di mobile */
-  .dropdown-menu {
-    position: static;
-    display: none;
-    opacity: 1;
-    transform: none;
-    border: none;
-    box-shadow: none;
-    padding: 6px 0 0 12px;
-    margin-top: 4px;
-  }
-
-  .click-dropdown.open>.dropdown-menu {
-    display: block;
-  }
-
   /* HOME */
   .home-hero-inner {
     grid-template-columns: 1fr;
@@ -137,13 +39,265 @@
   }
 }
 
-/* 480px: HP kecil, teks hero mengecil, stats jadi 1 kolom */
+/* =========================================================
+   866px: Tablet kecil & HP besar
+   - Pastikan layout aman saat lebar <= 866px
+========================================================= */
+@media (max-width: 866px){
+  /* Container: lebih lega di tablet/HP */
+  .container{ width: calc(100% - 28px); }
+
+  /* Shell (admin/staf/warga) -> 1 kolom */
+  .admin-shell,
+  .staf-shell,
+  .warga-shell{
+    grid-template-columns: 1fr !important;
+    padding: 0 14px 26px !important;
+    margin: 18px auto 26px !important;
+    column-gap: 16px !important;
+  }
+
+  /* Top bar tidak mepet */
+  .admin-top,
+  .staf-top,
+  .warga-top{
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* Form 2 kolom -> 1 kolom */
+  .form-row{ grid-template-columns: 1fr !important; }
+
+  /* Modal lebih pas di layar sempit */
+  .modal-card{
+    width: min(92vw, 760px) !important;
+    margin: 24px auto !important;
+  }
+
+  /* Unit kerja (detail): leader card lebih fleksibel */
+  .unit-leader{ grid-template-columns: 84px minmax(0, 1fr); }
+  .unit-leader-photo img{ width: 84px; height: 84px; border-radius: 16px; }
+}
+
+/* 480px: HP kecil */
 @media (max-width: 480px) {
+  .container{ width: calc(100% - 22px); }
+
   .hero-text h1 {
     font-size: 24px;
   }
 
   .home-stats {
     grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   PUBLIC (UNIT & LEMBAGA) — TABLE RESPONSIVE
+   - Tabel publik (RT/RW/PKK/KT/LPMK) jadi "card list" di HP
+========================= */
+
+@media (max-width: 720px){
+  .profil-page .table-wrapper,
+  .profil-page .table-wrap{
+    border: none;
+    overflow: visible;
+    border-radius: 0;
+  }
+
+  .profil-page .table{ min-width: 0 !important; }
+  .profil-page .table thead{ display:none; }
+
+  .profil-page .table,
+  .profil-page .table tbody,
+  .profil-page .table tr,
+  .profil-page .table td{
+    display:block;
+    width:100%;
+  }
+
+  .profil-page .table tr{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  .profil-page .table td{
+    display:flex;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 12px;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .profil-page .table td:last-child{ border-bottom:none; }
+
+  .profil-page .table td::before{
+    content: attr(data-label);
+    flex: 0 0 42%;
+    max-width: 42%;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .22px;
+  }
+}
+
+/* =========================
+   ADMIN & STAF — TABLE RESPONSIVE
+   - Ubah tabel jadi "card list" di HP agar tidak pecah huruf
+========================= */
+
+@media (max-width: 720px){
+  body.is-admin .table-wrap,
+  body.is-staf .table-wrap,
+  body.is-admin .table-wrapper,
+  body.is-staf .table-wrapper{
+    border: none;
+    overflow: visible;
+    border-radius: 0;
+  }
+
+  body.is-admin .table,
+  body.is-staf .table{
+    min-width: 0 !important;
+  }
+
+  body.is-admin .table thead,
+  body.is-staf .table thead{ display:none; }
+
+  body.is-admin .table,
+  body.is-admin .table tbody,
+  body.is-admin .table tr,
+  body.is-admin .table td,
+  body.is-staf .table,
+  body.is-staf .table tbody,
+  body.is-staf .table tr,
+  body.is-staf .table td{
+    display:block;
+    width:100%;
+  }
+
+  body.is-admin .table tr,
+  body.is-staf .table tr{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  body.is-admin .table td,
+  body.is-staf .table td{
+    display:flex;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 12px;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  body.is-admin .table td:last-child,
+  body.is-staf .table td:last-child{ border-bottom:none; }
+
+  body.is-admin .table td::before,
+  body.is-staf .table td::before{
+    content: attr(data-label);
+    flex: 0 0 42%;
+    max-width: 42%;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .22px;
+  }
+
+  /* kolom Aksi: stack */
+  body.is-admin .table td[data-label="Aksi" i],
+  body.is-staf .table td[data-label="Aksi" i]{
+    flex-direction: column;
+    align-items: stretch;
+  }
+  body.is-admin .table td[data-label="Aksi" i]::before,
+  body.is-staf .table td[data-label="Aksi" i]::before{
+    max-width: 100%;
+    flex-basis: auto;
+    margin-bottom: 6px;
+  }
+
+  body.is-admin .row-actions,
+  body.is-staf .row-actions{
+    width: 100%;
+  }
+
+  body.is-admin .row-actions .input,
+  body.is-staf .row-actions .input,
+  body.is-admin .row-actions select,
+  body.is-staf .row-actions select{
+    width: 100%;
+  }
+}
+
+/* HP kecil: padding & tab lebih rapat */
+@media (max-width: 520px){
+  body.is-admin .admin-top,
+  body.is-staf .staf-top{ padding: 12px 12px; }
+
+  body.is-admin .card-pad,
+  body.is-staf .card-pad{ padding: 14px; }
+
+  .filter-btn,
+  .tab{ padding: 7px 10px; font-size: 12px; }
+}
+
+/* =========================
+   WARGA — TABLE RESPONSIVE
+   - Tabel warga (.warga-table) jadi "card list" di HP
+========================= */
+
+@media (max-width: 720px){
+  body.is-warga .warga-table{ min-width: 0 !important; }
+  body.is-warga .warga-table thead{ display:none; }
+
+  body.is-warga .warga-table,
+  body.is-warga .warga-table tbody,
+  body.is-warga .warga-table tr,
+  body.is-warga .warga-table td{
+    display:block;
+    width:100%;
+  }
+
+  body.is-warga .warga-table tr{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  body.is-warga .warga-table td{
+    display:flex;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 12px;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  body.is-warga .warga-table td:last-child{ border-bottom:none; }
+
+  body.is-warga .warga-table td::before{
+    content: attr(data-label);
+    flex: 0 0 42%;
+    max-width: 42%;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .22px;
   }
 }

@@ -29,7 +29,7 @@
 
 .hero-text p {
   font-size: 14px;
-  opacity: .95;
+  opacity: 0.95;
   max-width: 560px;
 }
 
@@ -48,7 +48,7 @@
 .hero-media img {
   width: min(520px, 100%);
   border-radius: 20px;
-  box-shadow: 0 14px 34px rgba(0, 0, 0, .18);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
 }
 
 /* Stats */
@@ -75,7 +75,7 @@
   width: 40px;
   height: 40px;
   border-radius: 14px;
-  background: rgba(31, 95, 224, .10);
+  background: rgba(31, 95, 224, 0.1);
   display: grid;
   place-items: center;
   color: var(--primary);
@@ -92,7 +92,7 @@
   width: 42px;
   height: 42px;
   border-radius: 14px;
-  background: rgba(31, 95, 224, .10);
+  background: rgba(31, 95, 224, 0.1);
   display: grid;
   place-items: center;
   color: var(--primary);
@@ -112,13 +112,20 @@
   box-shadow: var(--shadow-sm);
   display: grid;
   gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.service-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 .service-card .svc-icon {
   width: 42px;
   height: 42px;
   border-radius: 14px;
-  background: rgba(31, 95, 224, .10);
+  background: rgba(31, 95, 224, 0.1);
   display: grid;
   place-items: center;
   color: var(--primary);
@@ -203,7 +210,7 @@
   width: 54px;
   height: 54px;
   border-radius: 16px;
-  background: rgba(31, 95, 224, .10);
+  background: rgba(31, 95, 224, 0.1);
   display: grid;
   place-items: center;
   color: var(--primary);
@@ -218,7 +225,7 @@
 .agenda-date .month {
   font-size: 10px;
   font-weight: 800;
-  opacity: .9;
+  opacity: 0.9;
 }
 
 .agenda-title {
@@ -256,7 +263,7 @@
 
 .home-cta p {
   margin-top: 8px;
-  opacity: .95;
+  opacity: 0.95;
   font-size: 13px;
 }
 
@@ -527,7 +534,7 @@
 
 .info-grid {
   display: grid;
-  grid-template-columns: 1.2fr .8fr;
+  grid-template-columns: 1.2fr 0.8fr;
   gap: 14px;
 }
 
@@ -670,7 +677,7 @@
   bottom: 0;
   left: 14px;
   width: 2px;
-  background: rgba(148, 163, 184, .5);
+  background: rgba(148, 163, 184, 0.5);
 }
 
 .timeline-item {
@@ -687,7 +694,7 @@
   height: 26px;
   border-radius: 999px;
   background: #fff;
-  box-shadow: 0 6px 16px rgba(15, 23, 42, .16);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.16);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -723,7 +730,7 @@
   position: fixed;
   inset: 0;
   padding: 18px;
-  background: rgba(2, 6, 23, .45);
+  background: rgba(2, 6, 23, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -782,18 +789,22 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  transition: box-shadow .2s ease, transform .15s ease, border-color .2s ease, background .2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.15s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
 }
 
 .choice-card:hover {
-  border-color: rgba(31, 95, 224, .35);
+  border-color: rgba(31, 95, 224, 0.35);
   box-shadow: var(--shadow-sm);
   transform: translateY(-1px);
 }
 
 .choice-card.active {
-  border-color: rgba(31, 95, 224, .65);
-  background: rgba(31, 95, 224, .06);
+  border-color: rgba(31, 95, 224, 0.65);
+  background: rgba(31, 95, 224, 0.06);
 }
 
 .choice-card h3 {
@@ -820,9 +831,9 @@
 }
 
 .choice-card.active .check {
-  border-color: rgba(31, 95, 224, .55);
+  border-color: rgba(31, 95, 224, 0.55);
   color: var(--primary);
-  background: rgba(31, 95, 224, .10);
+  background: rgba(31, 95, 224, 0.1);
 }
 
 .wizard-steps {
@@ -840,7 +851,7 @@
   gap: 4px;
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   color: var(--muted);
 }
 
@@ -864,13 +875,13 @@
 }
 
 .wizard-step.is-done {
-  opacity: .8;
+  opacity: 0.8;
 }
 
 /* animasi pane */
 .wizard-pane {
   display: none;
-  animation: wizardFade .18s ease-out;
+  animation: wizardFade 0.18s ease-out;
 }
 
 .wizard-pane.is-active {
@@ -895,12 +906,12 @@
   border: 1.5px dashed var(--border);
   padding: 18px 14px;
   text-align: center;
-  background: rgba(148, 163, 184, .04);
+  background: rgba(148, 163, 184, 0.04);
   cursor: pointer;
 }
 
 .upload-dropzone:hover {
-  background: rgba(148, 163, 184, .10);
+  background: rgba(148, 163, 184, 0.1);
   border-style: solid;
   box-shadow: var(--shadow-sm);
 }
@@ -917,7 +928,7 @@
   align-items: center;
   padding: 6px 10px;
   border-radius: 10px;
-  background: rgba(148, 163, 184, .08);
+  background: rgba(148, 163, 184, 0.08);
   font-size: 13px;
 }
 
@@ -986,8 +997,8 @@
 .pengumuman-filters select:focus,
 .pengumuman-filters input[type="text"]:focus,
 .pengumuman-filters input[type="search"]:focus {
-  border-color: rgba(31, 95, 224, .45);
-  box-shadow: 0 0 0 1px rgba(31, 95, 224, .18);
+  border-color: rgba(31, 95, 224, 0.45);
+  box-shadow: 0 0 0 1px rgba(31, 95, 224, 0.18);
   background: #fff;
 }
 
@@ -999,4 +1010,165 @@
   border: 1px solid var(--border);
   color: var(--muted);
   font-size: 14px;
+}
+
+/* =========================================================
+   UNIT KERJA / LEMBAGA DETAIL (RESPONSIVE)
+   - Halaman: pages/public/unit-kerja/* dan pages/public/lembaga-kemasyarakatan/*
+========================================================= */
+
+.page-title {
+  font-size: clamp(22px, 4.6vw, 32px);
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.page-lead {
+  /* Hindari teks pecah per huruf di layar kecil */
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.unit-leader {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.unit-leader-photo img {
+  width: 96px;
+  height: 96px;
+  border-radius: 18px;
+  object-fit: cover;
+  background: rgba(148, 163, 184, 0.16);
+}
+
+.unit-leader-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin-top: 8px;
+}
+
+.meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.meta-item span {
+  /* Jangan pecah per huruf */
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+@media (max-width: 600px) {
+  .unit-leader {
+    grid-template-columns: 1fr;
+  }
+  .unit-leader-photo img {
+    width: 84px;
+    height: 84px;
+  }
+}
+
+/* -------------------------
+   Konfirmasi (Thank You)
+   - Dipakai setelah pengajuan surat / pelaporan
+-------------------------- */
+.konfirmasi-page .thanks-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.konfirmasi-page .thanks-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(31, 95, 224, 0.1);
+  color: var(--primary);
+  font-size: 28px;
+  flex: 0 0 auto;
+}
+
+.konfirmasi-page .thanks-text h2 {
+  margin: 0 0 6px;
+  font-size: 22px;
+  font-weight: 1000;
+}
+
+.konfirmasi-page .thanks-text p {
+  margin: 0;
+}
+
+.konfirmasi-page .ref-code {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: rgba(31, 95, 224, 0.08);
+  border: 1px solid rgba(31, 95, 224, 0.18);
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  font-weight: 1000;
+  letter-spacing: 0.02em;
+}
+
+.konfirmasi-page .thanks-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 720px) {
+  .konfirmasi-page .thanks-inner {
+    flex-direction: column;
+  }
+  .konfirmasi-page .thanks-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    font-size: 24px;
+  }
+}
+
+/* ==========================
+   RESET PASSWORD INFO FIX
+========================== */
+
+.info-reset-card {
+  background: rgba(37, 99, 235, 0.06);
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  border-radius: 16px;
+}
+
+.info-reset-body {
+  padding: 16px;
+}
+
+.info-reset-title {
+  font-weight: 900;
+  margin-bottom: 10px;
+  color: var(--primary);
+  font-size: 15px;
+}
+
+.info-reset-list {
+  margin: 0;
+  padding-left: 20px;
+  list-style: disc;
+  color: #334155;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.info-reset-list li {
+  margin-bottom: 6px;
 }

@@ -1,0 +1,155 @@
+<section class="container" style="padding:28px 0" data-public-page="layanan">
+  <div class="section-head" style="margin-bottom:12px">
+    <h1>Layanan</h1>
+    <div class="muted">Pilih layanan, lalu isi formulir yang sesuai. (Publik bisa melihat, untuk mengirim diperlukan login warga.)</div>
+  </div>
+
+  <div class="card" style="border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow-sm)">
+    <div class="card-body" style="padding:16px">
+      <div style="display:grid;gap:10px;max-width:720px">
+        <label for="layananSelect" style="font-weight:800">Pilih Layanan</label>
+        <select id="layananSelect" class="input">
+          <option value="surat">Pengajuan Surat</option>
+          <option value="pelaporan">Pelaporan / Pengaduan</option>
+          <option value="kontak">Kontak RT/RW</option>
+        </select>
+      </div>
+
+      <!-- Gate tetap ada: hanya warga login yang bisa mengirim / melihat kontak -->
+      <div id="layananGate" style="margin-top:14px"></div>
+
+      <!-- ======================= SURAT ======================= -->
+      <div id="panelSurat" style="margin-top:16px;display:none">
+        <h2 style="margin:0">Pengajuan Surat</h2>
+        <div class="muted" style="margin:6px 0 12px">Isi data singkat. Jenis surat tersedia dalam dropdown.</div>
+
+        <form id="formSurat" class="form" autocomplete="on" style="max-width:840px" enctype="multipart/form-data">
+          <div class="form-grid">
+            <div class="form-field">
+              <label>Jenis Surat <span class="muted">(wajib)</span></label>
+              <select id="lsJenis" class="input" required></select>
+            </div>
+
+            <div class="form-field">
+              <label>Keperluan <span class="muted">(wajib)</span></label>
+              <input id="lsKeperluan" class="input" placeholder="Contoh: Melamar kerja / Administrasi sekolah" required />
+            </div>
+
+            <div class="form-field">
+              <label>NIK</label>
+              <input id="lsNik" class="input" inputmode="numeric" placeholder="16 digit" />
+            </div>
+
+            <div class="form-field">
+              <label>Jenis Kelamin</label>
+              <select id="lsGender" class="input">
+                <option value="">Pilih</option>
+                <option value="L">Laki-laki</option>
+                <option value="P">Perempuan</option>
+              </select>
+            </div>
+
+            <div class="form-field" style="grid-column:1/-1">
+              <label>Alamat</label>
+              <input id="lsAlamat" class="input" placeholder="Alamat domisili" />
+            </div>
+
+            <div class="form-field" style="grid-column:1/-1">
+              <label>Catatan</label>
+              <textarea id="lsCatatan" class="input" rows="3" placeholder="Opsional"></textarea>
+            </div>
+
+            <div class="form-field" style="grid-column:1/-1">
+              <label>Upload Berkas (opsional)</label>
+              <input id="lsBerkas" class="input" type="file" accept=".pdf,.jpg,.jpeg,.png" />
+              <div class="muted" style="font-size:12px;margin-top:6px">Format: PDF/JPG/PNG</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Kirim Pengajuan</button>
+            <button type="button" class="btn btn-ghost" data-action="resetSurat"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reset</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ===================== PELAPORAN ===================== -->
+      <div id="panelPelaporan" style="margin-top:16px;display:none">
+        <h2 style="margin:0">Pelaporan / Pengaduan</h2>
+        <div class="muted" style="margin:6px 0 12px">Pilih kategori, tulis judul & deskripsi. Bukti bisa diunggah (jpg/png/pdf).</div>
+
+        <form id="formPelaporan" class="form" autocomplete="on" style="max-width:840px" enctype="multipart/form-data">
+          <div class="form-grid">
+            <div class="form-field">
+              <label>Kategori <span class="muted">(wajib)</span></label>
+              <select id="lpKategori" class="input" required>
+                <option value="">Pilih kategori</option>
+                <option value="Infrastruktur">Infrastruktur</option>
+                <option value="Kebersihan">Kebersihan</option>
+                <option value="Keamanan">Keamanan</option>
+                <option value="Administrasi">Administrasi</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label>Judul <span class="muted">(wajib)</span></label>
+              <input id="lpJudul" class="input" placeholder="Ringkas dan jelas" required />
+            </div>
+
+            <div class="form-field" style="grid-column:1/-1">
+              <label>Lokasi <span class="muted">(wajib)</span></label>
+              <input id="lpLokasi" class="input" placeholder="Contoh: RT 002 / RW 001, Jl. ..." required />
+            </div>
+
+            <div class="form-field" style="grid-column:1/-1">
+              <label>Deskripsi <span class="muted">(wajib)</span></label>
+              <textarea id="lpDeskripsi" class="input" rows="4" placeholder="Jelaskan kronologi / detail" required></textarea>
+            </div>
+
+            <div class="form-field" style="grid-column:1/-1">
+              <label>Upload Bukti (opsional)</label>
+              <input id="lpBukti" class="input" type="file" accept=".pdf,.jpg,.jpeg,.png" />
+              <div class="muted" style="font-size:12px;margin-top:6px">Format: PDF/JPG/PNG</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Kirim Laporan</button>
+            <button type="button" class="btn btn-ghost" data-action="resetPelaporan"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reset</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ======================= KONTAK ======================= -->
+      <div id="panelKontak" style="margin-top:16px;display:none">
+        <h2 style="margin:0">Kontak RT/RW</h2>
+        <div class="muted" style="margin:6px 0 12px">Kontak pengurus RT/RW (WhatsApp/telepon) untuk koordinasi lingkungan.</div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:10px">
+          <select id="lkJenis" class="input" style="max-width:220px">
+            <option value="rt">RT</option>
+            <option value="rw">RW</option>
+          </select>
+          <input id="lkSearch" class="input" placeholder="Cari nama / wilayah..." style="flex:1;min-width:220px" />
+        </div>
+
+        <div style="overflow:auto">
+          <table class="warga-table">
+            <thead>
+              <tr>
+                <th>Nama</th>
+                <th>Jabatan</th>
+                <th>Wilayah</th>
+                <th>Kontak</th>
+              </tr>
+            </thead>
+            <tbody id="lkTbody"></tbody>
+          </table>
+        </div>
+
+        <div class="muted" style="font-size:12px;margin-top:10px">* Data kontak bisa dikelola admin pada menu RT/RW.</div>
+      </div>
+    </div>
+  </div>
+</section>

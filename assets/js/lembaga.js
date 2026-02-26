@@ -119,6 +119,9 @@
 
         const data = getAll().filter((x) => x.jenis === jenis);
 
+        const s = Guard.getSession ? Guard.getSession() : null;
+        const canSeeContact = !!(s && s.role === "warga");
+
         const tbody = document.getElementById("lembagaTbody");
         const kontakUtama = document.getElementById("lembagaKontakUtama");
 
@@ -131,7 +134,7 @@
             <td>${item.nama || "-"}</td>
             <td>${item.jabatan || "-"}</td>
             <td>${item.wilayah || "-"}</td>
-            <td>${item.kontak || "-"}</td>
+            <td>${canSeeContact ? (item.kontak || "-") : '<span class="muted">Login untuk lihat</span>'}</td>
           </tr>`
                     )
                     .join("") ||
@@ -151,7 +154,7 @@
               <p><b>${utama.nama}</b></p>
               <p class="muted">${utama.jabatan}</p>
               <p><i class="fa-solid fa-location-dot"></i> ${utama.wilayah}</p>
-              <p><i class="fa-brands fa-whatsapp"></i> ${utama.kontak}</p>
+              <p><i class="fa-brands fa-whatsapp"></i> ${canSeeContact ? (utama.kontak || "-") : '<span class="muted">Login untuk lihat</span>'}</p>
               ${utama.keterangan
                         ? `<p class="muted" style="margin-top:8px;font-size:13px;">${utama.keterangan}</p>`
                         : ""
