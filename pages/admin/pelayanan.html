@@ -1,9 +1,16 @@
 <section class="admin-shell" data-admin-page="pelayanan">
-    <!-- =============== SIDEBAR =============== -->
-      <aside class="admin-side">
+  <!-- =============== SIDEBAR =============== -->
+  <aside class="admin-side">
     <div class="side-head">
       <h3><i class="fa-solid fa-shield-halved"></i> Panel Admin</h3>
-      <div class="muted" style="font-size:12px;margin-top:6px" id="adminUserLabel" data-bind="userName">-</div>
+      <div
+        class="muted"
+        style="font-size: 12px; margin-top: 6px"
+        id="adminUserLabel"
+        data-bind="userName"
+      >
+        -
+      </div>
     </div>
 
     <ul class="side-menu" id="adminSideMenu">
@@ -15,16 +22,25 @@
       </li>
 
       <li>
-        <a class="nav-link" data-page="admin/profil-kelurahan" href="#admin/profil-kelurahan">
+        <a
+          class="nav-link"
+          data-page="admin/profil-kelurahan"
+          href="#admin/profil-kelurahan"
+        >
           <i class="fa-solid fa-location-dot"></i> Profil Kelurahan
         </a>
       </li>
 
-      <li class="divider" style="margin:10px 0"></li>
+      <li class="divider" style="margin: 10px 0"></li>
 
       <!-- KONTEN (collapse) -->
       <li class="menu-group" data-group="konten">
-        <button class="group-toggle" type="button" aria-expanded="false" aria-controls="groupKonten">
+        <button
+          class="group-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="groupKonten"
+        >
           <span class="left">
             <i class="fa-regular fa-folder-open"></i>
             <span>Konten</span>
@@ -33,25 +49,64 @@
         </button>
 
         <ul class="group-items" id="groupKonten">
-          <li><a class="nav-link" data-page="admin/berita" href="#admin/berita"><i class="fa-regular fa-newspaper"></i> Kelola Berita</a></li>
-          <li><a class="nav-link" data-page="admin/agenda" href="#admin/agenda"><i class="fa-regular fa-calendar"></i> Kelola Agenda</a></li>
-          <li><a class="nav-link" data-page="admin/galeri" href="#admin/galeri"><i class="fa-regular fa-image"></i> Kelola Galeri</a></li>
-          <li><a class="nav-link" data-page="admin/pengumuman" href="#admin/pengumuman"><i class="fa-solid fa-bullhorn"></i> Kelola Pengumuman</a></li>
+          <li>
+            <a class="nav-link" data-page="admin/berita" href="#admin/berita"
+              ><i class="fa-regular fa-newspaper"></i> Kelola Berita</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" data-page="admin/agenda" href="#admin/agenda"
+              ><i class="fa-regular fa-calendar"></i> Kelola Agenda</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" data-page="admin/galeri" href="#admin/galeri"
+              ><i class="fa-regular fa-image"></i> Kelola Galeri</a
+            >
+          </li>
+          <li>
+            <a
+              class="nav-link"
+              data-page="admin/pengumuman"
+              href="#admin/pengumuman"
+              ><i class="fa-solid fa-bullhorn"></i> Kelola Pengumuman</a
+            >
+          </li>
         </ul>
       </li>
 
-      <li class="divider" style="margin:10px 0"></li>
+      <li class="divider" style="margin: 10px 0"></li>
 
       <!-- ORGANISASI & PELAYANAN -->
-      <li><a class="nav-link" data-page="admin/pelayanan" href="#admin/pelayanan"><i class="fa-regular fa-file-lines"></i> Pelayanan Surat</a></li>
-      <li><a class="nav-link" data-page="admin/unit-kerja" href="#admin/unit-kerja"><i class="fa-solid fa-people-roof"></i> Unit Kerja</a></li>
-      <li><a class="nav-link" data-page="admin/lembaga" href="#admin/lembaga"><i class="fa-solid fa-building-columns"></i> Lembaga</a></li>
+      <li>
+        <a class="nav-link" data-page="admin/pelayanan" href="#admin/pelayanan"
+          ><i class="fa-regular fa-file-lines"></i> Pelayanan Surat</a
+        >
+      </li>
+      <li>
+        <a
+          class="nav-link"
+          data-page="admin/unit-kerja"
+          href="#admin/unit-kerja"
+          ><i class="fa-solid fa-people-roof"></i> Unit Kerja</a
+        >
+      </li>
+      <li>
+        <a class="nav-link" data-page="admin/lembaga" href="#admin/lembaga"
+          ><i class="fa-solid fa-building-columns"></i> Lembaga</a
+        >
+      </li>
 
-      <li class="divider" style="margin:10px 0"></li>
+      <li class="divider" style="margin: 10px 0"></li>
 
       <!-- OPERASIONAL (collapse) -->
       <li class="menu-group" data-group="operasional">
-        <button class="group-toggle" type="button" aria-expanded="false" aria-controls="groupOperasional">
+        <button
+          class="group-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="groupOperasional"
+        >
           <span class="left">
             <i class="fa-solid fa-clipboard-check"></i>
             <span>Operasional</span>
@@ -60,19 +115,42 @@
         </button>
 
         <ul class="group-items" id="groupOperasional">
-          <li><a class="nav-link" data-page="admin/pengaduan" href="#admin/pengaduan"><i class="fa-solid fa-comments"></i> Pengaduan</a></li>
-          <li><a class="nav-link" data-page="admin/surat" href="#admin/surat"><i class="fa-solid fa-file-signature"></i> Surat</a></li>
-          <li><a class="nav-link" data-page="admin/umkm" href="#admin/umkm"><i class="fa-solid fa-store"></i> UMKM</a></li>
-          <li><a class="nav-link" data-page="admin/rt-rw" href="#admin/rt-rw"><i class="fa-solid fa-users"></i> RT/RW</a></li>
-          <li><a class="nav-link" data-page="admin/faq" href="#admin/faq"><i class="fa-regular fa-circle-question"></i> FAQ</a></li>
+          <li>
+            <a
+              class="nav-link"
+              data-page="admin/pengaduan"
+              href="#admin/pengaduan"
+              ><i class="fa-solid fa-comments"></i> Pengaduan</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" data-page="admin/surat" href="#admin/surat"
+              ><i class="fa-solid fa-file-signature"></i> Surat</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" data-page="admin/rt-rw" href="#admin/rt-rw"
+              ><i class="fa-solid fa-users"></i> RT/RW</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" data-page="admin/faq" href="#admin/faq"
+              ><i class="fa-regular fa-circle-question"></i> FAQ</a
+            >
+          </li>
         </ul>
       </li>
 
-      <li class="divider" style="margin:10px 0"></li>
+      <li class="divider" style="margin: 10px 0"></li>
 
       <!-- SISTEM (collapse) -->
       <li class="menu-group" data-group="sistem">
-        <button class="group-toggle" type="button" aria-expanded="false" aria-controls="groupSistem">
+        <button
+          class="group-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="groupSistem"
+        >
           <span class="left">
             <i class="fa-solid fa-sliders"></i>
             <span>Sistem</span>
@@ -81,177 +159,269 @@
         </button>
 
         <ul class="group-items" id="groupSistem">
-          <li><a class="nav-link" data-page="admin/pengaturan" href="#admin/pengaturan"><i class="fa-solid fa-gear"></i> Pengaturan</a></li>
-          <li><a class="nav-link" data-page="admin/laporan" href="#admin/laporan"><i class="fa-solid fa-chart-column"></i> Laporan</a></li>
+          <li>
+            <a
+              class="nav-link"
+              data-page="admin/pengaturan"
+              href="#admin/pengaturan"
+              ><i class="fa-solid fa-gear"></i> Pengaturan</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" data-page="admin/laporan" href="#admin/laporan"
+              ><i class="fa-solid fa-chart-column"></i> Laporan</a
+            >
+          </li>
         </ul>
       </li>
 
-      <li class="divider" style="margin:10px 0"></li>
+      <li class="divider" style="margin: 10px 0"></li>
 
       <!-- BOTTOM -->
-      <li><a class="nav-link" data-page="home" href="#home"><i class="fa-solid fa-arrow-left"></i> Ke Publik</a></li>
-      <li><a href="#" data-action="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+      <li>
+        <a class="nav-link" data-page="home" href="#home"
+          ><i class="fa-solid fa-arrow-left"></i> Ke Publik</a
+        >
+      </li>
+      <li>
+        <a href="#" data-action="logout"
+          ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
+        >
+      </li>
     </ul>
   </aside>
-<!-- =============== MAIN CONTENT =============== -->
-    <div class="admin-main">
-        <div class="admin-top">
-            <h1 class="page-title">Kelola Pelayanan Surat</h1>
-            <p class="page-subtitle muted">
-                Atur daftar layanan surat, jenis layanan (online / harus datang langsung),
-                persyaratan, dan langkah proses yang akan tampil di halaman publik.
-            </p>
-        </div>
-
-        <!-- LIST / TABEL LAYANAN -->
-        <div class="card admin-card">
-            <div class="card-header admin-card-header">
-                <div>
-                    <h2>Daftar Pelayanan Surat</h2>
-                    <p class="muted">
-                        Gunakan cari untuk menemukan layanan tertentu, lalu klik edit atau hapus
-                        pada kolom aksi.
-                    </p>
-                </div>
-                <div class="admin-card-actions">
-                    <button class="btn btn-light" type="button" id="srvRefreshBtn">
-                        <i class="fa-solid fa-rotate"></i> Muat Ulang
-                    </button>
-                    <button class="btn btn-primary" type="button" id="btnAddSrv">
-                        <i class="fa-solid fa-plus"></i> Tambah Layanan
-                    </button>
-                </div>
-            </div>
-
-            <div class="card-body">
-                <div class="filter-row">
-                    <div class="filter-item" style="flex:1;">
-                        <label for="srvSearch">Cari Layanan</label>
-                        <input class="input" id="srvSearch"
-                            placeholder="Cari berdasarkan nama layanan / nama page..." />
-                    </div>
-                </div>
-
-                <div class="table-wrapper" style="margin-top:16px;">
-                    <table class="table admin-table">
-                        <thead>
-                            <tr>
-                                <th>Nama Layanan</th>
-                                <th>Page</th>
-                                <th>Jenis</th>
-                                <th class="text-right">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="srvAdmTbody"><!-- diisi via pelayanan.js --></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- FORM / MODAL LAYANAN -->
-        <div class="modal" id="srvModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-head">
-                        <div class="modal-title">
-                            <h3 id="srvModalTitle">Data Layanan Surat</h3>
-                            <div class="muted" style="font-size:13px">Kelola layanan, persyaratan, tahapan proses, dan form pengajuan online.</div>
-                        </div>
-                        <button class="icon-btn" type="button" data-action="closeSrvModal" aria-label="Tutup">
-                            <i class="fa-solid fa-xmark"></i>
-                        </button>
-                    </div>
-
-                    <form id="srvForm">
-                        <input type="hidden" id="fSrvId" />
-
-                        <div class="modal-body">
-                            <div class="form-grid">
-                                <div class="field">
-                                    <label for="fSrvNama">Nama Layanan</label>
-                                    <input class="input" id="fSrvNama" placeholder="Contoh: Surat Keterangan Domisili (SKD)" required />
-                                </div>
-
-                                <div class="field">
-                                    <label for="fSrvPage">Slug (URL)</label>
-                                    <input class="input" id="fSrvPage" placeholder="Contoh: pelayanan-skd" required />
-                                    <small class="muted">Dipakai di URL, contoh: <code>#pelayanan-skd</code></small>
-                                </div>
-
-                                <div class="field">
-                                    <label for="fSrvEstimasi">Estimasi Waktu</label>
-                                    <input class="input" id="fSrvEstimasi" placeholder="Contoh: 1 hari kerja" />
-                                </div>
-
-                                <div class="field">
-                                    <label for="fSrvBiaya">Biaya</label>
-                                    <input class="input" id="fSrvBiaya" placeholder="Contoh: Gratis" />
-                                </div>
-
-                                <div class="field">
-                                    <label>Status Online</label>
-                                    <div style="display:flex;gap:10px;align-items:center;height:44px">
-                                        <input type="checkbox" id="fSrvOnline" />
-                                        <span style="font-weight:900">Bisa Online</span>
-                                    </div>
-                                </div>
-
-                                <div class="field">
-                                    <label for="fSrvTombol">Teks Tombol</label>
-                                    <input class="input" id="fSrvTombol" placeholder="Contoh: Ajukan Surat ... Online" />
-                                </div>
-                            </div>
-
-                            <div class="divider" style="margin:14px 0"></div>
-
-                            <div class="section-head" style="margin-bottom:10px">
-                                <h2 style="margin:0;font-size:16px">Persyaratan</h2>
-                                <button class="btn btn-ghost" type="button" id="btnAddSyarat"><i class="fa-solid fa-plus"></i> Tambah Syarat</button>
-                            </div>
-                            <div id="fSrvSyaratList" class="list-editor"></div>
-
-                            <div class="divider" style="margin:14px 0"></div>
-
-                            <div class="section-head" style="margin-bottom:10px">
-                                <h2 style="margin:0;font-size:16px">Tahapan Proses</h2>
-                                <button class="btn btn-ghost" type="button" id="btnAddStep"><i class="fa-solid fa-plus"></i> Tambah Step</button>
-                            </div>
-                            <div id="fSrvStepList" class="list-editor"></div>
-
-                            <div class="divider" style="margin:14px 0"></div>
-
-                            <div class="section-head" style="margin-bottom:10px">
-                                <h2 style="margin:0;font-size:16px">Form Online (Opsional)</h2>
-                                <button class="btn btn-ghost" type="button" id="btnAddField"><i class="fa-solid fa-plus"></i> Tambah Field</button>
-                            </div>
-                            <div class="muted" style="font-size:13px;margin-bottom:10px">Field tambahan yang akan muncul di langkah “Isi Data”.</div>
-                            <div id="fSrvFormList" class="list-editor"></div>
-
-                            <div class="divider" style="margin:14px 0"></div>
-
-                            <div class="field">
-                                <label for="fSrvJam">Jam Pelayanan</label>
-                                <textarea class="input" id="fSrvJam" rows="2" placeholder="Contoh:\nSenin - Jumat: 08.00 - 15.00 WIB\nSabtu - Minggu: Libur"></textarea>
-                            </div>
-
-                            <div class="field">
-                                <label for="fSrvLokasi">Lokasi</label>
-                                <textarea class="input" id="fSrvLokasi" rows="3" placeholder="Contoh:\nKantor Kelurahan Duren Mekar\nJl. Duren Mekar No.59, Bojongsari, Kota Depok\nTelp: (021) 12345678"></textarea>
-                            </div>
-
-                            <div class="field">
-                                <label for="fSrvCatatan">Catatan (1 baris = 1 poin)</label>
-                                <textarea class="input" id="fSrvCatatan" rows="3"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="modal-foot">
-                            <button class="btn btn-ghost" type="button" data-action="closeSrvModal">Batal</button>
-                            <button class="btn btn-solid" type="submit"><i class="fa-solid fa-floppy-disk"></i> Simpan</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+  <!-- =============== MAIN CONTENT =============== -->
+  <div class="admin-main">
+    <div class="admin-top">
+      <h1 class="page-title">Kelola Pelayanan Surat</h1>
+      <p class="page-subtitle muted">
+        Atur daftar layanan surat, jenis layanan (online / harus datang
+        langsung), persyaratan, dan langkah proses yang akan tampil di halaman
+        publik.
+      </p>
     </div>
+
+    <!-- LIST / TABEL LAYANAN -->
+    <div class="card admin-card">
+      <div class="card-header admin-card-header">
+        <div>
+          <h2>Daftar Pelayanan Surat</h2>
+          <p class="muted">
+            Gunakan cari untuk menemukan layanan tertentu, lalu klik edit atau
+            hapus pada kolom aksi.
+          </p>
+        </div>
+        <div class="admin-card-actions">
+          <button class="btn btn-light" type="button" id="srvRefreshBtn">
+            <i class="fa-solid fa-rotate"></i> Muat Ulang
+          </button>
+          <button class="btn btn-primary" type="button" id="btnAddSrv">
+            <i class="fa-solid fa-plus"></i> Tambah Layanan
+          </button>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="filter-row">
+          <div class="filter-item" style="flex: 1">
+            <label for="srvSearch">Cari Layanan</label>
+            <input
+              class="input"
+              id="srvSearch"
+              placeholder="Cari berdasarkan nama layanan / nama page..."
+            />
+          </div>
+        </div>
+
+        <div class="table-wrapper" style="margin-top: 16px">
+          <table class="table admin-table">
+            <thead>
+              <tr>
+                <th>Nama Layanan</th>
+                <th>Page</th>
+                <th>Jenis</th>
+                <th class="text-right">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="srvAdmTbody">
+              <!-- diisi via pelayanan.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM / MODAL LAYANAN -->
+    <div class="modal" id="srvModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-head">
+            <div class="modal-title">
+              <h3 id="srvModalTitle">Data Layanan Surat</h3>
+              <div class="muted" style="font-size: 13px">
+                Kelola layanan, persyaratan, tahapan proses, dan form pengajuan
+                online.
+              </div>
+            </div>
+            <button
+              class="icon-btn"
+              type="button"
+              data-action="closeSrvModal"
+              aria-label="Tutup"
+            >
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <form id="srvForm">
+            <input type="hidden" id="fSrvId" />
+
+            <div class="modal-body">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="fSrvNama">Nama Layanan</label>
+                  <input
+                    class="input"
+                    id="fSrvNama"
+                    placeholder="Contoh: Surat Keterangan Domisili (SKD)"
+                    required
+                  />
+                </div>
+
+                <div class="field">
+                  <label for="fSrvPage">Slug (URL)</label>
+                  <input
+                    class="input"
+                    id="fSrvPage"
+                    placeholder="Contoh: pelayanan-skd"
+                    required
+                  />
+                  <small class="muted"
+                    >Dipakai di URL, contoh: <code>#pelayanan-skd</code></small
+                  >
+                </div>
+
+                <div class="field">
+                  <label for="fSrvEstimasi">Estimasi Waktu</label>
+                  <input
+                    class="input"
+                    id="fSrvEstimasi"
+                    placeholder="Contoh: 1 hari kerja"
+                  />
+                </div>
+
+                <div class="field">
+                  <label for="fSrvBiaya">Biaya</label>
+                  <input
+                    class="input"
+                    id="fSrvBiaya"
+                    placeholder="Contoh: Gratis"
+                  />
+                </div>
+
+                <div class="field">
+                  <label>Status Online</label>
+                  <div
+                    style="
+                      display: flex;
+                      gap: 10px;
+                      align-items: center;
+                      height: 44px;
+                    "
+                  >
+                    <input type="checkbox" id="fSrvOnline" />
+                    <span style="font-weight: 900">Bisa Online</span>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label for="fSrvTombol">Teks Tombol</label>
+                  <input
+                    class="input"
+                    id="fSrvTombol"
+                    placeholder="Contoh: Ajukan Surat ... Online"
+                  />
+                </div>
+              </div>
+
+              <div class="divider" style="margin: 14px 0"></div>
+
+              <div class="section-head" style="margin-bottom: 10px">
+                <h2 style="margin: 0; font-size: 16px">Persyaratan</h2>
+                <button class="btn btn-ghost" type="button" id="btnAddSyarat">
+                  <i class="fa-solid fa-plus"></i> Tambah Syarat
+                </button>
+              </div>
+              <div id="fSrvSyaratList" class="list-editor"></div>
+
+              <div class="divider" style="margin: 14px 0"></div>
+
+              <div class="section-head" style="margin-bottom: 10px">
+                <h2 style="margin: 0; font-size: 16px">Tahapan Proses</h2>
+                <button class="btn btn-ghost" type="button" id="btnAddStep">
+                  <i class="fa-solid fa-plus"></i> Tambah Step
+                </button>
+              </div>
+              <div id="fSrvStepList" class="list-editor"></div>
+
+              <div class="divider" style="margin: 14px 0"></div>
+
+              <div class="section-head" style="margin-bottom: 10px">
+                <h2 style="margin: 0; font-size: 16px">
+                  Form Online (Opsional)
+                </h2>
+                <button class="btn btn-ghost" type="button" id="btnAddField">
+                  <i class="fa-solid fa-plus"></i> Tambah Field
+                </button>
+              </div>
+              <div class="muted" style="font-size: 13px; margin-bottom: 10px">
+                Field tambahan yang akan muncul di langkah “Isi Data”.
+              </div>
+              <div id="fSrvFormList" class="list-editor"></div>
+
+              <div class="divider" style="margin: 14px 0"></div>
+
+              <div class="field">
+                <label for="fSrvJam">Jam Pelayanan</label>
+                <textarea
+                  class="input"
+                  id="fSrvJam"
+                  rows="2"
+                  placeholder="Contoh:\nSenin - Jumat: 08.00 - 15.00 WIB\nSabtu - Minggu: Libur"
+                ></textarea>
+              </div>
+
+              <div class="field">
+                <label for="fSrvLokasi">Lokasi</label>
+                <textarea
+                  class="input"
+                  id="fSrvLokasi"
+                  rows="3"
+                  placeholder="Contoh:\nKantor Kelurahan Duren Mekar\nJl. Duren Mekar No.59, Bojongsari, Kota Depok\nTelp: (021) 12345678"
+                ></textarea>
+              </div>
+
+              <div class="field">
+                <label for="fSrvCatatan">Catatan (1 baris = 1 poin)</label>
+                <textarea class="input" id="fSrvCatatan" rows="3"></textarea>
+              </div>
+            </div>
+
+            <div class="modal-foot">
+              <button
+                class="btn btn-ghost"
+                type="button"
+                data-action="closeSrvModal"
+              >
+                Batal
+              </button>
+              <button class="btn btn-solid" type="submit">
+                <i class="fa-solid fa-floppy-disk"></i> Simpan
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

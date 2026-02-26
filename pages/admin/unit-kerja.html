@@ -1,8 +1,15 @@
 <section class="admin-shell" data-admin-page="unit-kerja">
-      <aside class="admin-side">
+  <aside class="admin-side">
     <div class="side-head">
       <h3><i class="fa-solid fa-shield-halved"></i> Panel Admin</h3>
-      <div class="muted" style="font-size:12px;margin-top:6px" id="adminUserLabel" data-bind="userName">-</div>
+      <div
+        class="muted"
+        style="font-size: 12px; margin-top: 6px"
+        id="adminUserLabel"
+        data-bind="userName"
+      >
+        -
+      </div>
     </div>
 
     <ul class="side-menu" id="adminSideMenu">
@@ -14,16 +21,25 @@
       </li>
 
       <li>
-        <a class="nav-link" data-page="admin/profil-kelurahan" href="#admin/profil-kelurahan">
+        <a
+          class="nav-link"
+          data-page="admin/profil-kelurahan"
+          href="#admin/profil-kelurahan"
+        >
           <i class="fa-solid fa-location-dot"></i> Profil Kelurahan
         </a>
       </li>
 
-      <li class="divider" style="margin:10px 0"></li>
+      <li class="divider" style="margin: 10px 0"></li>
 
       <!-- KONTEN (collapse) -->
       <li class="menu-group" data-group="konten">
-        <button class="group-toggle" type="button" aria-expanded="false" aria-controls="groupKonten">
+        <button
+          class="group-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="groupKonten"
+        >
           <span class="left">
             <i class="fa-regular fa-folder-open"></i>
             <span>Konten</span>
@@ -32,25 +48,64 @@
         </button>
 
         <ul class="group-items" id="groupKonten">
-          <li><a class="nav-link" data-page="admin/berita" href="#admin/berita"><i class="fa-regular fa-newspaper"></i> Kelola Berita</a></li>
-          <li><a class="nav-link" data-page="admin/agenda" href="#admin/agenda"><i class="fa-regular fa-calendar"></i> Kelola Agenda</a></li>
-          <li><a class="nav-link" data-page="admin/galeri" href="#admin/galeri"><i class="fa-regular fa-image"></i> Kelola Galeri</a></li>
-          <li><a class="nav-link" data-page="admin/pengumuman" href="#admin/pengumuman"><i class="fa-solid fa-bullhorn"></i> Kelola Pengumuman</a></li>
+          <li>
+            <a class="nav-link" data-page="admin/berita" href="#admin/berita"
+              ><i class="fa-regular fa-newspaper"></i> Kelola Berita</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" data-page="admin/agenda" href="#admin/agenda"
+              ><i class="fa-regular fa-calendar"></i> Kelola Agenda</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" data-page="admin/galeri" href="#admin/galeri"
+              ><i class="fa-regular fa-image"></i> Kelola Galeri</a
+            >
+          </li>
+          <li>
+            <a
+              class="nav-link"
+              data-page="admin/pengumuman"
+              href="#admin/pengumuman"
+              ><i class="fa-solid fa-bullhorn"></i> Kelola Pengumuman</a
+            >
+          </li>
         </ul>
       </li>
 
-      <li class="divider" style="margin:10px 0"></li>
+      <li class="divider" style="margin: 10px 0"></li>
 
       <!-- ORGANISASI & PELAYANAN -->
-      <li><a class="nav-link" data-page="admin/pelayanan" href="#admin/pelayanan"><i class="fa-regular fa-file-lines"></i> Pelayanan Surat</a></li>
-      <li><a class="nav-link" data-page="admin/unit-kerja" href="#admin/unit-kerja"><i class="fa-solid fa-people-roof"></i> Unit Kerja</a></li>
-      <li><a class="nav-link" data-page="admin/lembaga" href="#admin/lembaga"><i class="fa-solid fa-building-columns"></i> Lembaga</a></li>
+      <li>
+        <a class="nav-link" data-page="admin/pelayanan" href="#admin/pelayanan"
+          ><i class="fa-regular fa-file-lines"></i> Pelayanan Surat</a
+        >
+      </li>
+      <li>
+        <a
+          class="nav-link"
+          data-page="admin/unit-kerja"
+          href="#admin/unit-kerja"
+          ><i class="fa-solid fa-people-roof"></i> Unit Kerja</a
+        >
+      </li>
+      <li>
+        <a class="nav-link" data-page="admin/lembaga" href="#admin/lembaga"
+          ><i class="fa-solid fa-building-columns"></i> Lembaga</a
+        >
+      </li>
 
-      <li class="divider" style="margin:10px 0"></li>
+      <li class="divider" style="margin: 10px 0"></li>
 
       <!-- OPERASIONAL (collapse) -->
       <li class="menu-group" data-group="operasional">
-        <button class="group-toggle" type="button" aria-expanded="false" aria-controls="groupOperasional">
+        <button
+          class="group-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="groupOperasional"
+        >
           <span class="left">
             <i class="fa-solid fa-clipboard-check"></i>
             <span>Operasional</span>
@@ -59,19 +114,42 @@
         </button>
 
         <ul class="group-items" id="groupOperasional">
-          <li><a class="nav-link" data-page="admin/pengaduan" href="#admin/pengaduan"><i class="fa-solid fa-comments"></i> Pengaduan</a></li>
-          <li><a class="nav-link" data-page="admin/surat" href="#admin/surat"><i class="fa-solid fa-file-signature"></i> Surat</a></li>
-          <li><a class="nav-link" data-page="admin/umkm" href="#admin/umkm"><i class="fa-solid fa-store"></i> UMKM</a></li>
-          <li><a class="nav-link" data-page="admin/rt-rw" href="#admin/rt-rw"><i class="fa-solid fa-users"></i> RT/RW</a></li>
-          <li><a class="nav-link" data-page="admin/faq" href="#admin/faq"><i class="fa-regular fa-circle-question"></i> FAQ</a></li>
+          <li>
+            <a
+              class="nav-link"
+              data-page="admin/pengaduan"
+              href="#admin/pengaduan"
+              ><i class="fa-solid fa-comments"></i> Pengaduan</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" data-page="admin/surat" href="#admin/surat"
+              ><i class="fa-solid fa-file-signature"></i> Surat</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" data-page="admin/rt-rw" href="#admin/rt-rw"
+              ><i class="fa-solid fa-users"></i> RT/RW</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" data-page="admin/faq" href="#admin/faq"
+              ><i class="fa-regular fa-circle-question"></i> FAQ</a
+            >
+          </li>
         </ul>
       </li>
 
-      <li class="divider" style="margin:10px 0"></li>
+      <li class="divider" style="margin: 10px 0"></li>
 
       <!-- SISTEM (collapse) -->
       <li class="menu-group" data-group="sistem">
-        <button class="group-toggle" type="button" aria-expanded="false" aria-controls="groupSistem">
+        <button
+          class="group-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="groupSistem"
+        >
           <span class="left">
             <i class="fa-solid fa-sliders"></i>
             <span>Sistem</span>
@@ -80,178 +158,242 @@
         </button>
 
         <ul class="group-items" id="groupSistem">
-          <li><a class="nav-link" data-page="admin/pengaturan" href="#admin/pengaturan"><i class="fa-solid fa-gear"></i> Pengaturan</a></li>
-          <li><a class="nav-link" data-page="admin/laporan" href="#admin/laporan"><i class="fa-solid fa-chart-column"></i> Laporan</a></li>
+          <li>
+            <a
+              class="nav-link"
+              data-page="admin/pengaturan"
+              href="#admin/pengaturan"
+              ><i class="fa-solid fa-gear"></i> Pengaturan</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" data-page="admin/laporan" href="#admin/laporan"
+              ><i class="fa-solid fa-chart-column"></i> Laporan</a
+            >
+          </li>
         </ul>
       </li>
 
-      <li class="divider" style="margin:10px 0"></li>
+      <li class="divider" style="margin: 10px 0"></li>
 
       <!-- BOTTOM -->
-      <li><a class="nav-link" data-page="home" href="#home"><i class="fa-solid fa-arrow-left"></i> Ke Publik</a></li>
-      <li><a href="#" data-action="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+      <li>
+        <a class="nav-link" data-page="home" href="#home"
+          ><i class="fa-solid fa-arrow-left"></i> Ke Publik</a
+        >
+      </li>
+      <li>
+        <a href="#" data-action="logout"
+          ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
+        >
+      </li>
     </ul>
   </aside>
-<!-- ✅ SEMUA KONTEN ADMIN DIBUNGKUS DI SINI -->
-    <div class="admin-main">
-        <div class="admin-top">
-            <h1 class="page-title">Kelola Unit Kerja</h1>
-            <p class="page-subtitle">
-                Atur data pimpinan, kontak penting, dan deskripsi setiap unit kerja
-                (Kantor Lurah, Sekretariat, Seksi, dll). Data ini akan tampil di halaman
-                publik Unit Kerja.
-            </p>
-        </div>
-
-        <!-- LIST + FILTER UNIT KERJA -->
-        <div class="card admin-card">
-            <div class="card-header admin-card-header">
-                <div>
-                    <h2>Data Unit Kerja</h2>
-                    <p class="muted">
-                        Pilih unit kerja kemudian klik tombol edit untuk memperbarui informasi.
-                    </p>
-                </div>
-                <div class="admin-card-actions">
-                    <button class="btn btn-light" id="ukRefreshBtn">
-                        <i class="fa-solid fa-rotate"></i> Muat Ulang
-                    </button>
-                    <button class="btn btn-primary" id="ukAddBtn">
-                        <i class="fa-solid fa-plus"></i> Tambah Unit Kerja
-                    </button>
-                </div>
-            </div>
-
-            <div class="card-body">
-                <div class="filter-row">
-                    <div class="filter-item">
-                        <label for="ukFilterJenis">Jenis Unit</label>
-                        <select id="ukFilterJenis">
-                            <option value="all">Semua</option>
-                            <option value="lurah">Kantor Lurah</option>
-                            <option value="sekretariat">Sekretariat</option>
-                            <option value="tata-pemerintahan">Seksi Tata Pemerintahan</option>
-                            <option value="pemberdayaan">
-                                Seksi Pemberdayaan Masyarakat, Pemuda dan Budaya
-                            </option>
-                            <option value="ketertiban">Seksi Ketentraman dan Ketertiban Umum</option>
-                        </select>
-                    </div>
-
-                    <div class="filter-item">
-                        <label for="ukSearch">Cari</label>
-                        <input id="ukSearch" type="text" placeholder="Cari nama unit / pimpinan / kontak..." />
-                    </div>
-                </div>
-
-                <div class="table-wrapper">
-                    <table class="table admin-table" id="ukTable">
-                        <thead>
-                            <tr>
-                                <th>Unit Kerja</th>
-                                <th>Pimpinan</th>
-                                <th>Kontak</th>
-                                <th>Terakhir Diubah</th>
-                                <th class="text-right">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Diisi via JS (admin/unit-kerja.js) -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- FORM UNIT KERJA -->
-        <div class="card admin-card" id="ukFormCard" hidden>
-            <div class="card-header admin-card-header">
-                <div>
-                    <h2 id="ukFormTitle">Tambah Unit Kerja</h2>
-                    <p class="muted">
-                        Lengkapi data berikut lalu simpan untuk memperbarui informasi unit kerja.
-                    </p>
-                </div>
-                <button class="icon-btn" id="ukFormClose" type="button" aria-label="Tutup form">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <div class="card-body">
-                <form id="ukForm">
-                    <input type="hidden" id="ukId" />
-
-                    <div class="form-grid two-col">
-                        <div class="form-group">
-                            <label for="ukJenis">Jenis Unit</label>
-                            <select id="ukJenis" required>
-                                <option value="">Pilih jenis...</option>
-                                <option value="lurah">Kantor Lurah</option>
-                                <option value="sekretariat">Sekretariat</option>
-                                <option value="tata-pemerintahan">Seksi Tata Pemerintahan</option>
-                                <option value="pemberdayaan">
-                                    Seksi Pemberdayaan Masyarakat, Pemuda dan Budaya
-                                </option>
-                                <option value="ketertiban">
-                                    Seksi Ketentraman dan Ketertiban Umum
-                                </option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="ukNamaUnit">Nama Unit Kerja</label>
-                            <input id="ukNamaUnit" type="text" placeholder="Contoh: Seksi Pemberdayaan Masyarakat"
-                                required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="ukNamaPimpinan">Nama Pimpinan</label>
-                            <input id="ukNamaPimpinan" type="text" placeholder="Nama lengkap pimpinan unit" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="ukJabatanPimpinan">Jabatan Pimpinan</label>
-                            <input id="ukJabatanPimpinan" type="text" placeholder="Contoh: Lurah / Kepala Seksi" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="ukKontak">Kontak / Nomor HP</label>
-                            <input id="ukKontak" type="text" placeholder="0812-xxxx-xxxx (opsional)" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="ukEmail">Email</label>
-                            <input id="ukEmail" type="email" placeholder="email@kelurahan.go.id (opsional)" />
-                        </div>
-                    </div>
-
-                    <div class="form-group full">
-                        <label for="ukAlamat">Alamat / Lokasi Layanan</label>
-                        <textarea id="ukAlamat" rows="2"
-                            placeholder="Alamat sekretariat / lokasi layanan unit kerja..."></textarea>
-                    </div>
-
-                    <div class="form-group full">
-                        <label for="ukTugas">Tugas Pokok &amp; Fungsi</label>
-                        <textarea id="ukTugas" rows="3"
-                            placeholder="Daftar tugas pokok dan fungsi utama unit kerja..."></textarea>
-                    </div>
-
-                    <div class="form-group full">
-                        <label for="ukKewenangan">Kewenangan</label>
-                        <textarea id="ukKewenangan" rows="3" placeholder="Kewenangan unit kerja..."></textarea>
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="button" class="btn btn-light" id="ukFormCancel">
-                            Batal
-                        </button>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa-solid fa-save"></i> Simpan
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+  <!-- ✅ SEMUA KONTEN ADMIN DIBUNGKUS DI SINI -->
+  <div class="admin-main">
+    <div class="admin-top">
+      <h1 class="page-title">Kelola Unit Kerja</h1>
+      <p class="page-subtitle">
+        Atur data pimpinan, kontak penting, dan deskripsi setiap unit kerja
+        (Kantor Lurah, Sekretariat, Seksi, dll). Data ini akan tampil di halaman
+        publik Unit Kerja.
+      </p>
     </div>
+
+    <!-- LIST + FILTER UNIT KERJA -->
+    <div class="card admin-card">
+      <div class="card-header admin-card-header">
+        <div>
+          <h2>Data Unit Kerja</h2>
+          <p class="muted">
+            Pilih unit kerja kemudian klik tombol edit untuk memperbarui
+            informasi.
+          </p>
+        </div>
+        <div class="admin-card-actions">
+          <button class="btn btn-light" id="ukRefreshBtn">
+            <i class="fa-solid fa-rotate"></i> Muat Ulang
+          </button>
+          <button class="btn btn-primary" id="ukAddBtn">
+            <i class="fa-solid fa-plus"></i> Tambah Unit Kerja
+          </button>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="filter-row">
+          <div class="filter-item">
+            <label for="ukFilterJenis">Jenis Unit</label>
+            <select id="ukFilterJenis">
+              <option value="all">Semua</option>
+              <option value="lurah">Kantor Lurah</option>
+              <option value="sekretariat">Sekretariat</option>
+              <option value="tata-pemerintahan">Seksi Tata Pemerintahan</option>
+              <option value="pemberdayaan">
+                Seksi Pemberdayaan Masyarakat, Pemuda dan Budaya
+              </option>
+              <option value="ketertiban">
+                Seksi Ketentraman dan Ketertiban Umum
+              </option>
+            </select>
+          </div>
+
+          <div class="filter-item">
+            <label for="ukSearch">Cari</label>
+            <input
+              id="ukSearch"
+              type="text"
+              placeholder="Cari nama unit / pimpinan / kontak..."
+            />
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="table admin-table" id="ukTable">
+            <thead>
+              <tr>
+                <th>Unit Kerja</th>
+                <th>Pimpinan</th>
+                <th>Kontak</th>
+                <th>Terakhir Diubah</th>
+                <th class="text-right">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Diisi via JS (admin/unit-kerja.js) -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM UNIT KERJA -->
+    <div class="card admin-card" id="ukFormCard" hidden>
+      <div class="card-header admin-card-header">
+        <div>
+          <h2 id="ukFormTitle">Tambah Unit Kerja</h2>
+          <p class="muted">
+            Lengkapi data berikut lalu simpan untuk memperbarui informasi unit
+            kerja.
+          </p>
+        </div>
+        <button
+          class="icon-btn"
+          id="ukFormClose"
+          type="button"
+          aria-label="Tutup form"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="card-body">
+        <form id="ukForm">
+          <input type="hidden" id="ukId" />
+
+          <div class="form-grid two-col">
+            <div class="form-group">
+              <label for="ukJenis">Jenis Unit</label>
+              <select id="ukJenis" required>
+                <option value="">Pilih jenis...</option>
+                <option value="lurah">Kantor Lurah</option>
+                <option value="sekretariat">Sekretariat</option>
+                <option value="tata-pemerintahan">
+                  Seksi Tata Pemerintahan
+                </option>
+                <option value="pemberdayaan">
+                  Seksi Pemberdayaan Masyarakat, Pemuda dan Budaya
+                </option>
+                <option value="ketertiban">
+                  Seksi Ketentraman dan Ketertiban Umum
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="ukNamaUnit">Nama Unit Kerja</label>
+              <input
+                id="ukNamaUnit"
+                type="text"
+                placeholder="Contoh: Seksi Pemberdayaan Masyarakat"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="ukNamaPimpinan">Nama Pimpinan</label>
+              <input
+                id="ukNamaPimpinan"
+                type="text"
+                placeholder="Nama lengkap pimpinan unit"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="ukJabatanPimpinan">Jabatan Pimpinan</label>
+              <input
+                id="ukJabatanPimpinan"
+                type="text"
+                placeholder="Contoh: Lurah / Kepala Seksi"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="ukKontak">Kontak / Nomor HP</label>
+              <input
+                id="ukKontak"
+                type="text"
+                placeholder="0812-xxxx-xxxx (opsional)"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="ukEmail">Email</label>
+              <input
+                id="ukEmail"
+                type="email"
+                placeholder="email@kelurahan.go.id (opsional)"
+              />
+            </div>
+          </div>
+
+          <div class="form-group full">
+            <label for="ukAlamat">Alamat / Lokasi Layanan</label>
+            <textarea
+              id="ukAlamat"
+              rows="2"
+              placeholder="Alamat sekretariat / lokasi layanan unit kerja..."
+            ></textarea>
+          </div>
+
+          <div class="form-group full">
+            <label for="ukTugas">Tugas Pokok &amp; Fungsi</label>
+            <textarea
+              id="ukTugas"
+              rows="3"
+              placeholder="Daftar tugas pokok dan fungsi utama unit kerja..."
+            ></textarea>
+          </div>
+
+          <div class="form-group full">
+            <label for="ukKewenangan">Kewenangan</label>
+            <textarea
+              id="ukKewenangan"
+              rows="3"
+              placeholder="Kewenangan unit kerja..."
+            ></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-light" id="ukFormCancel">
+              Batal
+            </button>
+            <button type="submit" class="btn btn-primary">
+              <i class="fa-solid fa-save"></i> Simpan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </section>

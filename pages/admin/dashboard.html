@@ -1,8 +1,15 @@
 <section class="admin-shell" data-admin-page="dashboard">
-    <aside class="admin-side">
+  <aside class="admin-side">
     <div class="side-head">
       <h3><i class="fa-solid fa-shield-halved"></i> Panel Admin</h3>
-      <div class="muted" style="font-size:12px;margin-top:6px" id="adminUserLabel" data-bind="userName">-</div>
+      <div
+        class="muted"
+        style="font-size: 12px; margin-top: 6px"
+        id="adminUserLabel"
+        data-bind="userName"
+      >
+        -
+      </div>
     </div>
 
     <ul class="side-menu" id="adminSideMenu">
@@ -14,16 +21,25 @@
       </li>
 
       <li>
-        <a class="nav-link" data-page="admin/profil-kelurahan" href="#admin/profil-kelurahan">
+        <a
+          class="nav-link"
+          data-page="admin/profil-kelurahan"
+          href="#admin/profil-kelurahan"
+        >
           <i class="fa-solid fa-location-dot"></i> Profil Kelurahan
         </a>
       </li>
 
-      <li class="divider" style="margin:10px 0"></li>
+      <li class="divider" style="margin: 10px 0"></li>
 
       <!-- KONTEN (collapse) -->
       <li class="menu-group" data-group="konten">
-        <button class="group-toggle" type="button" aria-expanded="false" aria-controls="groupKonten">
+        <button
+          class="group-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="groupKonten"
+        >
           <span class="left">
             <i class="fa-regular fa-folder-open"></i>
             <span>Konten</span>
@@ -32,25 +48,64 @@
         </button>
 
         <ul class="group-items" id="groupKonten">
-          <li><a class="nav-link" data-page="admin/berita" href="#admin/berita"><i class="fa-regular fa-newspaper"></i> Kelola Berita</a></li>
-          <li><a class="nav-link" data-page="admin/agenda" href="#admin/agenda"><i class="fa-regular fa-calendar"></i> Kelola Agenda</a></li>
-          <li><a class="nav-link" data-page="admin/galeri" href="#admin/galeri"><i class="fa-regular fa-image"></i> Kelola Galeri</a></li>
-          <li><a class="nav-link" data-page="admin/pengumuman" href="#admin/pengumuman"><i class="fa-solid fa-bullhorn"></i> Kelola Pengumuman</a></li>
+          <li>
+            <a class="nav-link" data-page="admin/berita" href="#admin/berita"
+              ><i class="fa-regular fa-newspaper"></i> Kelola Berita</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" data-page="admin/agenda" href="#admin/agenda"
+              ><i class="fa-regular fa-calendar"></i> Kelola Agenda</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" data-page="admin/galeri" href="#admin/galeri"
+              ><i class="fa-regular fa-image"></i> Kelola Galeri</a
+            >
+          </li>
+          <li>
+            <a
+              class="nav-link"
+              data-page="admin/pengumuman"
+              href="#admin/pengumuman"
+              ><i class="fa-solid fa-bullhorn"></i> Kelola Pengumuman</a
+            >
+          </li>
         </ul>
       </li>
 
-      <li class="divider" style="margin:10px 0"></li>
+      <li class="divider" style="margin: 10px 0"></li>
 
       <!-- ORGANISASI & PELAYANAN -->
-      <li><a class="nav-link" data-page="admin/pelayanan" href="#admin/pelayanan"><i class="fa-regular fa-file-lines"></i> Pelayanan Surat</a></li>
-      <li><a class="nav-link" data-page="admin/unit-kerja" href="#admin/unit-kerja"><i class="fa-solid fa-people-roof"></i> Unit Kerja</a></li>
-      <li><a class="nav-link" data-page="admin/lembaga" href="#admin/lembaga"><i class="fa-solid fa-building-columns"></i> Lembaga</a></li>
+      <li>
+        <a class="nav-link" data-page="admin/pelayanan" href="#admin/pelayanan"
+          ><i class="fa-regular fa-file-lines"></i> Pelayanan Surat</a
+        >
+      </li>
+      <li>
+        <a
+          class="nav-link"
+          data-page="admin/unit-kerja"
+          href="#admin/unit-kerja"
+          ><i class="fa-solid fa-people-roof"></i> Unit Kerja</a
+        >
+      </li>
+      <li>
+        <a class="nav-link" data-page="admin/lembaga" href="#admin/lembaga"
+          ><i class="fa-solid fa-building-columns"></i> Lembaga</a
+        >
+      </li>
 
-      <li class="divider" style="margin:10px 0"></li>
+      <li class="divider" style="margin: 10px 0"></li>
 
       <!-- OPERASIONAL (collapse) -->
       <li class="menu-group" data-group="operasional">
-        <button class="group-toggle" type="button" aria-expanded="false" aria-controls="groupOperasional">
+        <button
+          class="group-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="groupOperasional"
+        >
           <span class="left">
             <i class="fa-solid fa-clipboard-check"></i>
             <span>Operasional</span>
@@ -59,19 +114,42 @@
         </button>
 
         <ul class="group-items" id="groupOperasional">
-          <li><a class="nav-link" data-page="admin/pengaduan" href="#admin/pengaduan"><i class="fa-solid fa-comments"></i> Pengaduan</a></li>
-          <li><a class="nav-link" data-page="admin/surat" href="#admin/surat"><i class="fa-solid fa-file-signature"></i> Surat</a></li>
-          <li><a class="nav-link" data-page="admin/umkm" href="#admin/umkm"><i class="fa-solid fa-store"></i> UMKM</a></li>
-          <li><a class="nav-link" data-page="admin/rt-rw" href="#admin/rt-rw"><i class="fa-solid fa-users"></i> RT/RW</a></li>
-          <li><a class="nav-link" data-page="admin/faq" href="#admin/faq"><i class="fa-regular fa-circle-question"></i> FAQ</a></li>
+          <li>
+            <a
+              class="nav-link"
+              data-page="admin/pengaduan"
+              href="#admin/pengaduan"
+              ><i class="fa-solid fa-comments"></i> Pengaduan</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" data-page="admin/surat" href="#admin/surat"
+              ><i class="fa-solid fa-file-signature"></i> Surat</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" data-page="admin/rt-rw" href="#admin/rt-rw"
+              ><i class="fa-solid fa-users"></i> RT/RW</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" data-page="admin/faq" href="#admin/faq"
+              ><i class="fa-regular fa-circle-question"></i> FAQ</a
+            >
+          </li>
         </ul>
       </li>
 
-      <li class="divider" style="margin:10px 0"></li>
+      <li class="divider" style="margin: 10px 0"></li>
 
       <!-- SISTEM (collapse) -->
       <li class="menu-group" data-group="sistem">
-        <button class="group-toggle" type="button" aria-expanded="false" aria-controls="groupSistem">
+        <button
+          class="group-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="groupSistem"
+        >
           <span class="left">
             <i class="fa-solid fa-sliders"></i>
             <span>Sistem</span>
@@ -80,26 +158,47 @@
         </button>
 
         <ul class="group-items" id="groupSistem">
-          <li><a class="nav-link" data-page="admin/pengaturan" href="#admin/pengaturan"><i class="fa-solid fa-gear"></i> Pengaturan</a></li>
-          <li><a class="nav-link" data-page="admin/laporan" href="#admin/laporan"><i class="fa-solid fa-chart-column"></i> Laporan</a></li>
+          <li>
+            <a
+              class="nav-link"
+              data-page="admin/pengaturan"
+              href="#admin/pengaturan"
+              ><i class="fa-solid fa-gear"></i> Pengaturan</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" data-page="admin/laporan" href="#admin/laporan"
+              ><i class="fa-solid fa-chart-column"></i> Laporan</a
+            >
+          </li>
         </ul>
       </li>
 
-      <li class="divider" style="margin:10px 0"></li>
+      <li class="divider" style="margin: 10px 0"></li>
 
       <!-- BOTTOM -->
-      <li><a class="nav-link" data-page="home" href="#home"><i class="fa-solid fa-arrow-left"></i> Ke Publik</a></li>
-      <li><a href="#" data-action="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+      <li>
+        <a class="nav-link" data-page="home" href="#home"
+          ><i class="fa-solid fa-arrow-left"></i> Ke Publik</a
+        >
+      </li>
+      <li>
+        <a href="#" data-action="logout"
+          ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
+        >
+      </li>
     </ul>
   </aside>
-<div class="admin-main">
+  <div class="admin-main">
     <div class="admin-top">
       <h1>Dashboard</h1>
       <div class="top-actions">
-        <a class="btn btn-ghost nav-link" data-page="home" href="#home"><i class="fa-solid fa-arrow-left"></i> Kembali
-          ke Publik</a>
-        <button class="btn btn-solid" data-action="openQuickCreate"><i class="fa-solid fa-plus"></i> Tambah
-          Konten</button>
+        <a class="btn btn-ghost nav-link" data-page="home" href="#home"
+          ><i class="fa-solid fa-arrow-left"></i> Kembali ke Publik</a
+        >
+        <button class="btn btn-solid" data-action="openQuickCreate">
+          <i class="fa-solid fa-plus"></i> Tambah Konten
+        </button>
       </div>
     </div>
 
@@ -124,16 +223,18 @@
 
     <div class="card">
       <div class="card-body">
-        <h3 style="margin:0 0 10px">Aktivitas Terbaru</h3>
-        <div class="muted" style="margin-bottom:14px">Ringkasan data konten terbaru</div>
+        <h3 style="margin: 0 0 10px">Aktivitas Terbaru</h3>
+        <div class="muted" style="margin-bottom: 14px">
+          Ringkasan data konten terbaru
+        </div>
 
         <div class="form-row">
           <div>
-            <h4 style="margin:0 0 10px">Berita Terbaru</h4>
+            <h4 style="margin: 0 0 10px">Berita Terbaru</h4>
             <div id="recentBerita"></div>
           </div>
           <div>
-            <h4 style="margin:0 0 10px">Agenda Terdekat</h4>
+            <h4 style="margin: 0 0 10px">Agenda Terdekat</h4>
             <div id="recentAgenda"></div>
           </div>
         </div>
@@ -145,26 +246,57 @@
       <div class="modal-panel">
         <div class="modal-head">
           <h3>Tambah Konten</h3>
-          <button class="btn btn-ghost" data-action="closeModal"><i class="fa-solid fa-xmark"></i></button>
+          <button class="btn btn-ghost" data-action="closeModal">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
         <div class="modal-body">
-          <p class="muted" style="margin-top:0">Pilih jenis konten yang ingin ditambahkan.</p>
-          <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <a class="btn btn-solid nav-link" data-page="admin/berita" href="#admin/berita"><i
-                class="fa-regular fa-newspaper"></i> Berita</a>
-            <a class="btn btn-solid nav-link" data-page="admin/galeri" href="#admin/galeri"><i
-                class="fa-regular fa-image"></i> Galeri</a>
-            <a class="btn btn-solid nav-link" data-page="admin/agenda" href="#admin/agenda"><i
-                class="fa-regular fa-calendar"></i> Agenda</a>
-            <a class="btn btn-solid nav-link" data-page="admin/pengumuman" href="#admin/pengumuman"><i
-                class="fa-solid fa-bullhorn"></i> Pengumuman</a>
-            <a class="btn btn-solid nav-link" data-page="admin/lembaga" href="#admin/lembaga"><i
-                class="fa-solid fa-bullhorn"></i> Lemabaga Masyarakat</a>
-            <a class="btn btn-solid nav-link" data-page="admin/pelayanan" href="#admin/pelayanan"><i
-                class="fa-solid fa-bullhorn"></i> Pelayanan Surat</a>
-            <a class="btn btn-solid nav-link" data-page="admin/unit-kerja" href="#admin/unit-kerja"><i
-                class="fa-solid fa-bullhorn"></i> Unit Kerja</a>
-
+          <p class="muted" style="margin-top: 0">
+            Pilih jenis konten yang ingin ditambahkan.
+          </p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap">
+            <a
+              class="btn btn-solid nav-link"
+              data-page="admin/berita"
+              href="#admin/berita"
+              ><i class="fa-regular fa-newspaper"></i> Berita</a
+            >
+            <a
+              class="btn btn-solid nav-link"
+              data-page="admin/galeri"
+              href="#admin/galeri"
+              ><i class="fa-regular fa-image"></i> Galeri</a
+            >
+            <a
+              class="btn btn-solid nav-link"
+              data-page="admin/agenda"
+              href="#admin/agenda"
+              ><i class="fa-regular fa-calendar"></i> Agenda</a
+            >
+            <a
+              class="btn btn-solid nav-link"
+              data-page="admin/pengumuman"
+              href="#admin/pengumuman"
+              ><i class="fa-solid fa-bullhorn"></i> Pengumuman</a
+            >
+            <a
+              class="btn btn-solid nav-link"
+              data-page="admin/lembaga"
+              href="#admin/lembaga"
+              ><i class="fa-solid fa-bullhorn"></i> Lemabaga Masyarakat</a
+            >
+            <a
+              class="btn btn-solid nav-link"
+              data-page="admin/pelayanan"
+              href="#admin/pelayanan"
+              ><i class="fa-solid fa-bullhorn"></i> Pelayanan Surat</a
+            >
+            <a
+              class="btn btn-solid nav-link"
+              data-page="admin/unit-kerja"
+              href="#admin/unit-kerja"
+              ><i class="fa-solid fa-bullhorn"></i> Unit Kerja</a
+            >
           </div>
         </div>
       </div>
