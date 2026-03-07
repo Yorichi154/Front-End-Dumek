@@ -15,9 +15,15 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.92);
+  /* Biru muda senada dengan footer-cta, dibuat lebih "kuat" tapi tetap rapi */
+  background-color: rgba(219, 234, 254, 0.86);
+  background-image: linear-gradient(
+    135deg,
+    rgba(31, 95, 224, 0.22),
+    rgba(22, 195, 255, 0.28)
+  );
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(37, 99, 235, 0.32);
   transition: box-shadow 0.25s ease;
 }
 
@@ -26,7 +32,7 @@
 }
 
 .header-container {
-  width: min(1400px, calc(100% - 48px));
+  width: min(1200px, calc(100% - 48px));
   margin-inline: auto;
   padding: 12px 0;
   display: flex;
@@ -528,4 +534,24 @@
   outline: none;
   background: transparent;
   color: inherit;
+}
+
+
+/* ===== Global desktop width lock ===== */
+.container,
+.header-container,
+.footer-container,
+.home-hero,
+.home-stats,
+.home-page .section-head,
+.home-page .service-grid,
+.home-page .news-grid,
+.home-page .agenda-list,
+.home-page .home-cta,
+.admin-shell,
+.staf-shell,
+.warga-shell {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }

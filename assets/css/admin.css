@@ -155,7 +155,7 @@ body.is-admin #footer {
 
 @media (min-width: 1440px) {
   .admin-shell {
-    max-width: 1320px;
+    max-width: 1200px;
   }
 }
 
@@ -163,7 +163,6 @@ body.is-admin #footer {
 @media (max-width: 1024px) {
   .admin-shell {
     grid-template-columns: 1fr;
-    margin: 14px auto 32px;
     padding: 0 14px 32px;
   }
 
@@ -208,7 +207,6 @@ body.is-admin #footer {
 
   .admin-top{ flex-wrap: wrap; }
   .admin-top .top-actions{ width: 100%; }
-  .admin-top .top-actions .search-box{ width: 100%; min-width: 0 !important; }
 }
 
 @media (max-width: 520px) {

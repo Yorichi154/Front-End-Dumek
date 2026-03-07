@@ -6,5 +6,5 @@
 @import url("admin.css");
 @import url("staf.css");
 @import url("warga.css");
-@import url("responsive.css");   /* ✅ HARUS PALING TERAKHIR */
+@import url("responsive.css");
 @import url("enhance.css");

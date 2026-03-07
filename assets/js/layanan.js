@@ -285,6 +285,22 @@
     }
 
     // kontak RT/RW
+    function normalizeWaNumber(raw) {
+      const digits = String(raw || "").replace(/\D/g, "");
+      if (!digits) return "";
+      // Indonesia: 08xx -> 628xx
+      if (digits.startsWith("0")) return "62" + digits.slice(1);
+      if (digits.startsWith("8")) return "62" + digits;
+      return digits;
+    }
+
+    function makeWaUrl(number, wilayah, jenis) {
+      const wa = normalizeWaNumber(number);
+      if (!wa) return "";
+      const msg = `Assalamualaikum, saya warga Duren Mekar. Ingin koordinasi terkait wilayah ${wilayah || "-"} (${String(jenis || "").toUpperCase()}).`;
+      return `https://wa.me/${wa}?text=${encodeURIComponent(msg)}`;
+    }
+
     function renderKontak() {
       if (!lkTbody || !lkJenis) return;
       const jenis = (lkJenis.value || "rt").toLowerCase();
@@ -297,15 +313,25 @@
 
       lkTbody.innerHTML =
         items
-          .map(
-            (x) => `
+          .map((x) => {
+            const wilayah = x.wilayah || "-";
+            const rawKontak = x.kontak || "";
+            const waUrl = rawKontak ? makeWaUrl(rawKontak, wilayah, jenis) : "";
+            const label = rawKontak ? String(rawKontak) : "-";
+            return `
             <tr>
               <td>${x.nama || "-"}</td>
               <td>${x.jabatan || "-"}</td>
-              <td>${x.wilayah || "-"}</td>
-              <td>${x.kontak ? `<a href="https://wa.me/${String(x.kontak).replace(/\D/g, "")}" target="_blank" rel="noopener">${x.kontak}</a>` : "-"}</td>
-            </tr>`
-          )
+              <td>${wilayah}</td>
+              <td>
+                ${waUrl
+                  ? `<a class="btn btn-success btn-sm" href="${waUrl}" target="_blank" rel="noopener" title="Chat WhatsApp">
+                      <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> ${label}
+                    </a>`
+                  : "-"}
+              </td>
+            </tr>`;
+          })
           .join("") || `<tr><td colspan="4" class="muted">Data belum tersedia.</td></tr>`;
     }
 

@@ -6,14 +6,16 @@
    HOME
 -------------------------- */
 .home-hero {
-  background: linear-gradient(135deg, var(--primary), #19c7ff);
+  /* lebih terang (seperti versi biru muda) */
+  background: linear-gradient(135deg, var(--primary-500), #19c7ff);
   color: #fff;
   border-radius: 24px;
   overflow: hidden;
 }
 
 .home-hero .hero-inner {
-  padding: 46px 0;
+  /* tambah jarak kiri/kanan biar rapi */
+  padding: 46px 28px;
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 26px;
@@ -585,6 +587,7 @@
 @media (max-width: 1024px) {
   .home-hero .hero-inner {
     grid-template-columns: 1fr;
+    padding: 38px 22px;
   }
 
   .hero-media {
@@ -621,6 +624,10 @@
 }
 
 @media (max-width: 600px) {
+  .home-hero .hero-inner {
+    padding: 28px 18px;
+  }
+
   .hero-text h1 {
     font-size: 26px;
   }
@@ -1171,4 +1178,72 @@
 
 .info-reset-list li {
   margin-bottom: 6px;
+}
+
+/* ===== GOV ULTRA MODERN CARDS (PUBLIK) ===== */
+.home-hero {
+  background: linear-gradient(135deg, #0f2f76, #1d4ed8, #38bdf8);
+  box-shadow: 0 22px 55px rgba(15, 47, 118, 0.25);
+}
+
+.stat-card,
+.service-card,
+.news-card,
+.agenda-item {
+  background: linear-gradient(180deg, #ffffff, #f6f9ff);
+  border: 1px solid rgba(15, 47, 118, 0.1);
+  box-shadow: 0 14px 34px rgba(15, 47, 118, 0.1);
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 44px rgba(15, 47, 118, 0.18);
+}
+
+/* ikon kotak pada kartu jadi biru muda */
+.stat-card .stat-icon,
+.service-card .svc-icon,
+.agenda-date {
+  background: rgba(29, 78, 216, 0.12);
+  color: #1d4ed8;
+}
+
+/* ===== Desktop layout fix (rapi seperti versi kiri) ===== */
+.home-hero {
+  max-width: 1200px;
+  margin: 36px auto 0 auto;
+}
+
+.home-hero .hero-inner {
+  padding: 56px 56px;
+}
+
+.home-stats {
+  max-width: 1200px;
+  margin: 24px auto 0 auto;
+}
+
+.section,
+.services,
+.news-section {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== Global desktop container fix ===== */
+.home-page .section-head,
+.home-page .service-grid,
+.home-page .news-grid,
+.home-page .agenda-list,
+.home-page .home-cta {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-page .service-grid,
+.home-page .news-grid,
+.home-page .agenda-list {
+  width: 100%;
 }

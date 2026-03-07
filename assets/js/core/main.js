@@ -19,6 +19,88 @@ function getUserName() {
 }
 
 // ==============================
+// HEADER AUTH BUTTON
+// - Tombol "Login" berubah jadi nama user
+// - Admin/Staf: Nama(role)
+// - Warga: Nama
+// ==============================
+function formatUserLabel(name, role) {
+  const n = String(name || "").trim();
+  const r = String(role || "").trim().toLowerCase();
+  if (!n || !r) return "";
+  if (r === "warga") return n;
+  if (r === "admin" || r === "staf") return `${n}(${r})`;
+  return `${n}(${r})`;
+}
+
+function updateHeaderAuthButton() {
+  const btn = document.querySelector("a.btn-login");
+  if (!btn) return;
+
+  const role = getRole();
+  const name = getUserName();
+  const span = btn.querySelector("span");
+  const icon = btn.querySelector("i");
+
+  if (role && name) {
+    const label = formatUserLabel(name, role);
+    if (span) span.textContent = label || name;
+    if (icon) {
+      icon.classList.remove("fa-right-to-bracket");
+      icon.classList.add("fa-user");
+    }
+
+    // arahkan ke dashboard sesuai role
+    const target = `${role}/dashboard`;
+    btn.setAttribute("href", `#${target}`);
+    btn.dataset.page = target;
+    btn.setAttribute("aria-label", `Akun: ${label || name}`);
+    btn.classList.add("is-auth");
+  } else {
+    if (span) span.textContent = "Login";
+    if (icon) {
+      icon.classList.remove("fa-user");
+      icon.classList.add("fa-right-to-bracket");
+    }
+
+    btn.setAttribute("href", "#login");
+    btn.dataset.page = "login";
+    btn.setAttribute("aria-label", "Login");
+    btn.classList.remove("is-auth");
+  }
+}
+
+
+
+function updateGuestOnlySections(root = document) {
+  const isLoggedIn = !!(getRole() && getUserName());
+  const selectors = [
+    ".hero-actions",
+    "#heroGuestActions",
+    ".home-cta",
+    ".home-cta .cta-actions",
+  ];
+
+  const seen = new Set();
+  selectors.forEach((sel) => {
+    root.querySelectorAll(sel).forEach((el) => seen.add(el));
+  });
+
+  seen.forEach((el) => {
+    if (el.classList.contains("home-cta")) {
+      el.style.display = isLoggedIn ? "none" : "";
+      el.toggleAttribute("hidden", isLoggedIn);
+      el.setAttribute("aria-hidden", isLoggedIn ? "true" : "false");
+      return;
+    }
+
+    el.style.display = isLoggedIn ? "none" : "";
+    el.toggleAttribute("hidden", isLoggedIn);
+    el.setAttribute("aria-hidden", isLoggedIn ? "true" : "false");
+  });
+}
+
+// ==============================
 // HELPERS
 // ==============================
 async function fetchFirstOk(urls) {
@@ -155,6 +237,10 @@ async function loadComponents() {
     setupDropdowns();
     setupStickyHeader();
     setupMobileMenu();
+
+    // ✅ sinkron tombol login -> nama user/role
+    updateHeaderAuthButton();
+    updateGuestOnlySections(document);
 
     // render page pertama
     navigateTo(getPageFromHash(), { replace: true });
@@ -317,6 +403,10 @@ async function navigateTo(page, opts = {}) {
     // bind nama user (opsional)
     const nameEl = document.querySelector("[data-bind='userName']");
     if (nameEl) nameEl.textContent = getUserName();
+
+    // ✅ sinkron tombol login -> nama user/role setiap pindah halaman
+    updateHeaderAuthButton();
+    updateGuestOnlySections(content);
 
     window.scrollTo({ top: 0, behavior: "smooth" });
   } catch (err) {

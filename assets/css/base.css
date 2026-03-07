@@ -3,75 +3,74 @@
    Theme: biru muda modern
 ========================= */
 :root {
-    --primary: #1f5fe0;
-    /* biru utama */
-    --primary-700: #174bb7;
-    --primary-500: #2e73ff;
-    --primary-soft: #e9f1ff;
-
-    --bg: #f4f7ff;
-    --surface: #ffffff;
-    /* background lembut untuk input biar tidak kaku */
-    --field-bg: rgba(15, 23, 42, .035);
-    --field-bg-strong: rgba(15, 23, 42, .055);
-    --text: #0b1220;
-    --muted: #5b677a;
-
-    --border: #e6ecf5;
-    --shadow: 0 12px 28px rgba(15, 23, 42, .10);
-    --shadow-sm: 0 8px 18px rgba(15, 23, 42, .08);
-
-    --radius: 16px;
-    --radius-sm: 12px;
-
     --container: 1200px;
+  /* ===== GOV ULTRA MODERN (PUBLIK) ===== */
+  --primary: #0f2f76; /* biru tua */
+  --primary-700: #0b2561;
+  --primary-500: #1d4ed8; /* biru terang */
+  --primary-soft: #eaf2ff;
+
+  --bg: #eef3fb; /* background biru-abu lembut */
+  --surface: #ffffff;
+
+  --border: rgba(15, 47, 118, 0.12);
+  --shadow: 0 18px 45px rgba(15, 47, 118, 0.18);
+  --shadow-sm: 0 10px 26px rgba(15, 47, 118, 0.1);
+
+  --radius: 18px;
+  --radius-sm: 14px;
 }
 
 /* Reset */
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html,
 body {
-    height: 100%;
-    overflow-x: hidden;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 body {
-    margin: 0;
-    font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
-    color: var(--text);
-    background: var(--bg);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    Arial,
+    sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 img {
-    max-width: 100%;
-    display: block;
+  max-width: 100%;
+  display: block;
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 button,
 input,
 select,
 textarea {
-    font: inherit;
-    color: inherit;
+  font: inherit;
+  color: inherit;
 }
 
 ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 h1,
@@ -79,40 +78,50 @@ h2,
 h3,
 h4,
 p {
-    margin: 0;
+  margin: 0;
 }
 
 :focus-visible {
-    outline: 3px solid rgba(46, 115, 255, .35);
-    outline-offset: 2px;
+  outline: 3px solid rgba(46, 115, 255, 0.35);
+  outline-offset: 2px;
 }
 
 /* Utilities */
 .container {
-    width: min(var(--container), calc(100% - 48px));
-    margin-inline: auto;
+  width: min(var(--container), calc(100% - 48px));
+  margin-inline: auto;
 }
 
 .stack {
-    display: grid;
-    gap: 12px;
+  display: grid;
+  gap: 12px;
 }
 
 .stack-lg {
-    display: grid;
-    gap: 18px;
+  display: grid;
+  gap: 18px;
 }
 
 .muted {
-    color: var(--muted);
+  color: var(--muted);
 }
 
 .hidden {
-    display: none !important;
+  display: none !important;
 }
 
 .divider {
-    height: 1px;
-    background: var(--border);
-    width: 100%;
+  height: 1px;
+  background: var(--border);
+  width: 100%;
+}
+
+/* ===== Dashboard (ADMIN/STAFF/WARGA) -> FLAT MINIMAL ===== */
+body.is-admin,
+body.is-staf,
+body.is-warga {
+  --bg: #f5f7fb;
+  --border: #e2e8f0;
+  --shadow: none;
+  --shadow-sm: none;
 }
