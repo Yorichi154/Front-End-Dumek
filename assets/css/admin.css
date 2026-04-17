@@ -10,7 +10,6 @@ body.is-admin #footer {
 }
 
 .admin-shell {
-
   max-width: 1200px;
   width: 100%;
   margin: 24px auto 48px;
@@ -27,7 +26,7 @@ body.is-admin #footer {
   background: #fff;
   border-radius: 18px;
   box-shadow: var(--shadow);
-  border: 1px solid rgba(230, 234, 242, .8);
+  border: 1px solid rgba(230, 234, 242, 0.8);
   overflow: hidden;
   position: sticky;
   top: 86px;
@@ -43,7 +42,7 @@ body.is-admin #footer {
 .admin-side .side-head h3 {
   margin: 0;
   font-size: 14px;
-  letter-spacing: .2px;
+  letter-spacing: 0.2px;
 }
 
 .admin-side .side-menu {
@@ -68,7 +67,7 @@ body.is-admin #footer {
 
 .admin-side a:hover,
 .admin-side a.active {
-  background: rgba(30, 99, 255, .12);
+  background: rgba(30, 99, 255, 0.12);
   color: var(--primary);
 }
 
@@ -84,7 +83,7 @@ body.is-admin #footer {
   background: #fff;
   border-radius: 18px;
   box-shadow: var(--shadow);
-  border: 1px solid rgba(230, 234, 242, .8);
+  border: 1px solid rgba(230, 234, 242, 0.8);
   padding: 14px 16px;
   display: flex;
   align-items: center;
@@ -104,13 +103,19 @@ body.is-admin #footer {
 }
 
 /* tombol menu drawer hanya tampil di layar kecil */
-.admin-top [data-action="toggleAdminMenu"]{ display:none; }
-@media (max-width: 1024px){
-  .admin-top [data-action="toggleAdminMenu"]{ display:inline-flex; }
+.admin-top [data-action="toggleAdminMenu"] {
+  display: none;
+}
+@media (max-width: 1024px) {
+  .admin-top [data-action="toggleAdminMenu"] {
+    display: inline-flex;
+  }
 }
 
 /* backdrop default off */
-#adminMenuBackdrop{ display:none; }
+#adminMenuBackdrop {
+  display: none;
+}
 
 /* Dashboard cards */
 .admin-metrics {
@@ -135,7 +140,7 @@ body.is-admin #footer {
   background: #fff;
   border-radius: 18px;
   box-shadow: var(--shadow);
-  border: 1px solid rgba(230, 234, 242, .8);
+  border: 1px solid rgba(230, 234, 242, 0.8);
   padding: 16px;
 }
 
@@ -144,7 +149,7 @@ body.is-admin #footer {
   font-size: 12px;
   font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: .3px;
+  letter-spacing: 0.3px;
 }
 
 .metric .value {
@@ -167,7 +172,7 @@ body.is-admin #footer {
   }
 
   /* Sidebar jadi drawer di mobile/tablet kecil */
-  .admin-side{
+  .admin-side {
     position: fixed;
     top: 12px;
     left: 12px;
@@ -175,28 +180,30 @@ body.is-admin #footer {
     width: min(360px, calc(100vw - 24px));
     height: auto;
     transform: translateX(calc(-100% - 24px));
-    transition: transform .22s ease;
+    transition: transform 0.22s ease;
     z-index: 100000;
   }
 
-  body.admin-menu-open .admin-side{
+  body.admin-menu-open .admin-side {
     transform: translateX(0);
   }
 
-  body.admin-menu-open{ overflow: hidden; }
+  body.admin-menu-open {
+    overflow: hidden;
+  }
 
-  #adminMenuBackdrop{
+  #adminMenuBackdrop {
     display: block;
     position: fixed;
     inset: 0;
-    background: rgba(2,6,23,.35);
+    background: rgba(2, 6, 23, 0.35);
     opacity: 0;
     pointer-events: none;
-    transition: opacity .18s ease;
+    transition: opacity 0.18s ease;
     z-index: 99999;
   }
 
-  body.admin-menu-open #adminMenuBackdrop{
+  body.admin-menu-open #adminMenuBackdrop {
     opacity: 1;
     pointer-events: auto;
   }
@@ -205,8 +212,12 @@ body.is-admin #footer {
     grid-template-columns: 1fr 1fr;
   }
 
-  .admin-top{ flex-wrap: wrap; }
-  .admin-top .top-actions{ width: 100%; }
+  .admin-top {
+    flex-wrap: wrap;
+  }
+  .admin-top .top-actions {
+    width: 100%;
+  }
 }
 
 @media (max-width: 520px) {
@@ -217,7 +228,9 @@ body.is-admin #footer {
 
 /* auth.css */
 .auth-card {
-  transition: box-shadow .2s ease, transform .15s ease;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
 }
 
 .auth-card:hover {
@@ -227,7 +240,10 @@ body.is-admin #footer {
 
 /* admin.css */
 .admin-side a {
-  transition: background .15s ease, color .15s ease, transform .1s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.1s ease;
 }
 
 .admin-side a:hover {
@@ -235,7 +251,9 @@ body.is-admin #footer {
 }
 
 .metric {
-  transition: box-shadow .2s ease, transform .15s ease;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
 }
 
 .metric:hover {
@@ -246,84 +264,99 @@ body.is-admin #footer {
    Admin Sidebar (Collapsible Groups)
 ========================================================= */
 
-.admin-side{
-  display:flex;
-  flex-direction:column;
+.admin-side {
+  display: flex;
+  flex-direction: column;
 }
 
-.admin-side .side-menu{
-  flex:1;
-  overflow:auto;
-  padding-bottom:16px;
+.admin-side .side-menu {
+  flex: 1;
+  overflow: auto;
+  padding-bottom: 16px;
 }
 
-.menu-group { margin: 2px 0; }
+.menu-group {
+  margin: 2px 0;
+}
 
-.group-toggle{
-  width:100%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  padding:10px 12px;
-  border:0;
-  background:transparent;
-  border-radius:12px;
-  cursor:pointer;
+.group-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 0;
+  background: transparent;
+  border-radius: 12px;
+  cursor: pointer;
   font: inherit;
   color: var(--text);
 }
 
-.group-toggle:hover{
-  background: rgba(30, 99, 255, .08);
+.group-toggle:hover {
+  background: rgba(30, 99, 255, 0.08);
 }
 
-.group-toggle .left{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:900;
+.group-toggle .left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
 }
 
-.group-toggle .chev{
-  transition: transform .18s ease;
-  opacity:.7;
+.group-toggle .chev {
+  transition: transform 0.18s ease;
+  opacity: 0.7;
 }
 
-.group-items{
+.group-items {
   margin: 4px 0 0 0;
   padding-left: 10px;
-  list-style:none;
-  overflow:hidden;
-  max-height:0;
-  transition: max-height .22s ease;
+  list-style: none;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.22s ease;
 }
 
-.menu-group.open .group-items{ max-height: 560px; }
-.menu-group.open .group-toggle .chev{ transform: rotate(180deg); }
+.menu-group.open .group-items {
+  max-height: 560px;
+}
+.menu-group.open .group-toggle .chev {
+  transform: rotate(180deg);
+}
 
-.group-items .nav-link{
-  padding:10px 12px;
-  border-radius:12px;
+.group-items .nav-link {
+  padding: 6px 10px;
+  border-radius: 12px;
 }
 
 /* Modal panel fallback (admin pages masih pakai modal-panel) */
-.modal-panel{
+.modal-panel {
   width: min(920px, 96vw);
   max-height: 92vh;
   overflow: auto;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 18px;
-  box-shadow: 0 30px 80px rgba(2, 6, 23, .35);
+  box-shadow: 0 30px 80px rgba(2, 6, 23, 0.35);
 }
 
 /* Admin table helpers (kalau dibutuhkan) */
-.row-actions{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.row-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
 /* Table di admin biasanya kolomnya banyak => lebih nyaman discroll */
-.admin-main .table{ min-width: 920px; }
+.admin-main .table {
+  min-width: 920px;
+}
 
-@media (max-width: 1024px){
-  .admin-side{ height:auto; }
+@media (max-width: 1024px) {
+  .admin-side {
+    height: auto;
+  }
 }

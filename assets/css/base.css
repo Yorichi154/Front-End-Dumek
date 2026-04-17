@@ -3,19 +3,28 @@
    Theme: biru muda modern
 ========================= */
 :root {
-    --container: 1200px;
+  --container: 1200px;
+
   /* ===== GOV ULTRA MODERN (PUBLIK) ===== */
-  --primary: #0f2f76; /* biru tua */
+  --primary: #0f2f76;
   --primary-700: #0b2561;
-  --primary-500: #1d4ed8; /* biru terang */
+  --primary-800: #081c4a; /* ✅ tambahan untuk klik */
+  --primary-500: #1d4ed8;
   --primary-soft: #eaf2ff;
 
-  --bg: #eef3fb; /* background biru-abu lembut */
+  --bg: #eef3fb;
   --surface: #ffffff;
 
+  --text: #0f172a; /* ✅ tambahan */
+  --muted: #64748b; /* ✅ tambahan */
+
+  --field-bg: #f8fafc; /* ✅ tambahan */
+
   --border: rgba(15, 47, 118, 0.12);
+
   --shadow: 0 18px 45px rgba(15, 47, 118, 0.18);
   --shadow-sm: 0 10px 26px rgba(15, 47, 118, 0.1);
+  --shadow-lg: 0 25px 60px rgba(15, 47, 118, 0.25); /* opsional */
 
   --radius: 18px;
   --radius-sm: 14px;
