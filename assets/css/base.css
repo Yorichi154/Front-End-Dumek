@@ -119,12 +119,6 @@ p {
   display: none !important;
 }
 
-.divider {
-  height: 1px;
-  background: var(--border);
-  width: 100%;
-}
-
 /* ===== Dashboard (ADMIN/STAFF/WARGA) -> FLAT MINIMAL ===== */
 body.is-admin,
 body.is-staf,
